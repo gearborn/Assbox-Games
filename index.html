@@ -44,6 +44,8 @@ body {
 body.game-none { background: #0f0f1a; }
 body.game-whofarted { background: var(--wf-bg); color: var(--wf-text); }
 body.game-fishbowl { background: var(--fb-bg); color: #fff; }
+body.game-tp { background: #1a1a2e; color: #fff; }
+body.game-scotty { background: #0d1117; color: #fff; }
 
 .screen { width: 100%; max-width: 480px; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; padding: 24px 20px 48px; gap: 14px; }
 .screen.hidden { display: none !important; }
@@ -208,6 +210,79 @@ body.game-fishbowl { background: var(--fb-bg); color: #fff; }
 .fb .team-box { background: rgba(255,255,255,.05); border-radius: 14px; padding: 14px; flex: 1; min-width: 0; }
 .fb .pass-count { font-size: .75rem; color: rgba(255,255,255,.45); text-align: center; margin-top: 4px; }
 .fb .pill { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: .85rem; font-weight: 700; }
+
+/* ============================================================
+   TELEPHONE PICTIONARY STYLES
+   ============================================================ */
+.tp { color: #fff; }
+.tp h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.3rem,5vw,1.9rem); color: #f9c74f; margin-bottom: 10px; }
+.tp .card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 20px; width: 100%; }
+.tp input[type="text"] { width:100%; padding:12px 15px; border-radius:12px; border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; font-size:1rem; font-family:'Nunito',sans-serif; outline:none; }
+.tp input[type="text"]:focus { border-color:#f9c74f; }
+.tp input[type="text"]::placeholder { color:rgba(255,255,255,.35); }
+.tp .btn { display:flex; align-items:center; justify-content:center; padding:13px 20px; border-radius:13px; border:none; font-family:Fredoka One,cursive; font-size:1.1rem; cursor:pointer; transition:all .15s; width:100%; }
+.tp .btn-primary { background:linear-gradient(135deg,#f9c74f,#f3722c); color:#1a0a00; }
+.tp .btn-primary:active { transform:scale(.97); }
+.tp .btn-secondary { background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.2); }
+.tp .btn-secondary:active { transform:scale(.97); }
+.tp .btn-danger { background:linear-gradient(135deg,#f94144,#c1121f); color:#fff; }
+.tp .btn:disabled { opacity:.4; cursor:not-allowed; }
+.tp .back-btn { background:none; border:none; color:rgba(255,255,255,.4); font-family:Fredoka One,cursive; font-size:15px; cursor:pointer; padding:8px 0; align-self:flex-start; }
+.tp .room-code { font-family:Fredoka One,cursive; font-size:3.5rem; letter-spacing:8px; color:#f9c74f; text-align:center; }
+.tp .player-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.1); border-radius:999px; padding:7px 13px; margin:3px; font-weight:700; font-size:.88rem; }
+.tp .alert-waiting { background:rgba(249,199,79,.1); border:1px solid rgba(249,199,79,.3); color:#f9c74f; border-radius:12px; padding:12px 16px; font-weight:700; text-align:center; }
+.tp .prompt-box { background:rgba(249,199,79,.1); border:2px solid rgba(249,199,79,.4); border-radius:14px; padding:14px; font-size:1.1rem; font-weight:700; color:#f9c74f; text-align:center; word-break:break-word; margin-bottom:12px; }
+.tp canvas { border-radius:12px; touch-action:none; display:block; cursor:crosshair; background:#fff; }
+.tp .canvas-wrap { position:relative; width:100%; }
+.tp .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); display:flex; align-items:center; justify-content:center; z-index:200; }
+.tp .confirm-box { background:#1e1e3a; border:2px solid rgba(249,199,79,.5); border-radius:20px; padding:28px 24px; text-align:center; max-width:320px; width:90%; }
+.tp .confirm-box h3 { font-family:Fredoka One,cursive; color:#f9c74f; font-size:1.4rem; margin-bottom:10px; }
+.tp .confirm-box p { color:rgba(255,255,255,.65); margin-bottom:20px; font-size:.95rem; }
+.tp .confirm-btns { display:flex; gap:10px; }
+.tp .chain-entry { border-radius:14px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(255,255,255,.1); }
+.tp .chain-label { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; padding:6px 14px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.5); }
+.tp .chain-text { padding:14px; font-size:1.05rem; font-weight:700; color:#fff; word-break:break-word; }
+.tp .chain-img { width:100%; display:block; }
+.tp .presenter-banner { background:linear-gradient(135deg,rgba(249,199,79,.15),rgba(243,114,44,.1)); border:2px solid rgba(249,199,79,.4); border-radius:14px; padding:14px; text-align:center; }
+.tp .gallery-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; }
+.tp .gallery-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:12px; overflow:hidden; cursor:pointer; }
+.tp .gallery-card img { width:100%; display:block; }
+.tp .gallery-card-name { font-size:.8rem; font-weight:700; padding:6px 10px; color:rgba(255,255,255,.7); text-align:center; }
+
+
+/* ============================================================
+   SCOTTY DOESN'T KNOW STYLES
+   ============================================================ */
+.sk { color: #fff; }
+.sk h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.3rem,5vw,1.9rem); color: #7ee8a2; margin-bottom: 10px; }
+.sk .card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px; width: 100%; }
+.sk input[type="text"] { width:100%; padding:12px 15px; border-radius:12px; border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; font-size:1rem; font-family:'Nunito',sans-serif; outline:none; }
+.sk input[type="text"]:focus { border-color:#7ee8a2; }
+.sk input[type="text"]::placeholder { color:rgba(255,255,255,.35); }
+.sk .btn { display:flex; align-items:center; justify-content:center; padding:13px 20px; border-radius:13px; border:none; font-family:'Fredoka One',cursive; font-size:1.1rem; cursor:pointer; transition:all .15s; width:100%; }
+.sk .btn-primary { background:linear-gradient(135deg,#7ee8a2,#43b37e); color:#001a0d; }
+.sk .btn-primary:active { transform:scale(.97); }
+.sk .btn-secondary { background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.2); }
+.sk .btn-secondary:active { transform:scale(.97); }
+.sk .btn-danger { background:linear-gradient(135deg,#f94144,#c1121f); color:#fff; }
+.sk .btn:disabled { opacity:.4; cursor:not-allowed; }
+.sk .back-btn { background:none; border:none; color:rgba(255,255,255,.4); font-family:'Fredoka One',cursive; font-size:15px; cursor:pointer; padding:8px 0; align-self:flex-start; }
+.sk .room-code { font-family:'Fredoka One',cursive; font-size:3.5rem; letter-spacing:8px; color:#7ee8a2; text-align:center; }
+.sk .player-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.1); border-radius:999px; padding:7px 13px; margin:3px; font-weight:700; font-size:.88rem; }
+.sk .scotty-screen { text-align:center; padding:40px 20px; }
+.sk .scotty-title { font-family:'Fredoka One',cursive; font-size:clamp(2rem,10vw,3.5rem); color:#f94144; text-shadow:0 0 30px rgba(249,65,68,.5); margin-bottom:8px; }
+.sk .category-box { background:rgba(126,232,162,.1); border:2px solid rgba(126,232,162,.4); border-radius:14px; padding:16px; font-size:1.2rem; font-weight:700; color:#7ee8a2; text-align:center; margin-bottom:12px; }
+.sk .score-row { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-radius:10px; background:rgba(255,255,255,.05); margin-bottom:6px; font-weight:700; }
+.sk .score-val { font-family:'Fredoka One',cursive; font-size:1.6rem; color:#7ee8a2; }
+.sk .vote-btn-player { padding:12px 16px; border-radius:12px; border:2px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:#fff; cursor:pointer; text-align:center; font-weight:700; font-size:.95rem; margin-bottom:8px; width:100%; transition:all .15s; }
+.sk .vote-btn-player.selected { background:rgba(126,232,162,.2); border-color:#7ee8a2; color:#7ee8a2; }
+.sk .round-badge { font-family:'Fredoka One',cursive; font-size:.95rem; padding:5px 16px; border-radius:999px; background:rgba(126,232,162,.1); border:1.5px solid #7ee8a2; color:#7ee8a2; display:inline-block; }
+.sk .results-card { border-radius:14px; overflow:hidden; margin-bottom:10px; }
+.sk .results-row { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.06); font-weight:700; }
+.sk .delta-pos { color:#7ee8a2; font-family:'Fredoka One',cursive; font-size:1.3rem; }
+.sk .delta-zero { color:rgba(255,255,255,.3); font-family:'Fredoka One',cursive; font-size:1.3rem; }
+.sk .no-scotty-banner { background:rgba(249,199,79,.1); border:2px solid rgba(249,199,79,.4); border-radius:12px; padding:12px; text-align:center; color:#f9c74f; font-weight:700; margin-bottom:12px; }
+
 </style>
 </head>
 <body class="game-none">
@@ -232,6 +307,20 @@ body.game-fishbowl { background: var(--fb-bg); color: #fff; }
         <div>
           <div class="game-card-name">Who Farted?</div>
           <div class="game-card-desc">Social deduction · Fart or hold it · 10 rounds</div>
+        </div>
+      </div>
+      <div class="game-card" onclick="selectGame('tp')">
+        <div class="game-card-icon">🎨</div>
+        <div>
+          <div class="game-card-name">Pictionary Telephone</div>
+          <div class="game-card-desc">Draw &amp; guess · Chains of chaos · 4+ players</div>
+        </div>
+      </div>
+      <div class="game-card" onclick="selectGame('scotty')">
+        <div class="game-card-icon">🕵️</div>
+        <div>
+          <div class="game-card-name">Scotty Doesn't Know</div>
+          <div class="game-card-desc">Hidden categories · Bluff & guess · 4+ players</div>
         </div>
       </div>
     </div>
@@ -380,7 +469,7 @@ body.game-fishbowl { background: var(--fb-bg); color: #fff; }
      ============================================================ -->
 <div id="screen-fb-home" class="screen fb hidden" style="text-align:center;justify-content:center;">
   <div style="font-size:5rem;margin-bottom:12px;">🐟</div>
-  <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3.5rem);background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;">Fishbowl</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(2rem,8vw,3.5rem);background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;">Fishbowl</div>
   <div class="card" style="display:flex;flex-direction:column;gap:12px;">
     <input type="text" id="fb-player-name" placeholder="Your name...">
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
@@ -449,9 +538,139 @@ body.game-fishbowl { background: var(--fb-bg); color: #fff; }
 
 <div id="screen-fb-ended" class="screen fb hidden" style="text-align:center;justify-content:center;">
   <div style="font-size:4rem;margin-bottom:12px;">🏆</div>
-  <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Game Over!</div>
+  <div style="font-family:Fredoka One,cursive;font-size:2.5rem;background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Game Over!</div>
   <div class="card" id="fb-ended-card"></div>
   <button class="btn btn-primary" style="margin-top:16px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+
+
+<!-- ============================================================
+     SCOTTY DOESN'T KNOW - ALL SCREENS
+     ============================================================ -->
+<div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4rem;margin-bottom:8px;">🕵️</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Scotty<br>Doesn't Know</div>
+  <div class="card sk" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="sk-player-name" placeholder="Your name...">
+    <div id="sk-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary sk" onclick="skCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="sk-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary sk" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="skJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn sk" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-sk-lobby" class="screen sk hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="sk-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Share this code</div>
+  </div>
+  <div class="card sk">
+    <h2 style="margin-bottom:10px;" id="sk-lobby-title">Players</h2>
+    <div id="sk-lobby-players" style="display:flex;flex-wrap:wrap;justify-content:center;"></div>
+  </div>
+  <div id="sk-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary sk" onclick="skStartGame()">Start Game →</button>
+  </div>
+  <div id="sk-lobby-guest-msg" style="color:rgba(255,255,255,.4);font-size:.9rem;text-align:center;">Waiting for host...</div>
+</div>
+
+<div id="screen-sk-categories" class="screen sk hidden">
+  <h2>Your Categories 📋</h2>
+  <div style="color:rgba(255,255,255,.5);font-size:.9rem;text-align:center;margin-bottom:4px;">Enter 2 categories - things people can name items from (e.g. "Types of pasta", "90s movies")</div>
+  <div class="card sk" id="sk-cat-card" style="display:flex;flex-direction:column;gap:10px;"></div>
+</div>
+
+<div id="screen-sk-play" class="screen sk hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="sk-play-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-sk-results" class="screen sk hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="sk-results-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-sk-final" class="screen sk hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:3.5rem;margin-bottom:12px;">🏆</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:2rem;background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Game Over!</div>
+  <div class="card sk" id="sk-final-card"></div>
+  <button class="btn btn-primary sk" style="margin-top:16px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+<!-- ============================================================
+     TELEPHONE PICTIONARY - ALL SCREENS
+     ============================================================ -->
+<div id="screen-tp-home" class="screen tp hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4.5rem;margin-bottom:8px;">🎨</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.8rem,7vw,3rem);background:linear-gradient(135deg,#f9c74f,#f3722c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Pictionary<br>Telephone</div>
+  <div class="card" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="tp-player-name" placeholder="Your name...">
+    <div id="tp-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary" onclick="tpCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="tp-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tpJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn tp" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-tp-lobby" class="screen tp hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="tp-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Share this code</div>
+  </div>
+  <div class="card">
+    <h2 style="margin-bottom:10px;" id="tp-lobby-title">Players</h2>
+    <div id="tp-lobby-players" style="display:flex;flex-wrap:wrap;justify-content:center;"></div>
+  </div>
+  <div id="tp-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary" onclick="tpStartGame()">Start Game →</button>
+  </div>
+  <div id="tp-lobby-guest-msg" style="color:rgba(255,255,255,.4);font-size:.9rem;text-align:center;display:none;">Waiting for host to start...</div>
+</div>
+
+<div id="screen-tp-play" class="screen tp hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="tp-play-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-tp-present" class="screen tp hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="tp-present-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-tp-gallery" class="screen tp hidden">
+  <h2 style="color:#f9c74f;">Gallery 🖼️</h2>
+  <div id="tp-gallery-content" style="width:100%;"></div>
+  <button class="btn btn-primary tp" onclick="goHome()" style="margin-top:8px;">🏠 Back to Games</button>
+</div>
+
+<!-- TP confirm overlay (shared) -->
+<div id="tp-confirm" class="tp confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 id="tp-confirm-title">Are you sure?</h3>
+    <p id="tp-confirm-msg"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tp" style="flex:1;" onclick="tpConfirmCancel()">Cancel</button>
+      <button class="btn btn-danger tp" style="flex:1;" id="tp-confirm-ok">Yes</button>
+    </div>
+  </div>
+</div>
+
+<!-- TP chain viewer overlay -->
+<div id="tp-chain-viewer" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:300;overflow-y:auto;padding:20px;">
+  <div style="max-width:480px;margin:0 auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#f9c74f;" id="tp-viewer-title">Chain</div>
+      <button onclick="tpCloseViewer()" style="background:rgba(255,255,255,.1);border:none;color:#fff;border-radius:8px;padding:8px 14px;font-size:1rem;cursor:pointer;">✕ Close</button>
+    </div>
+    <div id="tp-viewer-content"></div>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -532,7 +751,7 @@ function wfInitDb() {
 function wfCreateRoom() {
   const name = document.getElementById('wf-player-name-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = true; wfRoomCode = genRoomCode();
   const pd = { id:wfPlayerId, name:wfPlayerName, emoji:wfRandomEmoji(), score:0, isHost:true, forcedFart:false, connected:true };
   const rd = { code:wfRoomCode, phase:'lobby', round:1, players:{[wfPlayerId]:pd}, choices:{}, votes:{}, testReady:{}, hostId:wfPlayerId, createdAt:Date.now() };
@@ -548,7 +767,7 @@ function wfJoinRoom() {
   const code = document.getElementById('wf-join-code-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
   if (code.length !== 4) { wfShowError('Enter a 4-letter room code!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = false; wfRoomCode = code;
   wfDb.ref('rooms/wf/'+code).once('value').then(snap=>{
     if (!snap.exists()) { wfShowError('Room not found!'); return; }
@@ -797,7 +1016,8 @@ function fbShowNotif(icon,title,body,durationMs){
 function fbCreateRoom(){
   const name=document.getElementById('fb-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
-  if(!fbInitDb()){alert('Firebase not configured!');return;}
+  if(!fbInitDb()){alert('Firebase not configured! Check your firebaseConfig values.');return;}
+  if(FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet - please add your project credentials to the FIREBASE_CONFIG block.');return;}
   fbMyId=genId();
   fbRoomCode=genRoomCode();
   const player={id:fbMyId,name,emoji:fbMyEmoji,words:[],ready:false,teamIdx:null,connected:true};
@@ -827,7 +1047,7 @@ function fbJoinRoom(){
   const code=document.getElementById('fb-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!fbInitDb()){alert('Firebase not configured!');return;}
+  if(!fbInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet.');return;}
   fbMyId=genId();fbRoomCode=code;
   fbDb.ref('rooms/fb/'+code).once('value').then(snap=>{
     if(!snap.exists()){alert('Room not found!');return;}
@@ -891,7 +1111,7 @@ function fbRenderEntry(state){
       ${isHost&&!allDone?`<p style="text-align:center;color:rgba(255,255,255,.4);font-size:.85rem;margin-top:8px;">Waiting for others...</p>`:''}
       ${!isHost?`<p style="text-align:center;color:rgba(255,255,255,.4);font-size:.85rem;margin-top:8px;">Waiting for host...</p>`:''}`;
   } else {
-    card.innerHTML=`${[1,2,3,4,5].map(i=>`<div style="display:flex;gap:8px;align-items:center;"><span style="font-family:'Fredoka One',cursive;color:#f9d56e;font-size:1rem;width:20px;">${i}.</span><input type="text" id="fb-word-${i}" placeholder="Word or phrase ${i}..."></div>`).join('')}
+    card.innerHTML=`${[1,2,3,4,5].map(i=>`<div style="display:flex;gap:8px;align-items:center;"><span style="font-family:Fredoka One,cursive;color:#f9d56e;font-size:1rem;width:20px;">${i}.</span><input type="text" id="fb-word-${i}" placeholder="Word or phrase ${i}..."></div>`).join('')}
       <button class="btn btn-primary" onclick="fbSubmitWords()" style="margin-top:4px;">Submit Words ✓</button>`;
   }
 }
@@ -927,7 +1147,7 @@ function fbRenderTeams(state){
   td.innerHTML=[t0,t1].map((team,ti)=>{
     const color=FB_TEAM_COLORS[ti][0];
     return `<div class="team-box" style="border-top:3px solid ${color};">
-      <p style="font-weight:700;color:${color};margin-bottom:8px;font-family:'Fredoka One',cursive;">Team ${ti+1} (${team.length})</p>
+      <p style="font-weight:700;color:${color};margin-bottom:8px;font-family:Fredoka One,cursive;">Team ${ti+1} (${team.length})</p>
       ${team.map(p=>`<div class="player-chip" style="width:100%;justify-content:center;cursor:${p.id===fbMyId?'pointer':'default'};margin:3px 0;" onclick="${p.id===fbMyId?'fbSwitchTeam()':''}"><span>${p.emoji}</span><span>${p.name}</span>${p.id===fbMyId?'<span style="font-size:.7rem;color:rgba(255,255,255,.4);"> (tap)</span>':''}</div>`).join('')}
     </div>`;
   }).join('');
@@ -1083,12 +1303,12 @@ function fbRenderPlaying(state){
     <!-- Scores -->
     <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;">
       <div style="text-align:center;">
-        <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:${FB_TEAM_COLORS[0][0]};">${(state.scores&&state.scores[0])||0}</div>
+        <div style="font-family:Fredoka One,cursive;font-size:2rem;color:${FB_TEAM_COLORS[0][0]};">${(state.scores&&state.scores[0])||0}</div>
         <div style="font-size:.75rem;color:rgba(255,255,255,.4);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${(state.teamNames&&state.teamNames[0])||'Team 1'}</div>
       </div>
-      <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:rgba(255,255,255,.3);">vs</div>
+      <div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:rgba(255,255,255,.3);">vs</div>
       <div style="text-align:center;">
-        <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:${FB_TEAM_COLORS[1][0]};">${(state.scores&&state.scores[1])||0}</div>
+        <div style="font-family:Fredoka One,cursive;font-size:2rem;color:${FB_TEAM_COLORS[1][0]};">${(state.scores&&state.scores[1])||0}</div>
         <div style="font-size:.75rem;color:rgba(255,255,255,.4);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${(state.teamNames&&state.teamNames[1])||'Team 2'}</div>
       </div>
     </div>
@@ -1145,7 +1365,7 @@ function fbTimerSVG(t){
       <circle cx="60" cy="60" r="${r}" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
       <circle cx="60" cy="60" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-prog)}" stroke-linecap="round"/>
     </svg>
-    <span style="font-family:'Fredoka One',cursive;font-size:2.6rem;position:absolute;color:${color};">${t}</span>
+    <span style="font-family:Fredoka One,cursive;font-size:2.6rem;position:absolute;color:${color};">${t}</span>
   </div>`;
 }
 
@@ -1275,18 +1495,1251 @@ function fbRenderEnded(state){
     ${w>=0?`<h2 style="color:${FB_TEAM_COLORS[w][0]};margin-bottom:12px;">${(state.teamNames&&state.teamNames[w])||'Team '+(w+1)} wins! 🏆</h2>`:`<h2 style="margin-bottom:12px;">It's a tie! 🤝</h2>`}
     <div style="display:flex;justify-content:center;gap:20px;margin-bottom:8px;">
       ${[0,1].map(ti=>`<div style="text-align:center;">
-        <div style="font-family:'Fredoka One',cursive;font-size:3.5rem;color:${FB_TEAM_COLORS[ti][0]};">${(state.scores&&state.scores[ti])||0}</div>
+        <div style="font-family:Fredoka One,cursive;font-size:3.5rem;color:${FB_TEAM_COLORS[ti][0]};">${(state.scores&&state.scores[ti])||0}</div>
         <div style="color:rgba(255,255,255,.55);font-size:.85rem;">${(state.teamNames&&state.teamNames[ti])||'Team '+(ti+1)}</div>
       </div>`).join('')}
     </div>`;
 }
 </script>
 
+
+<!-- ============================================================
+     SCOTTY DOESN'T KNOW - ALL SCREENS
+     ============================================================ -->
+<div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4rem;margin-bottom:8px;">🕵️</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Scotty<br>Doesn't Know</div>
+  <div class="card sk" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="sk-player-name" placeholder="Your name...">
+    <div id="sk-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary sk" onclick="skCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="sk-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary sk" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="skJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn sk" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-sk-lobby" class="screen sk hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="sk-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Share this code</div>
+  </div>
+  <div class="card sk">
+    <h2 style="margin-bottom:10px;" id="sk-lobby-title">Players</h2>
+    <div id="sk-lobby-players" style="display:flex;flex-wrap:wrap;justify-content:center;"></div>
+  </div>
+  <div id="sk-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary sk" onclick="skStartGame()">Start Game →</button>
+  </div>
+  <div id="sk-lobby-guest-msg" style="color:rgba(255,255,255,.4);font-size:.9rem;text-align:center;">Waiting for host...</div>
+</div>
+
+<div id="screen-sk-categories" class="screen sk hidden">
+  <h2>Your Categories 📋</h2>
+  <div style="color:rgba(255,255,255,.5);font-size:.9rem;text-align:center;margin-bottom:4px;">Enter 2 categories - things people can name items from (e.g. "Types of pasta", "90s movies")</div>
+  <div class="card sk" id="sk-cat-card" style="display:flex;flex-direction:column;gap:10px;"></div>
+</div>
+
+<div id="screen-sk-play" class="screen sk hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="sk-play-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-sk-results" class="screen sk hidden" style="justify-content:flex-start;padding-top:14px;">
+  <div id="sk-results-content" style="width:100%;max-width:480px;"></div>
+</div>
+
+<div id="screen-sk-final" class="screen sk hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:3.5rem;margin-bottom:12px;">🏆</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:2rem;background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Game Over!</div>
+  <div class="card sk" id="sk-final-card"></div>
+  <button class="btn btn-primary sk" style="margin-top:16px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+<!-- ============================================================
+     TELEPHONE PICTIONARY - JAVASCRIPT
+     ============================================================ -->
+<script>
+var TP_EMOJIS=['🎨','🖌️','✏️','🖍️','🎭','🃏','🎪','🎬','🎤','🎸','🌈','🦄'];
+var tpDb=null;
+var tpRoomCode='';
+var tpMyId='';
+var tpMyEmoji='🎨';
+var tpMyName='';
+var tpIsHost=false;
+var tpLastState=null;
+var tpCanvas=null;
+var tpCtx=null;
+var tpDrawing=false;
+var tpLastX=0;
+var tpLastY=0;
+var tpUndoStack=[];
+var tpConfirmCallback=null;
+
+function tpInitDb(){ tpDb=getDb(); return !!tpDb; }
+function tpShowScreen(id){ showScreen('tp-'+id); }
+function tpRenderEmojiPicker(){
+  var p=document.getElementById('tp-emoji-picker');
+  if(!p) return;
+  tpMyEmoji=TP_EMOJIS[Math.floor(Math.random()*TP_EMOJIS.length)];
+  p.innerHTML=TP_EMOJIS.map(function(em){
+    var bg2=em===tpMyEmoji?'rgba(249,199,79,.25)':'transparent';
+    var bc2=em===tpMyEmoji?'#f9c74f':'transparent';
+    return '<button onclick="tpSelectEmojiById(this)" data-em="'+em+'" style="font-size:1.5rem;padding:5px;background:'+bg2+';border:2px solid '+bc2+';border-radius:8px;cursor:pointer;" id="tpemoji-'+em+'">'+em+'</button>';
+  }).join('');
+}
+function tpSelectEmojiById(btn){
+  tpMyEmoji=btn.getAttribute('data-em');
+  var all=document.querySelectorAll('[id^="tpemoji-"]');
+  for(var i=0;i<all.length;i++){all[i].style.background='transparent';all[i].style.borderColor='transparent';}
+  btn.style.background='rgba(249,199,79,.25)'; btn.style.borderColor='#f9c74f';
+}
+
+function tpCreateRoom(){
+  var name=document.getElementById('tp-player-name').value.trim();
+  if(!name){alert('Enter your name!');return;}
+  if(!tpInitDb()){alert('Firebase not configured!');return;}
+  tpMyId=genId(); tpMyName=name; tpIsHost=true; tpRoomCode=genRoomCode();
+  var player={id:tpMyId,name:tpMyName,emoji:tpMyEmoji,connected:true};
+  var room={code:tpRoomCode,phase:'lobby',hostId:tpMyId,players:{},playerOrder:[],chains:{},round:0,totalRounds:0,presentIdx:0,createdAt:Date.now()};
+  room.players[tpMyId]=player;
+  tpDb.ref('rooms/tp/'+tpRoomCode).set(room).then(function(){
+    document.getElementById('tp-room-code-display').textContent=tpRoomCode;
+    tpShowScreen('lobby');
+    tpListenRoom();
+  }).catch(function(e){alert('Error: '+e.message);});
+}
+
+function tpJoinRoom(){
+  var name=document.getElementById('tp-player-name').value.trim();
+  var code=document.getElementById('tp-join-code').value.trim().toUpperCase();
+  if(!name){alert('Enter your name!');return;}
+  if(code.length!==4){alert('Enter a 4-letter room code!');return;}
+  if(!tpInitDb()){alert('Firebase not configured!');return;}
+  tpMyId=genId(); tpMyName=name; tpIsHost=false; tpRoomCode=code;
+  tpDb.ref('rooms/tp/'+code).once('value').then(function(snap){
+    if(!snap.exists()){alert('Room not found!');return;}
+    var room=snap.val();
+    if(room.phase!=='lobby'){alert('Game already started!');return;}
+    var player={id:tpMyId,name:tpMyName,emoji:tpMyEmoji,connected:true};
+    tpDb.ref('rooms/tp/'+code+'/players/'+tpMyId).set(player).then(function(){
+      tpShowScreen('lobby');
+      tpListenRoom();
+    });
+  });
+}
+
+function tpListenRoom(){
+  tpDb.ref('rooms/tp/'+tpRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tpLastState=snap.val();
+    tpHandleState(tpLastState);
+  });
+  tpDb.ref('rooms/tp/'+tpRoomCode+'/players/'+tpMyId+'/connected').onDisconnect().set(false);
+}
+
+function tpHandleState(state){
+  var phase=state.phase;
+  if(phase==='lobby') tpRenderLobby(state);
+  else if(phase==='play') tpRenderPlay(state);
+  else if(phase==='present') tpRenderPresent(state);
+  else if(phase==='gallery') tpRenderGallery(state);
+}
+
+// ---- LOBBY ----
+function tpRenderLobby(state){
+  tpShowScreen('lobby');
+  var players=Object.values(state.players||{});
+  document.getElementById('tp-room-code-display').textContent=state.code;
+  document.getElementById('tp-lobby-title').textContent='Players ('+players.length+')';
+  document.getElementById('tp-lobby-players').innerHTML=players.map(function(p){
+    return '<div class="player-chip"><span>'+p.emoji+'</span><span>'+p.name+'</span></div>';
+  }).join('');
+  var isHost=state.hostId===tpMyId;
+  var hb=document.getElementById('tp-lobby-host-btn');
+  var gm=document.getElementById('tp-lobby-guest-msg');
+  hb.style.display=(isHost&&players.length>=4)?'block':'none';
+  gm.style.display=isHost?'none':'block';
+  if(isHost&&players.length<4){
+    hb.style.display='none';
+    if(!gm.textContent.includes('Need')) gm.style.display='block';
+    gm.textContent='Need at least 4 players ('+players.length+' so far)...';
+    gm.style.display='block';
+  }
+}
+
+function tpStartGame(){
+  if(!tpIsHost) return;
+  tpDb.ref('rooms/tp/'+tpRoomCode+'/players').once('value').then(function(snap){
+    var players=Object.values(snap.val()||{}).filter(function(p){return p.connected!==false;});
+    if(players.length<4){alert('Need at least 4 players!');return;}
+    var order=tpShuffle(players.map(function(p){return p.id;}));
+    var chains={};
+    order.forEach(function(pid){
+      chains[pid]={ownerId:pid,entries:{}};
+    });
+    tpDb.ref('rooms/tp/'+tpRoomCode).update({
+      phase:'play',playerOrder:order,chains:chains,
+      round:0,totalRounds:order.length,
+      roundSubmitted:{}
+    });
+  });
+}
+
+// ---- PLAY ----
+function tpRenderPlay(state){
+  tpShowScreen('play');
+  var order=state.playerOrder||[];
+  var myIdx=order.indexOf(tpMyId);
+  var round=state.round||0;
+  var totalRounds=state.totalRounds||order.length;
+  var content=document.getElementById('tp-play-content');
+
+  // Which chain am I working on this round?
+  // Round 0: each person works on their own chain (write phrase)
+  // Round r: person at index myIdx works on chain belonging to order[(myIdx - r + order.length) % order.length]
+  var chainOwnerIdx=(myIdx-round+order.length)%order.length;
+  var chainOwnerId=order[chainOwnerIdx];
+  var chain=(state.chains&&state.chains[chainOwnerId])||{entries:{}};
+  var entries=chain.entries||{};
+  var entryCount=Object.keys(entries).length;
+  // My entry for this round goes at position 'round' in this chain
+  var myEntryKey='e'+round;
+  var alreadySubmitted=!!entries[myEntryKey];
+
+  // Previous entry in chain (what I need to respond to)
+  var prevEntry=round>0?entries['e'+(round-1)]:null;
+
+  // Check if prev person has submitted (if round>0)
+  var waitingForPrev=round>0&&!prevEntry;
+
+  // Round type: even = write text, odd = draw
+  var isDrawRound=round%2===1;
+
+  if(alreadySubmitted){
+    content.innerHTML='<div style="text-align:center;padding:20px 0;">'
+      +'<div style="font-size:3rem;margin-bottom:12px;">'+( isDrawRound?'🖌️':'✏️')+'</div>'
+      +'<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f9c74f;margin-bottom:8px;">Submitted!</div>'
+      +'<div class="alert-waiting">Waiting to receive your next '+(isDrawRound?'phrase':'drawing')+'...</div>'
+      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(round+1)+' of '+totalRounds+'</div>'
+      +'</div>';
+    return;
+  }
+
+  if(waitingForPrev){
+    content.innerHTML='<div style="text-align:center;padding:20px 0;">'
+      +'<div style="font-size:3rem;margin-bottom:12px;">⏳</div>'
+      +'<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f9c74f;margin-bottom:8px;">Hang tight!</div>'
+      +'<div class="alert-waiting">Waiting to receive your '+(isDrawRound?'phrase to draw':'drawing to describe')+'...</div>'
+      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(round+1)+' of '+totalRounds+'</div>'
+      +'</div>';
+    return;
+  }
+
+  // Show the prompt
+  var promptHtml='';
+  if(round===0){
+    promptHtml='<div style="color:rgba(255,255,255,.55);font-size:.9rem;text-align:center;margin-bottom:12px;">Write something that can be drawn - a person, place, thing, or phrase:</div>'
+      +'<input type="text" id="tp-phrase-input" placeholder="e.g. a dog surfing" style="font-size:1rem;">'
+      +'<button class="btn btn-primary tp" onclick="tpSubmitPhrase()" style="margin-top:10px;">Submit Phrase</button>';
+  } else if(!isDrawRound){
+    // Text round: show prev drawing, write what you see
+    var imgSrc=(prevEntry&&prevEntry.type==='drawing')?prevEntry.data:'';
+    promptHtml='<div style="color:rgba(255,255,255,.55);font-size:.88rem;text-align:center;margin-bottom:8px;">What do you see in this drawing?</div>'
+      +'<img src="'+imgSrc+'" style="width:100%;border-radius:12px;margin-bottom:12px;display:block;">'
+      +'<input type="text" id="tp-phrase-input" placeholder="Describe what you see...">'
+      +'<button class="btn btn-primary tp" onclick="tpSubmitPhrase()" style="margin-top:10px;">Submit Description</button>';
+  } else {
+    // Draw round: show prev text, draw it
+    var prevText=(prevEntry&&prevEntry.type==='text')?prevEntry.data:'';
+    promptHtml='<div class="prompt-box">'+tpEscape(prevText)+'</div>'
+      +'<div style="color:rgba(255,255,255,.55);font-size:.85rem;text-align:center;margin-bottom:8px;">Draw this on the canvas below. Only submit when done!</div>'
+      +'<div class="canvas-wrap"><canvas id="tp-canvas"></canvas></div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px;">'
+      +'<button class="btn btn-secondary tp" onclick="tpUndo()" style="font-size:.85rem;padding:10px;">↩ Undo</button>'
+      +"<button class=\"btn btn-danger tp\" onclick=\"tpAskClear()\" style=\"font-size:.85rem;padding:10px;\">🗑️ Clear</button>"
+      +"<button class=\"btn btn-primary tp\" onclick=\"tpAskSubmit()\" style=\"font-size:.85rem;padding:10px;\">Submit ✓</button>"
+      +'</div>';
+  }
+
+  content.innerHTML='<div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">'
+    +'<div style="font-family:Fredoka One,cursive;color:#f9c74f;font-size:1.1rem;">Round '+(round+1)+' of '+totalRounds+'</div>'
+    +'<div style="font-size:.8rem;color:rgba(255,255,255,.4);">'+(isDrawRound?'Draw it!':'Describe it!')+'</div>'
+    +'</div>'
+    +promptHtml;
+
+  if(isDrawRound) tpInitCanvas();
+
+  // Check if all submitted this round and I am host -> advance
+  if(tpIsHost) tpCheckAdvanceRound(state);
+}
+
+function tpCheckAdvanceRound(state){
+  var order=state.playerOrder||[];
+  var round=state.round||0;
+  var totalRounds=state.totalRounds||order.length;
+  if(round>=totalRounds) return;
+  var chains=state.chains||{};
+  var allDone=order.every(function(pid){
+    var chainOwnerIdx=(order.indexOf(pid)-round+order.length)%order.length;
+    var chainOwnerId=order[chainOwnerIdx];
+    var entries=(chains[chainOwnerId]&&chains[chainOwnerId].entries)||{};
+    return !!entries['e'+round];
+  });
+  if(!allDone) return;
+  var nextRound=round+1;
+  if(nextRound>=totalRounds){
+    tpDb.ref('rooms/tp/'+tpRoomCode).update({phase:'present',presentIdx:0,presentAcks:{}});
+  } else {
+    tpDb.ref('rooms/tp/'+tpRoomCode+'/round').set(nextRound);
+  }
+}
+
+function tpSubmitPhrase(){
+  var input=document.getElementById('tp-phrase-input');
+  if(!input) return;
+  var val=input.value.trim();
+  if(!val){alert('Please enter something!');return;}
+  var round=(tpLastState&&tpLastState.round)||0;
+  var order=(tpLastState&&tpLastState.playerOrder)||[];
+  var myIdx=order.indexOf(tpMyId);
+  var chainOwnerIdx=(myIdx-round+order.length)%order.length;
+  var chainOwnerId=order[chainOwnerIdx];
+  var entry={type:'text',data:val,authorId:tpMyId,authorName:tpMyName};
+  tpDb.ref('rooms/tp/'+tpRoomCode+'/chains/'+chainOwnerId+'/entries/e'+round).set(entry).then(function(){
+    if(tpIsHost) tpCheckAdvanceRound(tpLastState);
+  });
+}
+
+function tpSubmitDrawing(){
+  if(!tpCanvas) return;
+  var dataUrl=tpCanvas.toDataURL('image/jpeg',0.6);
+  var round=(tpLastState&&tpLastState.round)||0;
+  var order=(tpLastState&&tpLastState.playerOrder)||[];
+  var myIdx=order.indexOf(tpMyId);
+  var chainOwnerIdx=(myIdx-round+order.length)%order.length;
+  var chainOwnerId=order[chainOwnerIdx];
+  var entry={type:'drawing',data:dataUrl,authorId:tpMyId,authorName:tpMyName};
+  tpDb.ref('rooms/tp/'+tpRoomCode+'/chains/'+chainOwnerId+'/entries/e'+round).set(entry).then(function(){
+    if(tpIsHost) tpCheckAdvanceRound(tpLastState);
+  });
+}
+
+// ---- CANVAS ----
+function tpInitCanvas(){
+  setTimeout(function(){
+    tpCanvas=document.getElementById('tp-canvas');
+    if(!tpCanvas) return;
+    var wrap=tpCanvas.parentElement;
+    var w=wrap.offsetWidth||340;
+    tpCanvas.width=w;
+    tpCanvas.height=Math.round(w*0.65);
+    tpCtx=tpCanvas.getContext('2d');
+    tpCtx.fillStyle='#ffffff';
+    tpCtx.fillRect(0,0,tpCanvas.width,tpCanvas.height);
+    tpCtx.strokeStyle='#222';
+    tpCtx.lineWidth=3;
+    tpCtx.lineCap='round';
+    tpCtx.lineJoin='round';
+    tpUndoStack=[];
+
+    function getPos(e){
+      var r=tpCanvas.getBoundingClientRect();
+      var scaleX=tpCanvas.width/r.width;
+      var scaleY=tpCanvas.height/r.height;
+      if(e.touches){
+        return {x:(e.touches[0].clientX-r.left)*scaleX,y:(e.touches[0].clientY-r.top)*scaleY};
+      }
+      return {x:(e.clientX-r.left)*scaleX,y:(e.clientY-r.top)*scaleY};
+    }
+
+    function startDraw(e){
+      e.preventDefault();
+      tpDrawing=true;
+      var pos=getPos(e);
+      tpLastX=pos.x; tpLastY=pos.y;
+      // Save undo snapshot
+      tpUndoStack.push(tpCtx.getImageData(0,0,tpCanvas.width,tpCanvas.height));
+      if(tpUndoStack.length>30) tpUndoStack.shift();
+      tpCtx.beginPath();
+      tpCtx.moveTo(tpLastX,tpLastY);
+    }
+    function doDraw(e){
+      e.preventDefault();
+      if(!tpDrawing) return;
+      var pos=getPos(e);
+      tpCtx.lineTo(pos.x,pos.y);
+      tpCtx.stroke();
+      tpLastX=pos.x; tpLastY=pos.y;
+    }
+    function endDraw(e){
+      e.preventDefault();
+      tpDrawing=false;
+      tpCtx.beginPath();
+    }
+
+    tpCanvas.addEventListener('mousedown',startDraw);
+    tpCanvas.addEventListener('mousemove',doDraw);
+    tpCanvas.addEventListener('mouseup',endDraw);
+    tpCanvas.addEventListener('mouseleave',endDraw);
+    tpCanvas.addEventListener('touchstart',startDraw,{passive:false});
+    tpCanvas.addEventListener('touchmove',doDraw,{passive:false});
+    tpCanvas.addEventListener('touchend',endDraw);
+  },100);
+}
+
+function tpUndo(){
+  if(!tpCtx||!tpUndoStack.length) return;
+  tpCtx.putImageData(tpUndoStack.pop(),0,0);
+}
+
+function tpClearCanvas(){
+  if(!tpCtx||!tpCanvas) return;
+  tpUndoStack.push(tpCtx.getImageData(0,0,tpCanvas.width,tpCanvas.height));
+  tpCtx.fillStyle='#ffffff';
+  tpCtx.fillRect(0,0,tpCanvas.width,tpCanvas.height);
+}
+
+// ---- CONFIRM DIALOG ----
+function tpConfirm(title,msg,cb){
+  document.getElementById('tp-confirm-title').textContent=title;
+  document.getElementById('tp-confirm-msg').textContent=msg;
+  tpConfirmCallback=cb;
+  document.getElementById('tp-confirm').style.display='flex';
+  document.getElementById('tp-confirm-ok').onclick=function(){
+    document.getElementById('tp-confirm').style.display='none';
+    if(tpConfirmCallback) tpConfirmCallback();
+  };
+}
+
+function tpAskClear(){ tpConfirm('Clear drawing?','This will erase everything.',tpClearCanvas); }
+function tpAskSubmit(){ tpConfirm('Submit drawing?','You cannot change it after submitting.',tpSubmitDrawing); }
+function tpConfirmCancel(){
+  document.getElementById('tp-confirm').style.display='none';
+  tpConfirmCallback=null;
+}
+
+// ---- PRESENT ----
+function tpRenderPresent(state){
+  tpShowScreen('present');
+  var order=state.playerOrder||[];
+  var presentIdx=state.presentIdx||0;
+  var presenterId=order[presentIdx];
+  var isPresenter=presenterId===tpMyId;
+  var chain=(state.chains&&state.chains[presenterId])||{entries:{}};
+  var entries=chain.entries||{};
+  var entryCount=Object.keys(entries).length;
+  var presenterName='';
+  var players=state.players||{};
+  var presenterPlayer=players[presenterId];
+  presenterName=presenterPlayer?(presenterPlayer.emoji+' '+presenterPlayer.name):'?';
+
+  var chainHtml=tpBuildChainHtml(entries,order.length,players);
+
+  var content=document.getElementById('tp-present-content');
+  if(isPresenter){
+    content.innerHTML='<div class="presenter-banner tp" style="margin-bottom:14px;">'
+      +'<div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:#f9c74f;margin-bottom:4px;">Your chain!</div>'
+      +'<div style="color:rgba(255,255,255,.6);font-size:.88rem;">Show everyone your phone and walk them through it.</div>'
+      +'</div>'
+      +chainHtml
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">'
+      +'<button class="btn btn-secondary tp" onclick="tpSkipPresent()">Skip</button>'
+      +'<button class="btn btn-primary tp" onclick="tpNextPresent()">Done →</button>'
+      +'</div>';
+  } else {
+    var acksNeeded=1;
+    var acks=Object.keys(state.presentAcks||{}).length;
+    content.innerHTML='<div style="text-align:center;margin-bottom:16px;">'
+      +'<div style="font-size:2.5rem;margin-bottom:6px;">'+( presenterPlayer?presenterPlayer.emoji:'🎨')+'</div>'
+      +'<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#f9c74f;">'+presenterName+' is presenting</div>'
+      +'<div style="color:rgba(255,255,255,.45);font-size:.85rem;margin-top:4px;">Watch their screen!</div>'
+      +'</div>'
+      +chainHtml
+      +'<div style="color:rgba(255,255,255,.35);font-size:.8rem;text-align:center;margin-top:12px;">Waiting for presenter to continue ('+(presentIdx+1)+' of '+order.length+')...</div>';
+  }
+}
+
+function tpNextPresent(){
+  if(!tpLastState) return;
+  var order=tpLastState.playerOrder||[];
+  var presentIdx=tpLastState.presentIdx||0;
+  var next=presentIdx+1;
+  if(next>=order.length){
+    tpDb.ref('rooms/tp/'+tpRoomCode).update({phase:'gallery'});
+  } else {
+    tpDb.ref('rooms/tp/'+tpRoomCode).update({presentIdx:next,presentAcks:{}});
+  }
+}
+
+function tpSkipPresent(){
+  tpNextPresent();
+}
+
+// ---- GALLERY ----
+function tpRenderGallery(state){
+  tpShowScreen('gallery');
+  var order=state.playerOrder||[];
+  var players=state.players||{};
+  var content=document.getElementById('tp-gallery-content');
+  content.innerHTML='<p style="color:rgba(255,255,255,.5);text-align:center;margin-bottom:14px;font-size:.9rem;">Tap any chain to view it fully</p>'
+    +'<div class="gallery-grid tp">'
+    +order.map(function(pid){
+      var chain=(state.chains&&state.chains[pid])||{entries:{}};
+      var entries=chain.entries||{};
+      var firstEntry=entries['e0'];
+      var p=players[pid];
+      var firstImg=null;
+      var keys=Object.keys(entries).sort();
+      for(var i=0;i<keys.length;i++){
+        if(entries[keys[i]].type==='drawing'){firstImg=entries[keys[i]].data;break;}
+      }
+      return '<div class="gallery-card tp" data-pid="'+pid+'" onclick="tpViewChainEl(this)">'
+        +(firstImg?'<img src="'+firstImg+'" alt="drawing">'
+          :'<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.3);">'+( (firstEntry&&firstEntry.data)?('"'+tpEscape(firstEntry.data.slice(0,20))+( firstEntry.data.length>20?'...':'')+'"'):'...' )+'</div>')
+        +"<div class=\"gallery-card-name\">"+(p?p.emoji+" "+p.name:"?")+"'s chain</div>"+
+        +'</div>';
+    }).join('')
+    +'</div>';
+}
+
+
+function tpViewChainEl(el){ tpViewChain(el.getAttribute('data-pid')); }
+function tpViewChain(ownerId){
+  if(!tpLastState) return;
+  var order=tpLastState.playerOrder||[];
+  var players=tpLastState.players||{};
+  var chain=(tpLastState.chains&&tpLastState.chains[ownerId])||{entries:{}};
+  var entries=chain.entries||{};
+  var p=players[ownerId];
+  document.getElementById("tp-viewer-title").textContent=(p?p.emoji+" "+p.name:"?")+"'s chain";
+  document.getElementById('tp-viewer-content').innerHTML=tpBuildChainHtml(entries,order.length,players);
+  document.getElementById('tp-chain-viewer').style.display='block';
+}
+
+function tpCloseViewer(){
+  document.getElementById('tp-chain-viewer').style.display='none';
+}
+
+// ---- HELPERS ----
+function tpBuildChainHtml(entries,totalRounds,players){
+  var html='';
+  for(var i=0;i<totalRounds;i++){
+    var entry=entries['e'+i];
+    if(!entry) break;
+    var author=players[entry.authorId];
+    var authorName=author?(author.emoji+' '+author.name):(entry.authorName||'?');
+    var label=i===0?'Original phrase':(entry.type==='drawing'?'Drawing by '+authorName:'Described by '+authorName);
+    html+='<div class="chain-entry tp">'
+      +'<div class="chain-label">'+label+'</div>';
+    if(entry.type==='drawing'){
+      html+='<img class="chain-img" src="'+entry.data+'" alt="drawing">';
+    } else {
+      html+='<div class="chain-text">'+tpEscape(entry.data)+'</div>';
+    }
+    html+='</div>';
+  }
+  return html||'<div style="color:rgba(255,255,255,.3);text-align:center;padding:20px;">No entries yet</div>';
+}
+
+function tpEscape(str){
+  if(!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function tpShuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+
+function tpResetLocalState(){
+  tpRoomCode=''; tpMyId=''; tpMyName=''; tpIsHost=false; tpLastState=null;
+  tpCanvas=null; tpCtx=null; tpDrawing=false; tpUndoStack=[];
+  if(tpDb&&tpRoomCode) tpDb.ref('rooms/tp/'+tpRoomCode).off();
+}
+</script>
+
+
+
+<!-- ============================================================
+     SCOTTY DOESN'T KNOW - JAVASCRIPT
+     ============================================================ -->
+<script>
+var SK_EMOJIS=['🕵️','🎭','🃏','🎪','🤡','👀','🦹','🧐','🤫','🫢','😏','🤔'];
+var skDb=null, skRoomCode='', skMyId='', skMyEmoji='🕵️', skMyName='', skIsHost=false, skLastState=null;
+var skMyVote=null, skMyGuess=null, skCatGuess='';
+var skSubmittedAnswer=false;
+
+function skInitDb(){ skDb=getDb(); return !!skDb; }
+function skShowScreen(id){ showScreen('sk-'+id); }
+
+function skRenderEmojiPicker(){
+  var p=document.getElementById('sk-emoji-picker');
+  if(!p) return;
+  skMyEmoji=SK_EMOJIS[Math.floor(Math.random()*SK_EMOJIS.length)];
+  p.innerHTML=SK_EMOJIS.map(function(em){
+    var sel=em===skMyEmoji;
+    return '<button data-em="'+em+'" onclick="skPickEmoji(this)" style="font-size:1.5rem;padding:5px;background:'+(sel?'rgba(126,232,162,.25)':'transparent')+';border:2px solid '+(sel?'#7ee8a2':'transparent')+';border-radius:8px;cursor:pointer;">'+em+'</button>';
+  }).join('');
+}
+function skPickEmoji(btn){
+  skMyEmoji=btn.getAttribute('data-em');
+  var all=document.querySelectorAll('#sk-emoji-picker button');
+  for(var i=0;i<all.length;i++){all[i].style.background='transparent';all[i].style.borderColor='transparent';}
+  btn.style.background='rgba(126,232,162,.25)'; btn.style.borderColor='#7ee8a2';
+}
+
+function skCreateRoom(){
+  var name=document.getElementById('sk-player-name').value.trim();
+  if(!name){alert('Enter your name!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
+  skMyId=genId(); skMyName=name; skIsHost=true; skRoomCode=genRoomCode();
+  var player={id:skMyId,name:skMyName,emoji:skMyEmoji,score:0,connected:true};
+  var room={code:skRoomCode,phase:'lobby',hostId:skMyId,players:{},
+    categories:[],categoryOrder:[],playerOrder:[],scottyCounts:{},
+    roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},createdAt:Date.now()};
+  room.players[skMyId]=player;
+  skDb.ref('rooms/sk/'+skRoomCode).set(room).then(function(){
+    document.getElementById('sk-room-code-display').textContent=skRoomCode;
+    skShowScreen('lobby');
+    skListenRoom();
+  }).catch(function(e){alert('Error: '+e.message);});
+}
+
+function skJoinRoom(){
+  var name=document.getElementById('sk-player-name').value.trim();
+  var code=document.getElementById('sk-join-code').value.trim().toUpperCase();
+  if(!name){alert('Enter your name!');return;}
+  if(code.length!==4){alert('Enter a 4-letter room code!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
+  skMyId=genId(); skMyName=name; skIsHost=false; skRoomCode=code;
+  skDb.ref('rooms/sk/'+code).once('value').then(function(snap){
+    if(!snap.exists()){alert('Room not found!');return;}
+    var room=snap.val();
+    if(room.phase!=='lobby'){alert('Game already started!');return;}
+    var player={id:skMyId,name:skMyName,emoji:skMyEmoji,score:0,connected:true};
+    skDb.ref('rooms/sk/'+code+'/players/'+skMyId).set(player).then(function(){
+      skShowScreen('lobby'); skListenRoom();
+    });
+  });
+}
+
+function skListenRoom(){
+  skDb.ref('rooms/sk/'+skRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    skLastState=snap.val();
+    skHandleState(skLastState);
+  });
+  skDb.ref('rooms/sk/'+skRoomCode+'/players/'+skMyId+'/connected').onDisconnect().set(false);
+}
+
+function skHandleState(state){
+  var ph=state.phase;
+  if(ph==='lobby') skRenderLobby(state);
+  else if(ph==='categories') skRenderCategories(state);
+  else if(ph==='play') skRenderPlay(state);
+  else if(ph==='results') skRenderResults(state);
+  else if(ph==='final') skRenderFinal(state);
+}
+
+// ---- LOBBY ----
+function skRenderLobby(state){
+  skShowScreen('lobby');
+  var players=Object.values(state.players||{});
+  document.getElementById('sk-room-code-display').textContent=state.code;
+  document.getElementById('sk-lobby-title').textContent='Players ('+players.length+')';
+  document.getElementById('sk-lobby-players').innerHTML=players.map(function(p){
+    return '<div class="player-chip sk"><span>'+p.emoji+'</span><span>'+p.name+'</span></div>';
+  }).join('');
+  var isHost=state.hostId===skMyId;
+  var hb=document.getElementById('sk-lobby-host-btn');
+  var gm=document.getElementById('sk-lobby-guest-msg');
+  if(isHost){
+    hb.style.display=players.length>=4?'block':'none';
+    gm.textContent=players.length<4?'Need at least 4 players ('+players.length+' so far)...':'';
+    gm.style.display=players.length<4?'block':'none';
+  } else {
+    hb.style.display='none';
+    gm.style.display='block';
+    gm.textContent='Waiting for host to start...';
+  }
+}
+
+function skStartGame(){
+  if(!skIsHost) return;
+  skDb.ref('rooms/sk/'+skRoomCode+'/players').once('value').then(function(snap){
+    var players=Object.values(snap.val()||{}).filter(function(p){return p.connected!==false;});
+    if(players.length<4){alert('Need at least 4 players!');return;}
+    skDb.ref('rooms/sk/'+skRoomCode).update({phase:'categories',catSubmissions:{}});
+  });
+}
+
+// ---- CATEGORIES ----
+function skRenderCategories(state){
+  skShowScreen('categories');
+  var subs=state.catSubmissions||{};
+  var myDone=!!subs[skMyId];
+  var total=Object.values(state.players||{}).length;
+  var doneCount=Object.keys(subs).length;
+  var card=document.getElementById('sk-cat-card');
+  if(myDone){
+    card.innerHTML='<div style="text-align:center;padding:12px;">'
+      +'<div style="font-size:2rem;margin-bottom:8px;">✓</div>'
+      +'<div style="color:#7ee8a2;font-weight:700;margin-bottom:8px;">Categories submitted!</div>'
+      +'<div style="color:rgba(255,255,255,.45);font-size:.9rem;">'+doneCount+'/'+total+' players ready</div>'
+      +'</div>';
+    if(skIsHost&&doneCount===total) skBuildRounds(state);
+    return;
+  }
+  card.innerHTML='<div><input type="text" id="sk-cat1" placeholder="Category 1 (e.g. Types of pasta)"></div>'
+    +'<div><input type="text" id="sk-cat2" placeholder="Category 2 (e.g. 90s movies)"></div>'
+    +'<button class="btn btn-primary sk" onclick="skSubmitCategories()" style="margin-top:4px;">Submit Categories</button>';
+}
+
+function skSubmitCategories(){
+  var c1=(document.getElementById('sk-cat1')||{}).value;
+  var c2=(document.getElementById('sk-cat2')||{}).value;
+  if(!c1||!c1.trim()||!c2||!c2.trim()){alert('Enter both categories!');return;}
+  skDb.ref('rooms/sk/'+skRoomCode+'/catSubmissions/'+skMyId).set({
+    cats:[c1.trim(),c2.trim()],playerId:skMyId,playerName:skMyName
+  }).then(function(){
+    if(skIsHost){
+      skDb.ref('rooms/sk/'+skRoomCode+'/catSubmissions').once('value').then(function(snap){
+        var subs=snap.val()||{};
+        var players=Object.values(skLastState.players||{});
+        if(Object.keys(subs).length===players.length) skBuildRounds(skLastState);
+      });
+    }
+  });
+}
+
+function skBuildRounds(state){
+  // Collect all categories with their owner
+  skDb.ref('rooms/sk/'+skRoomCode+'/catSubmissions').once('value').then(function(snap){
+    var subs=snap.val()||{};
+    var players=Object.values(state.players||{}).filter(function(p){return p.connected!==false;});
+    var n=players.length;
+
+    // All categories: [{cat, ownerId}]
+    var allCats=[];
+    Object.values(subs).forEach(function(sub){
+      sub.cats.forEach(function(c){allCats.push({cat:c,ownerId:sub.playerId});});
+    });
+    allCats=skShuffle(allCats); // random order
+
+    var totalRounds=allCats.length; // 2*n
+    // Two of these will be no-Scotty rounds: pick 2 random indices
+    var noScottyCount=2;
+    var roundIndices=skShuffle(Array.from({length:totalRounds},function(_,i){return i;}));
+    var noScottyRoundIndices=roundIndices.slice(0,noScottyCount);
+
+    // Assign Scotty for each round:
+    // Rules: everyone must be Scotty at least once, never for their own category, never >2 consecutive, never >2 total... wait
+    // Rule: "never more than twice in a game" (total Scotty appearances)
+    // "everyone has to be the Scotty at least once"
+    // Assign Scotty round by round
+    var playerIds=players.map(function(p){return p.id;});
+    var scottyCounts={};
+    playerIds.forEach(function(id){scottyCounts[id]=0;});
+    var lastScotty=null;
+    var consecutiveCounts={};
+    playerIds.forEach(function(id){consecutiveCounts[id]=0;});
+
+    var rounds=[];
+    for(var i=0;i<totalRounds;i++){
+      var isNoScotty=noScottyRoundIndices.indexOf(i)!==-1;
+      var catInfo=allCats[i];
+      // Clockwise order: shuffle players into a fixed circle at game start
+      // For each round, determine go-first player (non-Scotty who goes first)
+      // Player order is shuffled once
+      var playerOrder=skShuffle(playerIds.slice());
+      var scottyId=null;
+      if(!isNoScotty){
+        // Pick scotty: not the category owner, not >2 total, try to balance
+        var eligible=playerIds.filter(function(id){
+          return id!==catInfo.ownerId && scottyCounts[id]<2;
+        });
+        // Prefer players who haven't been Scotty yet or have fewer turns
+        eligible.sort(function(a,b){return scottyCounts[a]-scottyCounts[b];});
+        // Don't pick lastScotty if possible (avoid >2 consecutive) - actually rule is never >2 consecutive
+        var noConsec=eligible.filter(function(id){return consecutiveCounts[id]<2;});
+        if(noConsec.length>0) eligible=noConsec;
+        if(eligible.length===0){
+          // Fallback: anyone except owner
+          eligible=playerIds.filter(function(id){return id!==catInfo.ownerId;});
+        }
+        scottyId=eligible[0];
+        scottyCounts[scottyId]++;
+        Object.keys(consecutiveCounts).forEach(function(id){
+          consecutiveCounts[id]=id===scottyId?consecutiveCounts[id]+1:0;
+        });
+        lastScotty=scottyId;
+      }
+
+      // Go-first: first non-Scotty in the playerOrder
+      var goFirstId=null;
+      for(var j=0;j<playerOrder.length;j++){
+        if(playerOrder[j]!==scottyId){goFirstId=playerOrder[j];break;}
+      }
+
+      rounds.push({
+        roundIdx:i,category:catInfo.cat,categoryOwnerId:catInfo.ownerId,
+        scottyId:scottyId,isNoScotty:isNoScotty,
+        playerOrder:playerOrder,goFirstId:goFirstId
+      });
+    }
+
+    // Ensure everyone is Scotty at least once (fill gaps)
+    var unassigned=playerIds.filter(function(id){return scottyCounts[id]===0;});
+    unassigned.forEach(function(uid){
+      // Find a round where this person isn't the category owner and swap Scotty
+      for(var i=0;i<rounds.length;i++){
+        var r=rounds[i];
+        if(!r.isNoScotty&&r.categoryOwnerId!==uid&&r.scottyId!==uid&&scottyCounts[uid]<2){
+          var oldScotty=r.scottyId;
+          scottyCounts[oldScotty]--;
+          r.scottyId=uid;
+          scottyCounts[uid]++;
+          break;
+        }
+      }
+    });
+
+    skDb.ref('rooms/sk/'+skRoomCode).update({
+      phase:'play',rounds:rounds,roundIdx:0,totalRounds:totalRounds,
+      currentRound:rounds[0],answers:{},votes:{},catVotes:{},
+      scottyCounts:scottyCounts
+    });
+  });
+}
+
+// ---- PLAY ----
+function skRenderPlay(state){
+  skShowScreen('play');
+  var round=state.currentRound;
+  if(!round){skRenderWaiting();return;}
+  var players=state.players||{};
+  var n=Object.values(players).length;
+  var isScotty=round.scottyId===skMyId;
+  var isNoScotty=round.isNoScotty;
+  var answers=state.answers||{};
+  var votes=state.votes||{};
+  var catVotes=state.catVotes||{};
+  var myAnswer=answers[skMyId];
+  var allAnswered=Object.keys(answers).length>=n;
+  var allVoted=Object.keys(votes).length>=(isNoScotty?n:n-1); // Scotty votes too (category guess)
+  var allCatVoted=isNoScotty?(Object.keys(catVotes).length>=n):true;
+
+  var content=document.getElementById('sk-play-content');
+  var roundLabel='Round '+(state.roundIdx+1)+' of '+state.totalRounds;
+
+  // Header
+  var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+    +'<div class="round-badge sk">'+roundLabel+'</div>'
+    +(isNoScotty?'<div class="no-scotty-banner sk" style="font-size:.8rem;padding:4px 10px;margin:0;">No Scotty Round!</div>':'')
+    +'</div>';
+
+  if(isNoScotty){
+    html+='<div class="category-box sk">'+skEsc(round.category)+'</div>';
+  } else if(isScotty){
+    html+='<div class="scotty-screen sk"><div class="scotty-title">SCOTTY<br>DOESN\'T KNOW</div>'
+      +'<div style="color:rgba(255,255,255,.5);font-size:.9rem;">You don\'t know the category!<br>Listen to everyone\'s answers and try to blend in.</div></div>';
+  } else {
+    html+='<div class="category-box sk">'+skEsc(round.category)+'</div>';
+  }
+
+  // Go-first indicator
+  if(!myAnswer){
+    if(round.goFirstId===skMyId&&!isScotty){
+      html+='<div style="background:rgba(249,199,79,.1);border:1px solid rgba(249,199,79,.4);border-radius:10px;padding:10px;text-align:center;color:#f9c74f;font-weight:700;margin-bottom:10px;">You go FIRST! Say something from the category out loud.</div>';
+    } else if(!isScotty){
+      var goFirstPlayer=players[round.goFirstId];
+      html+='<div style="color:rgba(255,255,255,.4);font-size:.85rem;text-align:center;margin-bottom:10px;">'+(goFirstPlayer?goFirstPlayer.emoji+' '+goFirstPlayer.name:'Someone')+' goes first, then clockwise.</div>';
+    }
+  }
+
+  // Answer phase
+  if(!myAnswer){
+    html+='<div class="card sk" style="margin-bottom:10px;">'
+      +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">'+(isScotty?'Say anything that sounds like it fits':'Say something from the category')+':</div>'
+      +'<input type="text" id="sk-answer-input" placeholder="Your answer...">'
+      +'<button class="btn btn-primary sk" onclick="skSubmitAnswer()" style="margin-top:10px;">Submit Answer</button>'
+      +'</div>';
+  } else if(!allAnswered){
+    html+='<div class="card sk" style="margin-bottom:10px;text-align:center;">'
+      +'<div style="color:#7ee8a2;font-weight:700;margin-bottom:6px;">Answer submitted!</div>'
+      +'<div style="color:rgba(255,255,255,.45);font-size:.9rem;">Waiting for everyone else...</div>'
+      +'<div style="margin-top:10px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;">'
+      +Object.values(players).map(function(p){
+        var done=!!answers[p.id];
+        return '<div style="font-size:.8rem;padding:4px 10px;border-radius:999px;background:'+(done?'rgba(126,232,162,.2)':'rgba(255,255,255,.06)')+';color:'+(done?'#7ee8a2':'rgba(255,255,255,.4)')+';">'+p.emoji+' '+p.name+(done?' ✓':'')+'</div>';
+      }).join('')
+      +'</div></div>';
+  }
+
+  // Answers reveal + voting phase
+  if(allAnswered){
+    html+='<div class="card sk" style="margin-bottom:10px;">'
+      +'<div style="font-weight:700;margin-bottom:10px;color:rgba(255,255,255,.7);">Everyone\'s answers:</div>';
+    Object.values(players).forEach(function(p){
+      var ans=answers[p.id];
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);">'
+        +'<span style="font-size:1.2rem;">'+p.emoji+'</span>'
+        +'<span style="font-weight:700;">'+skEsc(p.name)+'</span>'
+        +'<span style="color:rgba(255,255,255,.6);margin-left:auto;">'+skEsc(ans||'?')+'</span>'
+        +'</div>';
+    });
+    html+='</div>';
+
+    // Voting: guess who Scotty is OR guess the category
+    var myVoteVal=votes[skMyId];
+    var myCatVote=catVotes[skMyId];
+
+    if(!isNoScotty&&isScotty&&!myCatVote){
+      // Scotty guesses the category
+      html+='<div class="card sk" style="margin-bottom:10px;">'
+        +'<div style="font-weight:700;margin-bottom:8px;color:#f9c74f;">You\'re Scotty! Guess the category:</div>'
+        +'<input type="text" id="sk-cat-guess-input" placeholder="What was the category?">'
+        +'<button class="btn btn-primary sk" onclick="skSubmitCatGuess()" style="margin-top:10px;">Submit Guess</button>'
+        +'</div>';
+    } else if(!isNoScotty&&isScotty&&myCatVote){
+      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Category guess submitted! Waiting for votes...</div>';
+    }
+
+    if(!isScotty&&!myVoteVal){
+      html+='<div class="card sk" style="margin-bottom:10px;">'
+        +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Guess the Scotty:</div>';
+      Object.values(players).forEach(function(p){
+        if(p.id===skMyId) return;
+        html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
+          +p.emoji+' '+skEsc(p.name)+'</button>';
+      });
+      html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Guess the Scotty</button>'
+        +'</div>';
+    } else if(!isScotty&&myVoteVal){
+      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
+    }
+
+    if(isNoScotty&&!myVoteVal){
+      html+='<div class="card sk" style="margin-bottom:10px;">'
+        +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">No Scotty - guess who you think will get the most votes:</div>';
+      Object.values(players).forEach(function(p){
+        if(p.id===skMyId) return;
+        html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
+          +p.emoji+' '+skEsc(p.name)+'</button>';
+      });
+      html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Submit Vote</button>'
+        +'</div>';
+    } else if(isNoScotty&&myVoteVal){
+      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
+    }
+  }
+
+  content.innerHTML=html;
+  if(skIsHost&&allAnswered) skCheckTallyReady(state);
+}
+
+var skSelectedVote=null;
+function skToggleScottyVote(btn){
+  var pid=btn.getAttribute('data-pid');
+  skSelectedVote=pid;
+  var all=document.querySelectorAll('.vote-btn-player.sk');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('selected');
+  btn.classList.add('selected');
+}
+
+function skSubmitAnswer(){
+  var input=document.getElementById('sk-answer-input');
+  if(!input||!input.value.trim()){alert('Enter an answer!');return;}
+  skDb.ref('rooms/sk/'+skRoomCode+'/answers/'+skMyId).set(input.value.trim());
+}
+
+function skSubmitVote(){
+  if(!skSelectedVote){alert('Pick someone!');return;}
+  skDb.ref('rooms/sk/'+skRoomCode+'/votes/'+skMyId).set(skSelectedVote).then(function(){
+    skSelectedVote=null;
+    if(skIsHost) skCheckTallyReady(skLastState);
+  });
+}
+
+function skSubmitCatGuess(){
+  var input=document.getElementById('sk-cat-guess-input');
+  if(!input||!input.value.trim()){alert('Enter your guess!');return;}
+  skDb.ref('rooms/sk/'+skRoomCode+'/catVotes/'+skMyId).set(input.value.trim()).then(function(){
+    if(skIsHost) skCheckTallyReady(skLastState);
+  });
+}
+
+function skCheckTallyReady(state){
+  if(!state||!state.currentRound) return;
+  var players=Object.values(state.players||{});
+  var n=players.length;
+  var answers=state.answers||{};
+  var votes=state.votes||{};
+  var catVotes=state.catVotes||{};
+  var round=state.currentRound;
+  var isNoScotty=round.isNoScotty;
+
+  if(Object.keys(answers).length<n) return;
+
+  var nonScottyCount=isNoScotty?n:n-1;
+  if(Object.keys(votes).length<nonScottyCount) return;
+  if(!isNoScotty&&Object.keys(catVotes).length<1) return; // Scotty must guess
+
+  skTallyRound(state);
+}
+
+function skTallyRound(state){
+  var round=state.currentRound;
+  var players=state.players||{};
+  var playerIds=Object.keys(players);
+  var n=playerIds.length;
+  var votes=state.votes||{};
+  var catVotes=state.catVotes||{};
+  var isNoScotty=round.isNoScotty;
+  var scottyId=round.scottyId;
+
+  // Count votes per player
+  var voteTally={};
+  playerIds.forEach(function(id){voteTally[id]=0;});
+  Object.values(votes).forEach(function(targetId){
+    if(voteTally[targetId]!==undefined) voteTally[targetId]++;
+  });
+
+  var deltas={};
+  playerIds.forEach(function(id){deltas[id]=0;});
+
+  if(isNoScotty){
+    // Find majority vote getter
+    var maxVotes=Math.max.apply(null,Object.values(voteTally));
+    var topIds=playerIds.filter(function(id){return voteTally[id]===maxVotes;});
+    if(maxVotes===0){
+      // Nobody voted for anyone - everyone gets 0
+    } else {
+      var isTie=topIds.length>1;
+      // If tied, all tied players get +3
+      topIds.forEach(function(id){deltas[id]+=3;});
+      // Everyone else who got at least 1 vote gets +1
+      playerIds.forEach(function(id){
+        if(topIds.indexOf(id)===-1&&voteTally[id]>0) deltas[id]+=1;
+      });
+    }
+  } else {
+    // Normal round: did majority catch Scotty?
+    var nonScottyIds=playerIds.filter(function(id){return id!==scottyId;});
+    var nonScottyCount=nonScottyIds.length;
+    var scottyVotes=voteTally[scottyId]||0;
+    // Majority means > half of non-scotty voters; tie favors Scotty
+    var caughtScotty=scottyVotes>nonScottyCount/2;
+
+    if(caughtScotty){
+      // Each non-Scotty player who voted for Scotty gets +1
+      nonScottyIds.forEach(function(id){
+        if(votes[id]===scottyId) deltas[id]+=1;
+      });
+    } else {
+      // Scotty not caught: Scotty gets +3
+      deltas[scottyId]=(deltas[scottyId]||0)+3;
+    }
+
+    // Did Scotty guess category correctly?
+    var scottyGuess=Object.values(catVotes)[0]||'';
+    var catCorrect=skCategoryMatch(scottyGuess,round.category);
+    if(catCorrect){
+      deltas[scottyId]=(deltas[scottyId]||0)+1;
+    } else {
+      // Non-Scotty players each get +1
+      nonScottyIds.forEach(function(id){deltas[id]+=1;});
+    }
+  }
+
+  // Apply deltas to scores
+  var newPlayers={};
+  playerIds.forEach(function(id){
+    var p=players[id];
+    newPlayers[id]=Object.assign({},p,{score:(p.score||0)+(deltas[id]||0)});
+  });
+
+  var roundIdx=state.roundIdx||0;
+  var rounds=state.rounds||[];
+  var totalRounds=state.totalRounds||rounds.length;
+  var isLast=roundIdx>=totalRounds-1;
+
+  var resultData={
+    players:newPlayers,
+    roundDeltas:deltas,
+    roundVoteTally:voteTally,
+    roundCaughtScotty:!isNoScotty?(Object.keys(votes).filter(function(id){return votes[id]===scottyId;}).length>(Object.values(players).length-1)/2):null,
+    roundCatGuess:Object.values(catVotes)[0]||'',
+    roundCatCorrect:!isNoScotty?skCategoryMatch(Object.values(catVotes)[0]||'',round.category):null,
+    phase:'results',
+    isLastRound:isLast
+  };
+
+  if(!isLast){
+    var nextIdx=roundIdx+1;
+    resultData.nextRound=rounds[nextIdx];
+    resultData.nextRoundIdx=nextIdx;
+  }
+
+  skDb.ref('rooms/sk/'+skRoomCode).update(resultData);
+}
+
+function skCategoryMatch(guess,category){
+  if(!guess||!category) return false;
+  var g=guess.toLowerCase().replace(/[^a-z0-9]/g,' ').trim();
+  var c=category.toLowerCase().replace(/[^a-z0-9]/g,' ').trim();
+  if(g===c) return true;
+  // Check if key words match
+  var gWords=g.split(' ').filter(function(w){return w.length>3;});
+  var cWords=c.split(' ').filter(function(w){return w.length>3;});
+  var matches=gWords.filter(function(w){return cWords.indexOf(w)!==-1;});
+  return matches.length>0&&matches.length>=Math.min(gWords.length,cWords.length)*0.6;
+}
+
+// ---- RESULTS ----
+function skRenderResults(state){
+  skShowScreen('results');
+  var round=state.currentRound;
+  var players=state.players||{};
+  var deltas=state.roundDeltas||{};
+  var votes=state.votes||{};
+  var voteTally=state.roundVoteTally||{};
+  var isNoScotty=round.isNoScotty;
+  var scottyId=round.scottyId;
+  var catGuess=state.roundCatGuess||'';
+  var catCorrect=state.roundCatCorrect;
+  var caughtScotty=state.roundCaughtScotty;
+
+  var content=document.getElementById('sk-results-content');
+  var roundLabel='Round '+((state.roundIdx||0)+1)+' of '+(state.totalRounds||'?');
+
+  var html='<div class="round-badge sk" style="margin-bottom:12px;">'+roundLabel+'</div>';
+
+  if(isNoScotty){
+    html+='<div class="no-scotty-banner sk">No Scotty Round! Category: <strong>'+skEsc(round.category)+'</strong></div>';
+  } else {
+    var scottyPlayer=players[scottyId];
+    html+='<div class="card sk" style="margin-bottom:10px;text-align:center;">'
+      +'<div style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:4px;">The Scotty was...</div>'
+      +'<div style="font-size:1.5rem;font-weight:700;">'+(scottyPlayer?scottyPlayer.emoji+' '+scottyPlayer.name:'?')+'</div>'
+      +'<div style="margin-top:8px;font-size:.9rem;color:rgba(255,255,255,.5);">Category: <strong style="color:#7ee8a2;">'+skEsc(round.category)+'</strong></div>'
+      +(caughtScotty
+        ?'<div style="margin-top:8px;color:#f9c74f;font-weight:700;">🎯 Scotty was caught! Non-Scotty voters who guessed right each get +1</div>'
+        :'<div style="margin-top:8px;color:#f94144;font-weight:700;">🕵️ Scotty escaped! +3 for Scotty</div>')
+      +'<div style="margin-top:6px;font-size:.9rem;color:rgba(255,255,255,.5);">Scotty\'s guess: <strong style="color:'+(catCorrect?'#7ee8a2':'#f94144')+';">'+skEsc(catGuess||'(no guess)')+'</strong> '+(catCorrect?'+1 Scotty':'- Non-Scotty +1 each')+'</div>'
+      +'</div>';
+  }
+
+  // Vote breakdown
+  html+='<div class="card sk" style="margin-bottom:10px;">'
+    +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Votes:</div>';
+  Object.values(players).forEach(function(p){
+    var vCount=voteTally[p.id]||0;
+    if(isNoScotty||p.id!==scottyId){
+      html+='<div class="results-row sk" style="background:rgba(255,255,255,.04);border-radius:8px;margin-bottom:4px;">'
+        +'<span>'+p.emoji+' '+skEsc(p.name)+'</span>'
+        +'<span style="color:rgba(255,255,255,.5);font-size:.85rem;">'+vCount+' vote'+(vCount!==1?'s':'')+'</span>'
+        +'</div>';
+    }
+  });
+  html+='</div>';
+
+  // Score changes
+  var sorted=Object.values(players).sort(function(a,b){return b.score-a.score;});
+  html+='<div class="card sk" style="margin-bottom:12px;">'
+    +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Scores:</div>';
+  sorted.forEach(function(p){
+    var d=deltas[p.id]||0;
+    html+='<div class="score-row sk">'
+      +'<span>'+p.emoji+' '+skEsc(p.name)+'</span>'
+      +'<div style="display:flex;align-items:center;gap:10px;">'
+      +'<span class="'+(d>0?'delta-pos':'delta-zero')+' sk">'+(d>0?'+':'')+d+'</span>'
+      +'<span class="score-val sk">'+p.score+'</span>'
+      +'</div></div>';
+  });
+  html+='</div>';
+
+  if(state.isLastRound){
+    html+='<button class="btn btn-primary sk" onclick="skEndGame()">See Final Results 🏆</button>';
+  } else if(skIsHost){
+    html+='<button class="btn btn-primary sk" onclick="skNextRound()">Next Round →</button>';
+  } else {
+    html+='<div style="color:rgba(255,255,255,.4);text-align:center;font-size:.9rem;">Waiting for host to continue...</div>';
+  }
+
+  content.innerHTML=html;
+}
+
+function skNextRound(){
+  if(!skIsHost||!skLastState) return;
+  var next=skLastState.nextRound;
+  var nextIdx=skLastState.nextRoundIdx;
+  skDb.ref('rooms/sk/'+skRoomCode).update({
+    phase:'play',currentRound:next,roundIdx:nextIdx,
+    answers:{},votes:{},catVotes:{},
+    roundDeltas:null,roundVoteTally:null,roundCaughtScotty:null,
+    roundCatGuess:null,roundCatCorrect:null,nextRound:null
+  });
+}
+
+function skEndGame(){
+  skDb.ref('rooms/sk/'+skRoomCode).update({phase:'final'});
+}
+
+// ---- FINAL ----
+function skRenderFinal(state){
+  skShowScreen('final');
+  var players=Object.values(state.players||{}).sort(function(a,b){return b.score-a.score;});
+  var medals=['🥇','🥈','🥉'];
+  var card=document.getElementById('sk-final-card');
+  card.innerHTML='<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#7ee8a2;margin-bottom:14px;">'+players[0].emoji+' '+skEsc(players[0].name)+' wins!</div>'
+    +players.map(function(p,i){
+      return '<div class="score-row sk" style="background:'+(i===0?'rgba(126,232,162,.1)':'rgba(255,255,255,.04)')+';border-radius:10px;margin-bottom:6px;">'
+        +'<span>'+medals[i]+(i>2?(i+1)+'.':'')+' '+p.emoji+' '+skEsc(p.name)+'</span>'
+        +'<span class="score-val sk">'+p.score+'</span>'
+        +'</div>';
+    }).join('');
+}
+
+function skEsc(str){
+  if(!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function skShuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+
+function skResetLocalState(){
+  skRoomCode=''; skMyId=''; skMyName=''; skIsHost=false; skLastState=null;
+  skSelectedVote=null; skSubmittedAnswer=false;
+  if(skDb&&skRoomCode) skDb.ref('rooms/sk/'+skRoomCode).off();
+}
+</script>
+
+
 <script>
 function selectGame(game) {
   if (game === 'whofarted') {
     document.body.className = 'game-whofarted';
     showScreen('wf-home');
+  } else if (game === 'tp') {
+    document.body.className = 'game-tp';
+    tpResetLocalState();
+    showScreen('tp-home');
+    tpRenderEmojiPicker();
+  } else if (game === 'scotty') {
+    document.body.className = 'game-scotty';
+    skResetLocalState();
+    showScreen('sk-home');
+    skRenderEmojiPicker();
   } else {
     document.body.className = 'game-fishbowl';
     fbResetLocalState();
@@ -1298,7 +2751,9 @@ function selectGame(game) {
 function goHome() {
   if (wfDb && wfRoomCode) { wfDb.ref('rooms/wf/' + wfRoomCode).off(); }
   if (fbDb && fbRoomCode) { fbDb.ref('rooms/fb/' + fbRoomCode).off(); }
-  wfRoomCode = ''; fbRoomCode = ''; fbMyId = '';
+  if (tpDb && tpRoomCode) { tpDb.ref('rooms/tp/' + tpRoomCode).off(); }
+  if (skDb && skRoomCode) { skDb.ref('rooms/sk/' + skRoomCode).off(); }
+  wfRoomCode = ''; fbRoomCode = ''; fbMyId = ''; tpRoomCode = ''; tpMyId = ''; skRoomCode = ''; skMyId = '';
   document.body.className = 'game-none';
   showScreen('assbox-home');
 }
