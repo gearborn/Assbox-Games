@@ -699,11 +699,7 @@ function getDb() {
     if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
     _db = firebase.database();
     return _db;
-  } catch(e) {
-    console.error('Firebase init error:', e.message, e.code || '');
-    alert('Firebase error: ' + e.message);
-    return null;
-  }
+  } catch(e) { return null; }
 }
 
 function showScreen(id) {
@@ -755,7 +751,7 @@ function wfInitDb() {
 function wfCreateRoom() {
   const name = document.getElementById('wf-player-name-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
-  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
+  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = true; wfRoomCode = genRoomCode();
   const pd = { id:wfPlayerId, name:wfPlayerName, emoji:wfRandomEmoji(), score:0, isHost:true, forcedFart:false, connected:true };
   const rd = { code:wfRoomCode, phase:'lobby', round:1, players:{[wfPlayerId]:pd}, choices:{}, votes:{}, testReady:{}, hostId:wfPlayerId, createdAt:Date.now() };
@@ -771,7 +767,7 @@ function wfJoinRoom() {
   const code = document.getElementById('wf-join-code-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
   if (code.length !== 4) { wfShowError('Enter a 4-letter room code!'); return; }
-  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
+  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = false; wfRoomCode = code;
   wfDb.ref('rooms/wf/'+code).once('value').then(snap=>{
     if (!snap.exists()) { wfShowError('Room not found!'); return; }
@@ -1021,7 +1017,6 @@ function fbCreateRoom(){
   const name=document.getElementById('fb-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
   if(!fbInitDb()){alert('Firebase not configured! Check your firebaseConfig values.');return;}
-  if(FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet - please add your project credentials to the FIREBASE_CONFIG block.');return;}
   fbMyId=genId();
   fbRoomCode=genRoomCode();
   const player={id:fbMyId,name,emoji:fbMyEmoji,words:[],ready:false,teamIdx:null,connected:true};
@@ -1051,7 +1046,7 @@ function fbJoinRoom(){
   const code=document.getElementById('fb-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!fbInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet.');return;}
+  if(!fbInitDb()){alert('Firebase not configured!');return;}
   fbMyId=genId();fbRoomCode=code;
   fbDb.ref('rooms/fb/'+code).once('value').then(snap=>{
     if(!snap.exists()){alert('Room not found!');return;}
@@ -2100,7 +2095,7 @@ function skPickEmoji(btn){
 function skCreateRoom(){
   var name=document.getElementById('sk-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
-  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
+  if(!skInitDb()){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=true; skRoomCode=genRoomCode();
   var player={id:skMyId,name:skMyName,emoji:skMyEmoji,score:0,connected:true};
   var room={code:skRoomCode,phase:'lobby',hostId:skMyId,players:{},
@@ -2119,7 +2114,7 @@ function skJoinRoom(){
   var code=document.getElementById('sk-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
+  if(!skInitDb()){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=false; skRoomCode=code;
   skDb.ref('rooms/sk/'+code).once('value').then(function(snap){
     if(!snap.exists()){alert('Room not found!');return;}
