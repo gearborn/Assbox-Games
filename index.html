@@ -699,7 +699,11 @@ function getDb() {
     if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
     _db = firebase.database();
     return _db;
-  } catch(e) { return null; }
+  } catch(e) {
+    console.error('Firebase init error:', e.message, e.code || '');
+    alert('Firebase error: ' + e.message);
+    return null;
+  }
 }
 
 function showScreen(id) {
