@@ -46,6 +46,7 @@ body.game-whofarted { background: var(--wf-bg); color: var(--wf-text); }
 body.game-fishbowl { background: var(--fb-bg); color: #fff; }
 body.game-tp { background: #1a1a2e; color: #fff; }
 body.game-scotty { background: #0d1117; color: #fff; }
+body.game-tangents { background: #1a0f0f; color: #fff; }
 
 .screen { width: 100%; max-width: 480px; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; padding: 24px 20px 48px; gap: 14px; }
 .screen.hidden { display: none !important; }
@@ -283,6 +284,69 @@ body.game-scotty { background: #0d1117; color: #fff; }
 .sk .delta-zero { color:rgba(255,255,255,.3); font-family:'Fredoka One',cursive; font-size:1.3rem; }
 .sk .no-scotty-banner { background:rgba(249,199,79,.1); border:2px solid rgba(249,199,79,.4); border-radius:12px; padding:12px; text-align:center; color:#f9c74f; font-weight:700; margin-bottom:12px; }
 
+
+/* ============================================================
+   TANGENTS STYLES
+   ============================================================ */
+.tg { color: #fff; }
+.tg h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.3rem,5vw,1.9rem); color: #e8d5b7; margin-bottom: 10px; }
+.tg .card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px; width: 100%; }
+.tg input[type="text"] { width:100%; padding:12px 15px; border-radius:12px; border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; font-size:1rem; font-family:'Nunito',sans-serif; outline:none; }
+.tg input[type="text"]:focus { border-color:#e8d5b7; }
+.tg input[type="text"]::placeholder { color:rgba(255,255,255,.35); }
+.tg input[type="number"] { width:80px; padding:12px 10px; border-radius:12px; border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; font-size:1.2rem; font-family:'Nunito',sans-serif; outline:none; text-align:center; }
+.tg .btn { display:flex; align-items:center; justify-content:center; padding:13px 20px; border-radius:13px; border:none; font-family:'Fredoka One',cursive; font-size:1.1rem; cursor:pointer; transition:all .15s; width:100%; }
+.tg .btn-primary { background:linear-gradient(135deg,#e8d5b7,#c9a96e); color:#1a0800; }
+.tg .btn-primary:active { transform:scale(.97); }
+.tg .btn-red { background:linear-gradient(135deg,#e63946,#c1121f); color:#fff; }
+.tg .btn-blue { background:linear-gradient(135deg,#4a90d9,#1565c0); color:#fff; }
+.tg .btn-secondary { background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.2); }
+.tg .btn-danger { background:linear-gradient(135deg,#f94144,#c1121f); color:#fff; }
+.tg .btn:disabled { opacity:.4; cursor:not-allowed; }
+.tg .back-btn { background:none; border:none; color:rgba(255,255,255,.4); font-family:'Fredoka One',cursive; font-size:15px; cursor:pointer; padding:8px 0; align-self:flex-start; }
+.tg .room-code { font-family:'Fredoka One',cursive; font-size:3.5rem; letter-spacing:8px; color:#e8d5b7; text-align:center; }
+.tg .player-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.1); border-radius:999px; padding:7px 13px; margin:3px; font-weight:700; font-size:.88rem; }
+.tg .player-chip.red { background:rgba(230,57,70,.25); border:1px solid rgba(230,57,70,.5); }
+.tg .player-chip.blue { background:rgba(74,144,217,.25); border:1px solid rgba(74,144,217,.5); }
+/* Counter bar */
+.tg .counter-bar { display:flex; gap:12px; justify-content:center; align-items:center; padding:10px 0; margin-bottom:8px; }
+.tg .counter-red { font-family:'Fredoka One',cursive; font-size:1.4rem; color:#e63946; background:rgba(230,57,70,.15); border:2px solid rgba(230,57,70,.4); border-radius:10px; padding:6px 18px; }
+.tg .counter-blue { font-family:'Fredoka One',cursive; font-size:1.4rem; color:#4a90d9; background:rgba(74,144,217,.15); border:2px solid rgba(74,144,217,.4); border-radius:10px; padding:6px 18px; }
+/* Grid */
+.tg .grid { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; width:100%; margin:8px 0; }
+.tg .word-card { border-radius:8px; padding:6px 4px; text-align:center; font-size:clamp(.6rem,.9vw + .4rem,.82rem); font-weight:700; cursor:pointer; min-height:48px; display:flex; align-items:center; justify-content:center; line-height:1.2; transition:transform .1s,box-shadow .1s; word-break:break-word; border:2px solid transparent; }
+.tg .word-card:active { transform:scale(.95); }
+.tg .word-card.beige { background:#d4b896; color:#3d2b1a; border-color:#b8956a; }
+.tg .word-card.red { background:#e63946; color:#fff; border-color:#c1121f; }
+.tg .word-card.blue { background:#4a90d9; color:#fff; border-color:#1565c0; }
+.tg .word-card.neutral { background:#c4a882; color:#3d2b1a; border-color:#a88760; }
+.tg .word-card.death { background:#1a1a1a; color:#fff; border-color:#000; }
+.tg .word-card.revealed { cursor:default; opacity:.85; }
+.tg .word-card.revealed:active { transform:none; }
+/* Clue display */
+.tg .clue-box { background:rgba(232,213,183,.1); border:2px solid rgba(232,213,183,.3); border-radius:14px; padding:14px 18px; text-align:center; margin-bottom:10px; }
+.tg .clue-word { font-family:'Fredoka One',cursive; font-size:2rem; color:#e8d5b7; }
+.tg .clue-bid { font-size:1rem; color:rgba(255,255,255,.6); margin-top:4px; }
+.tg .clue-guesses { font-size:.85rem; color:rgba(255,255,255,.5); margin-top:2px; }
+/* Turn banner */
+.tg .turn-banner { text-align:center; padding:8px; border-radius:10px; font-family:'Fredoka One',cursive; font-size:1rem; margin-bottom:8px; }
+.tg .turn-banner.red { background:rgba(230,57,70,.2); border:1px solid rgba(230,57,70,.4); color:#e63946; }
+.tg .turn-banner.blue { background:rgba(74,144,217,.2); border:1px solid rgba(74,144,217,.4); color:#4a90d9; }
+/* Confirm overlay */
+.tg .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,.8); display:flex; align-items:center; justify-content:center; z-index:200; }
+.tg .confirm-box { background:#2a1a0f; border:2px solid rgba(232,213,183,.4); border-radius:20px; padding:28px 24px; text-align:center; max-width:320px; width:90%; }
+.tg .confirm-box h3 { font-family:'Fredoka One',cursive; color:#e8d5b7; font-size:1.4rem; margin-bottom:10px; }
+.tg .confirm-box p { color:rgba(255,255,255,.65); margin-bottom:20px; font-size:.95rem; }
+.tg .confirm-btns { display:flex; gap:10px; }
+/* Clue dialog */
+.tg .clue-dialog { position:fixed; inset:0; background:rgba(0,0,0,.85); display:flex; align-items:center; justify-content:center; z-index:200; }
+.tg .clue-dialog-box { background:#2a1a0f; border:2px solid rgba(232,213,183,.5); border-radius:20px; padding:28px 24px; max-width:340px; width:90%; }
+.tg .clue-dialog-box h3 { font-family:'Fredoka One',cursive; color:#e8d5b7; font-size:1.5rem; margin-bottom:16px; text-align:center; }
+.tg .clue-row { display:flex; gap:10px; align-items:center; margin-bottom:12px; }
+.tg .clue-label { font-weight:700; color:rgba(255,255,255,.6); font-size:.9rem; min-width:40px; }
+/* End screen */
+.tg .win-banner { font-family:'Fredoka One',cursive; font-size:2.5rem; text-align:center; margin-bottom:16px; }
+
 </style>
 </head>
 <body class="game-none">
@@ -321,6 +385,13 @@ body.game-scotty { background: #0d1117; color: #fff; }
         <div>
           <div class="game-card-name">Scotty Doesn't Know</div>
           <div class="game-card-desc">Hidden categories · Bluff & guess · 4+ players</div>
+        </div>
+      </div>
+      <div class="game-card" onclick="selectGame('tangents')">
+        <div class="game-card-icon">🔴</div>
+        <div>
+          <div class="game-card-name">Tangents</div>
+          <div class="game-card-desc">Codenames-style · Red vs Blue · 4+ players</div>
         </div>
       </div>
     </div>
@@ -545,6 +616,96 @@ body.game-scotty { background: #0d1117; color: #fff; }
 
 
 
+
+<!-- ============================================================
+     TANGENTS - ALL SCREENS
+     ============================================================ -->
+<div id="screen-tg-home" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
+  <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="tg-player-name" placeholder="Your name...">
+    <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn tg" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-tg-lobby" class="screen tg hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="tg-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Choose your team</div>
+  </div>
+  <div style="display:flex;gap:10px;width:100%;" id="tg-teams-display"></div>
+  <div style="display:flex;gap:8px;width:100%;">
+    <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
+    <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
+  </div>
+  <div id="tg-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
+  </div>
+  <div id="tg-lobby-msg" style="color:rgba(255,255,255,.4);font-size:.88rem;text-align:center;"></div>
+</div>
+
+<div id="screen-tg-play" class="screen tg hidden" style="justify-content:flex-start;padding:12px 12px 48px;">
+  <div id="tg-play-content" style="width:100%;max-width:480px;margin:0 auto;"></div>
+</div>
+
+<div id="screen-tg-ended" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div id="tg-ended-content" style="width:100%;max-width:480px;"></div>
+  <button class="btn btn-primary tg" style="margin-top:16px;max-width:300px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+<!-- Tangents confirm overlay -->
+<div id="tg-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 id="tg-confirm-title">Are you sure?</h3>
+    <p id="tg-confirm-msg"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgConfirmCancel()">No</button>
+      <button class="btn btn-danger tg" style="flex:1;" id="tg-confirm-ok">Yes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents clue dialog -->
+<div id="tg-clue-dialog" class="tg clue-dialog" style="display:none;">
+  <div class="clue-dialog-box">
+    <h3>Give a Clue</h3>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Clue:</span>
+      <input type="text" id="tg-clue-word-input" placeholder="One word..." style="flex:1;">
+    </div>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Bid:</span>
+      <input type="number" id="tg-clue-bid-input" min="1" max="9" value="2">
+      <span style="color:rgba(255,255,255,.5);font-size:.85rem;margin-left:8px;">words</span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCloseClueDialog()">Cancel</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgSubmitClue()">Give Clue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents word guess overlay -->
+<div id="tg-guess-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 style="color:#e8d5b7;">Guess this word?</h3>
+    <p id="tg-guess-word-display" style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#fff;margin-bottom:16px;"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCancelGuess()">No</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgConfirmGuess()">Yes, guess it</button>
+    </div>
+  </div>
+</div>
+
 <!-- ============================================================
      SCOTTY DOESN'T KNOW - ALL SCREENS
      ============================================================ -->
@@ -751,7 +912,7 @@ function wfInitDb() {
 function wfCreateRoom() {
   const name = document.getElementById('wf-player-name-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = true; wfRoomCode = genRoomCode();
   const pd = { id:wfPlayerId, name:wfPlayerName, emoji:wfRandomEmoji(), score:0, isHost:true, forcedFart:false, connected:true };
   const rd = { code:wfRoomCode, phase:'lobby', round:1, players:{[wfPlayerId]:pd}, choices:{}, votes:{}, testReady:{}, hostId:wfPlayerId, createdAt:Date.now() };
@@ -767,7 +928,7 @@ function wfJoinRoom() {
   const code = document.getElementById('wf-join-code-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
   if (code.length !== 4) { wfShowError('Enter a 4-letter room code!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = false; wfRoomCode = code;
   wfDb.ref('rooms/wf/'+code).once('value').then(snap=>{
     if (!snap.exists()) { wfShowError('Room not found!'); return; }
@@ -1017,6 +1178,7 @@ function fbCreateRoom(){
   const name=document.getElementById('fb-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
   if(!fbInitDb()){alert('Firebase not configured! Check your firebaseConfig values.');return;}
+  if(FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet - please add your project credentials to the FIREBASE_CONFIG block.');return;}
   fbMyId=genId();
   fbRoomCode=genRoomCode();
   const player={id:fbMyId,name,emoji:fbMyEmoji,words:[],ready:false,teamIdx:null,connected:true};
@@ -1046,7 +1208,7 @@ function fbJoinRoom(){
   const code=document.getElementById('fb-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!fbInitDb()){alert('Firebase not configured!');return;}
+  if(!fbInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet.');return;}
   fbMyId=genId();fbRoomCode=code;
   fbDb.ref('rooms/fb/'+code).once('value').then(snap=>{
     if(!snap.exists()){alert('Room not found!');return;}
@@ -1348,7 +1510,7 @@ function fbRenderPlaying(state){
     </div>`;
   } else {
     html+=`<div class="card" style="text-align:center;">
-      <p style="font-weight:700;margin-bottom:4px;">⏳ Other team's turn</p>
+      <p style="font-weight:700;margin-bottom:4px;">⏳ Other team\'s turn</p>
       <p style="color:rgba(255,255,255,.45);font-size:.88rem;">Watch and wait - you're up next!</p>
     </div>`;
   }
@@ -1501,6 +1663,96 @@ function fbRenderEnded(state){
 }
 </script>
 
+
+
+<!-- ============================================================
+     TANGENTS - ALL SCREENS
+     ============================================================ -->
+<div id="screen-tg-home" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
+  <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="tg-player-name" placeholder="Your name...">
+    <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn tg" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-tg-lobby" class="screen tg hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="tg-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Choose your team</div>
+  </div>
+  <div style="display:flex;gap:10px;width:100%;" id="tg-teams-display"></div>
+  <div style="display:flex;gap:8px;width:100%;">
+    <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
+    <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
+  </div>
+  <div id="tg-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
+  </div>
+  <div id="tg-lobby-msg" style="color:rgba(255,255,255,.4);font-size:.88rem;text-align:center;"></div>
+</div>
+
+<div id="screen-tg-play" class="screen tg hidden" style="justify-content:flex-start;padding:12px 12px 48px;">
+  <div id="tg-play-content" style="width:100%;max-width:480px;margin:0 auto;"></div>
+</div>
+
+<div id="screen-tg-ended" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div id="tg-ended-content" style="width:100%;max-width:480px;"></div>
+  <button class="btn btn-primary tg" style="margin-top:16px;max-width:300px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+<!-- Tangents confirm overlay -->
+<div id="tg-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 id="tg-confirm-title">Are you sure?</h3>
+    <p id="tg-confirm-msg"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgConfirmCancel()">No</button>
+      <button class="btn btn-danger tg" style="flex:1;" id="tg-confirm-ok">Yes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents clue dialog -->
+<div id="tg-clue-dialog" class="tg clue-dialog" style="display:none;">
+  <div class="clue-dialog-box">
+    <h3>Give a Clue</h3>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Clue:</span>
+      <input type="text" id="tg-clue-word-input" placeholder="One word..." style="flex:1;">
+    </div>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Bid:</span>
+      <input type="number" id="tg-clue-bid-input" min="1" max="9" value="2">
+      <span style="color:rgba(255,255,255,.5);font-size:.85rem;margin-left:8px;">words</span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCloseClueDialog()">Cancel</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgSubmitClue()">Give Clue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents word guess overlay -->
+<div id="tg-guess-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 style="color:#e8d5b7;">Guess this word?</h3>
+    <p id="tg-guess-word-display" style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#fff;margin-bottom:16px;"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCancelGuess()">No</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgConfirmGuess()">Yes, guess it</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      SCOTTY DOESN'T KNOW - ALL SCREENS
@@ -2064,6 +2316,96 @@ function tpResetLocalState(){
 
 
 
+
+<!-- ============================================================
+     TANGENTS - ALL SCREENS
+     ============================================================ -->
+<div id="screen-tg-home" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
+  <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
+    <input type="text" id="tg-player-name" placeholder="Your name...">
+    <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
+    <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
+    </div>
+  </div>
+  <button class="back-btn tg" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
+</div>
+
+<div id="screen-tg-lobby" class="screen tg hidden">
+  <button class="back-btn" onclick="goHome()">← Back</button>
+  <div style="text-align:center;width:100%;">
+    <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Room Code</div>
+    <div class="room-code" id="tg-room-code-display">----</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:6px;">Min 4 players · Choose your team</div>
+  </div>
+  <div style="display:flex;gap:10px;width:100%;" id="tg-teams-display"></div>
+  <div style="display:flex;gap:8px;width:100%;">
+    <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
+    <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
+  </div>
+  <div id="tg-lobby-host-btn" style="width:100%;display:none;">
+    <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
+  </div>
+  <div id="tg-lobby-msg" style="color:rgba(255,255,255,.4);font-size:.88rem;text-align:center;"></div>
+</div>
+
+<div id="screen-tg-play" class="screen tg hidden" style="justify-content:flex-start;padding:12px 12px 48px;">
+  <div id="tg-play-content" style="width:100%;max-width:480px;margin:0 auto;"></div>
+</div>
+
+<div id="screen-tg-ended" class="screen tg hidden" style="text-align:center;justify-content:center;">
+  <div id="tg-ended-content" style="width:100%;max-width:480px;"></div>
+  <button class="btn btn-primary tg" style="margin-top:16px;max-width:300px;" onclick="goHome()">🏠 Back to Games</button>
+</div>
+
+<!-- Tangents confirm overlay -->
+<div id="tg-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 id="tg-confirm-title">Are you sure?</h3>
+    <p id="tg-confirm-msg"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgConfirmCancel()">No</button>
+      <button class="btn btn-danger tg" style="flex:1;" id="tg-confirm-ok">Yes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents clue dialog -->
+<div id="tg-clue-dialog" class="tg clue-dialog" style="display:none;">
+  <div class="clue-dialog-box">
+    <h3>Give a Clue</h3>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Clue:</span>
+      <input type="text" id="tg-clue-word-input" placeholder="One word..." style="flex:1;">
+    </div>
+    <div class="clue-row tg">
+      <span class="clue-label tg">Bid:</span>
+      <input type="number" id="tg-clue-bid-input" min="1" max="9" value="2">
+      <span style="color:rgba(255,255,255,.5);font-size:.85rem;margin-left:8px;">words</span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCloseClueDialog()">Cancel</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgSubmitClue()">Give Clue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tangents word guess overlay -->
+<div id="tg-guess-confirm" class="tg confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3 style="color:#e8d5b7;">Guess this word?</h3>
+    <p id="tg-guess-word-display" style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#fff;margin-bottom:16px;"></p>
+    <div class="confirm-btns">
+      <button class="btn btn-secondary tg" style="flex:1;" onclick="tgCancelGuess()">No</button>
+      <button class="btn btn-primary tg" style="flex:1;" onclick="tgConfirmGuess()">Yes, guess it</button>
+    </div>
+  </div>
+</div>
+
 <!-- ============================================================
      SCOTTY DOESN'T KNOW - JAVASCRIPT
      ============================================================ -->
@@ -2095,7 +2437,7 @@ function skPickEmoji(btn){
 function skCreateRoom(){
   var name=document.getElementById('sk-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
-  if(!skInitDb()){alert('Firebase not configured!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=true; skRoomCode=genRoomCode();
   var player={id:skMyId,name:skMyName,emoji:skMyEmoji,score:0,connected:true};
   var room={code:skRoomCode,phase:'lobby',hostId:skMyId,players:{},
@@ -2114,7 +2456,7 @@ function skJoinRoom(){
   var code=document.getElementById('sk-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!skInitDb()){alert('Firebase not configured!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=false; skRoomCode=code;
   skDb.ref('rooms/sk/'+code).once('value').then(function(snap){
     if(!snap.exists()){alert('Room not found!');return;}
@@ -2724,6 +3066,433 @@ function skResetLocalState(){
 </script>
 
 
+
+<!-- ============================================================
+     TANGENTS - JAVASCRIPT
+     ============================================================ -->
+<script>
+var TG_WORDS = ["Accident", "Acrobat", "Afterparty", "Air Fryer", "Airplane", "Airport", "Alien", "Alien Invasion", "Alligator", "Alpaca", "Ambulance", "Amnesia", "Anchor", "Anime", "Antenna", "Apocalypse", "Apple", "Aquarium", "Arcade", "Arm Wrestling", "Armor", "Artificial Intelligence", "Astronaut", "Auction", "Avalanche", "Babysitter", "Bachelor Party", "Backpack", "Bacon", "Bad Breath", "Bakery", "Balloon", "Ballroom", "Banana", "Banana Peel", "Bandit", "Bank Robber", "Barber", "Barista", "Barn", "Barricade", "Basement", "Basketball", "Bathtub", "Battery", "Beach", "Beacon", "Beauty Pageant", "Bedbug", "Bedtime", "Bee", "Bee Sting", "Belt", "Bicycle", "Billionaire", "Bingo", "Birdcage", "Blackout", "Blind Date", "Blindfold", "Blizzard", "Blowtorch", "Blueprint", "Bodybuilder", "Bomb Shelter", "Bonfire", "Book Club", "Bookmark", "Boom", "Botox", "Boulder", "Bouncer", "Bowling", "Boxing", "Boy Band", "Brain", "Brain Freeze", "Breadcrumb", "Breakfast", "Breathalyzer", "Bridge", "Broken Heart", "Broom", "Brunch", "Bubble Wrap", "Bubblegum", "Bucket", "Budget Airline", "Buffet", "Bug", "Bungee Jump", "Burglary", "Burnout", "Bus Stop", "Button", "Cactus", "Cafeteria", "Camera", "Camp Counselor", "Campfire", "Camping", "Candle", "Cannon", "Cannonball", "Canyon", "Capsule", "Captain", "Car Alarm", "Caravan", "Carnival", "Carpool", "Cartoon", "Casino", "Castle", "Cat Lady", "Catapult", "Catfish", "Cathedral", "Cave", "Caveman", "Cereal", "Chain", "Chainsaw", "Chalk", "Champion", "Chaos", "Chaos Theory", "Charger", "Cheat Code", "Checkpoint", "Cheesecake", "Chemistry", "Chess", "Chili", "Chimney", "Chip", "Choir", "Church", "Classroom", "Claw Machine", "Cliff", "Cliffhanger", "Clock", "Clone", "Clown", "Clown Car", "Coal", "Coconut", "Coffee", "Coffin", "Comet", "Comic Book", "Compass", "Conspiracy", "Contortionist", "Cookie", "Coral", "Couch", "Couch Potato", "Cowbell", "Cowboy", "Coworker", "Crab", "Crash Landing", "Crater", "Crayon", "Creek", "Crime", "Crocodile", "Crossroads", "Crossword", "Crowbar", "Crowd Surfing", "Crown", "Cruise Director", "Cruise Ship", "Crying Baby", "Crypto", "Crystal", "Cult Leader", "Curse", "Cyclone", "Dad Bod", "Daddy Issues", "Dam", "Dance Battle", "Dandelion", "Daredevil", "Dating App", "Daycare", "Daydream", "Dead Battery", "Deadbeat", "Death Wish", "Debt", "Deep Dish Pizza", "Deep Sea", "Deepfake", "Demolition", "Dentist", "Desert", "Desert Island", "Detective", "Diary", "Diner", "Dinosaur", "Disco Ball", "Dishwasher", "Divorce", "Divorce Papers", "DJ", "Dock", "Dog Park", "Dollhouse", "Domino", "Doomsday", "Double Chin", "Dragon", "Dragon Egg", "Dragonfly", "Drama", "Dream", "Drift", "Drive-Thru", "Drone", "Drunk Text", "Duck", "Dumpster", "Dumpster Fire", "Dungeon", "Earbuds", "Earthquake", "Earthworm", "Echo", "Eclipse", "Eggplant", "Electricity", "Elevator", "Emergency Exit", "Emoji", "Engine", "Escalator", "Escape Plan", "Escape Room", "Espresso Shot", "Explosion", "Eyepatch", "Fairy Tale", "Fake ID", "Falcon", "Fame", "Family Reunion", "Fanfiction", "Fantasy League", "Fast Food", "Fence", "Ferris Wheel", "Festival", "Fever Dream", "Film Set", "Finger Guns", "Fingerprint", "Fire", "Fire Drill", "Firefighter", "Fireworks", "Fish Tank", "Flamethrower", "Flashback", "Flashlight", "Flat Tire", "Flea Market", "Flood", "Fog", "Food Poisoning", "Food Truck", "Fortune Cookie", "Fortune Teller", "Fossil", "Fountain", "Frat House", "Free Trial", "Freedom", "Frog", "Frostbite", "Funeral", "Gambling", "Game Show", "Garage", "Garbage Disposal", "Garbage Truck", "Gargoyle", "Gas Station", "Genie", "Germs", "Ghost", "Ghosting", "Giant Squid", "Glacier", "Glass", "Glitter", "Glitter Bomb", "Glow Up", "Gold", "Gold Digger", "Goldfish", "Golf Cart", "Gorilla", "Graffiti", "Grave Robber", "Graveyard", "Gravity", "Group Chat", "Group Project", "Guilty Pleasure", "Guitar", "Guitar Solo", "Gym", "Hamburger", "Hammer", "Handcuffs", "Hangover", "Happy Hour", "Harbor", "Hard Drive", "Harvest", "Haunted House", "Haunted Motel", "Headphones", "Heartbreak", "Hedgehog", "Helicopter", "Helicopter Parent", "Helmet", "Hideout", "Highway", "Hive", "Homewrecker", "Horizon", "Horoscope", "Hospital", "Hot Mic", "Hot Sauce", "Hot Tub", "Hourglass", "Hunter", "Hurricane", "Ice Cream Truck", "Igloo", "Infection", "Influencer", "Influencer Scam", "Ink", "Internet", "Island", "Jackpot", "Jet Ski", "Jetlag", "Jigsaw", "Judge", "Juice Cleanse", "Jungle", "Junkyard", "Karaoke", "Karaoke Machine", "Key", "King", "Knife", "Knockout", "Ladder", "Landlord", "Lantern", "Laser", "Lava", "Librarian", "Life Coach", "Life Hack", "Lifeboat", "Lighthouse", "Lightning", "Lipstick", "Lizard", "Lobster", "Lockdown", "Locker", "Lockpick", "Lottery", "Loudspeaker", "Love Triangle", "Lumberjack", "Magician", "Magician\u2019s Hat", "Mailbox", "Mansion", "Marathon", "Marshmallow", "Mascot", "Mask", "Maze", "Meadow", "Meltdown", "Meme", "Mermaid", "Meteor", "Microwave", "Midlife Crisis", "Milkshake", "Minefield", "Minivan", "Mirage", "Mirror", "Missile", "Mobster", "Monsoon", "Monster", "Moon", "Mosh Pit", "Motel", "Motivational Speaker", "Motorcycle", "Mountain", "Mummy", "Museum", "Mushroom", "Music Festival", "Nachos", "Needle", "Neon", "Nepotism", "Nightclub", "Nightmare", "Ninja", "Oasis", "Observatory", "Ocean", "Octopus", "Oil Spill", "Open Relationship", "Opera", "Orbit", "Orchard", "Origami", "Outbreak", "Outlaw", "Oxygen", "Oxygen Tank", "Paintball", "Pajamas", "Pancake", "Panic", "Panic Attack", "Parachute", "Parade", "Parasocial", "Party", "Penguin", "Penguin Suit", "Pet Store", "Phantom", "Pharmacy", "Phoenix", "Phone Booth", "Pickaxe", "Pickpocket", "Pickup Line", "Picnic", "Pier", "Piggy Bank", "Pillow", "Pillow Fight", "Pinball", "Pineapple", "Piranha", "Pirate", "Pizza Delivery", "Planet", "Playground", "Pocketknife", "Pocketwatch", "Podcast", "Poison", "Pop Quiz", "Popcorn", "Potion", "Power Couple", "Power Outage", "Prank Call", "Pressure", "Princess", "Prison", "Prisoner", "Prom", "Protest", "Pumpkin", "Puppet", "Puzzle", "Pyramid", "Pyramid Scheme", "Quarantine", "Quicksand", "Racecar", "Radar", "Radio", "Rage Room", "Railroad", "Rainbow", "Rainforest", "Reality Show", "Rebound", "Red Flag", "Reef", "Refrigerator", "Relic", "Renaissance", "Rescue", "Reservoir", "Revenge", "Revolver", "Ring", "Riot", "Road Rage", "Robot", "Roller Coaster", "Romance", "Roommate", "Rope", "Royalty", "Rubber Duck", "Ruins", "Runway", "Sailboat", "Sandstorm", "Sandwich", "Satellite", "Satellite Dish", "Scandal", "Scarecrow", "School Bus", "Science Fair", "Scooter", "Scorpion", "Scrapyard", "Scroll", "Seafood", "Secret", "Secret Menu", "Selfie", "Shack", "Shadow", "Shark", "Shark Tank", "Sheriff", "Shopping Cart", "Shower", "Side Hustle", "Silence", "Situationship", "Skate Park", "Skateboard", "Skeleton", "Ski Resort", "Skull", "Slime", "Slingshot", "Slot Machine", "Smoke", "Smoke Signal", "Snake", "Snakebite", "Snowball", "Snowman", "Soap Opera", "Soccer Ball", "Soulmate", "Spaceship", "Spear", "Sphinx", "Spider", "Spiderweb", "Spring Break", "Squirrel", "Stadium", "Stadium Lights", "Stargazer", "Statue", "Steakhouse", "Steam", "Stepdad", "Stomachache", "Stowaway", "Streamer", "Strip Mall", "Submarine", "Subscription", "Sugar Daddy", "Sugar Rush", "Superhero", "Surfboard", "Survivor", "Sushi", "Swamp", "Swimming Pool", "Taco Truck", "Tailgate", "Tap Dance", "Tattoo", "Taxi", "Tea Party", "Teenager", "Temple", "Theme Park", "Therapist", "Therapy", "Thirst Trap", "Thunderstorm", "Tie Dye", "Timber", "Time Machine", "Tooth Fairy", "Tornado", "Totem", "Tractor", "Traffic", "Train", "Trampoline", "Trapdoor", "Treasure", "Treasure Chest", "Troll", "Trophy", "Trophy Wife", "Truck Stop", "Tsunami", "Tundra", "Tunnel", "Turbine", "Tuxedo", "Undertow", "Vacation", "Vacuum", "Valentine", "Vampire", "Vault", "Video Game", "Vine", "Viral Video", "Virus", "Volcano", "Waffle", "Wallet", "Walrus", "Warehouse", "Watchtower", "Water Balloon", "Waterfall", "Waterpark", "Wedding", "Wellness Retreat", "Werewolf", "Whale", "Wheelchair", "Whistle", "Wig", "Wildfire", "Windmill", "Windshield", "Wizard", "Wolf", "Wolfpack", "Wreckage", "Wrestling", "Yacht", "Yo-Yo", "Zeppelin", "Zombie", "Zombie Apocalypse"];
+var TG_EMOJIS = ['🔴','🔵','🎯','🧩','🎲','🃏','🎭','🌟','⚡','🔥','💎','🌊'];
+var tgDb=null, tgRoomCode='', tgMyId='', tgMyEmoji='🔴', tgMyName='', tgIsHost=false;
+var tgLastState=null, tgPendingGuessIdx=null, tgConfirmCb=null;
+
+function tgInitDb(){ tgDb=getDb(); return !!tgDb; }
+function tgShowScreen(id){ showScreen('tg-'+id); }
+
+function tgRenderEmojiPicker(){
+  var p=document.getElementById('tg-emoji-picker');
+  if(!p) return;
+  tgMyEmoji=TG_EMOJIS[Math.floor(Math.random()*TG_EMOJIS.length)];
+  p.innerHTML=TG_EMOJIS.map(function(em){
+    var sel=em===tgMyEmoji;
+    return '<button data-em="'+em+'" onclick="tgPickEmoji(this)" style="font-size:1.4rem;padding:5px;background:'+(sel?'rgba(232,213,183,.25)':'transparent')+';border:2px solid '+(sel?'#e8d5b7':'transparent')+';border-radius:8px;cursor:pointer;">'+em+'</button>';
+  }).join('');
+}
+function tgPickEmoji(btn){
+  tgMyEmoji=btn.getAttribute('data-em');
+  var all=document.querySelectorAll('#tg-emoji-picker button');
+  for(var i=0;i<all.length;i++){all[i].style.background='transparent';all[i].style.borderColor='transparent';}
+  btn.style.background='rgba(232,213,183,.25)'; btn.style.borderColor='#e8d5b7';
+}
+
+function tgCreateRoom(){
+  var name=document.getElementById('tg-player-name').value.trim();
+  if(!name){alert('Enter your name!');return;}
+  if(!tgInitDb()){alert('Firebase not configured!');return;}
+  tgMyId=genId(); tgMyName=name; tgIsHost=true; tgRoomCode=genRoomCode();
+  var player={id:tgMyId,name:tgMyName,emoji:tgMyEmoji,team:'',role:'',connected:true};
+  var room={code:tgRoomCode,phase:'lobby',hostId:tgMyId,players:{},
+    grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,
+    redLeft:9,blueLeft:8,createdAt:Date.now()};
+  room.players[tgMyId]=player;
+  tgDb.ref('rooms/tg/'+tgRoomCode).set(room).then(function(){
+    document.getElementById('tg-room-code-display').textContent=tgRoomCode;
+    tgShowScreen('lobby');
+    tgListenRoom();
+  }).catch(function(e){alert('Error: '+e.message);});
+}
+
+function tgJoinRoom(){
+  var name=document.getElementById('tg-player-name').value.trim();
+  var code=document.getElementById('tg-join-code').value.trim().toUpperCase();
+  if(!name){alert('Enter your name!');return;}
+  if(code.length!==4){alert('Enter a 4-letter room code!');return;}
+  if(!tgInitDb()){alert('Firebase not configured!');return;}
+  tgMyId=genId(); tgMyName=name; tgIsHost=false; tgRoomCode=code;
+  tgDb.ref('rooms/tg/'+code).once('value').then(function(snap){
+    if(!snap.exists()){alert('Room not found!');return;}
+    var room=snap.val();
+    if(room.phase!=='lobby'){alert('Game already started!');return;}
+    var player={id:tgMyId,name:tgMyName,emoji:tgMyEmoji,team:'',role:'',connected:true};
+    tgDb.ref('rooms/tg/'+code+'/players/'+tgMyId).set(player).then(function(){
+      tgShowScreen('lobby'); tgListenRoom();
+    });
+  });
+}
+
+function tgListenRoom(){
+  tgDb.ref('rooms/tg/'+tgRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tgLastState=snap.val();
+    tgHandleState(tgLastState);
+  });
+  tgDb.ref('rooms/tg/'+tgRoomCode+'/players/'+tgMyId+'/connected').onDisconnect().set(false);
+}
+
+function tgHandleState(state){
+  if(state.phase==='lobby') tgRenderLobby(state);
+  else if(state.phase==='play') tgRenderPlay(state);
+  else if(state.phase==='ended') tgRenderEnded(state);
+}
+
+// ---- LOBBY ----
+function tgRenderLobby(state){
+  tgShowScreen('lobby');
+  var players=Object.values(state.players||{});
+  var red=players.filter(function(p){return p.team==='red';});
+  var blue=players.filter(function(p){return p.team==='blue';});
+  var isHost=state.hostId===tgMyId;
+
+  var td=document.getElementById('tg-teams-display');
+  td.innerHTML=['red','blue'].map(function(t){
+    var team=t==='red'?red:blue;
+    var color=t==='red'?'#e63946':'#4a90d9';
+    var bg=t==='red'?'rgba(230,57,70,.1)':'rgba(74,144,217,.1)';
+    return '<div style="flex:1;background:'+bg+';border:1.5px solid '+color+';border-radius:14px;padding:12px;">'
+      +'<div style="font-family:Fredoka One,cursive;color:'+color+';margin-bottom:8px;">'+(t==='red'?'🔴 Red':'🔵 Blue')+' ('+team.length+')</div>'
+      +team.map(function(p){return '<div style="font-size:.85rem;font-weight:700;padding:4px 0;">'+p.emoji+' '+tgEsc(p.name)+'</div>';}).join('')
+      +'</div>';
+  }).join('');
+
+  var me=state.players&&state.players[tgMyId];
+  var myTeam=me&&me.team;
+  var msg='';
+  var ok=red.length>=2&&blue.length>=2;
+  if(!myTeam) msg='Pick a team to join!';
+  else if(!ok) msg='Each team needs at least 2 players.';
+  else if(isHost) msg='';
+  else msg='Waiting for host to start...';
+
+  document.getElementById('tg-lobby-msg').textContent=msg;
+  var hb=document.getElementById('tg-lobby-host-btn');
+  hb.style.display=(isHost&&ok)?'block':'none';
+}
+
+function tgJoinTeam(team){
+  tgDb.ref('rooms/tg/'+tgRoomCode+'/players/'+tgMyId+'/team').set(team);
+}
+
+function tgStartGame(){
+  if(!tgIsHost) return;
+  tgDb.ref('rooms/tg/'+tgRoomCode+'/players').once('value').then(function(snap){
+    var players=Object.values(snap.val()||{});
+    var red=players.filter(function(p){return p.team==='red';});
+    var blue=players.filter(function(p){return p.team==='blue';});
+    if(red.length<2||blue.length<2){alert('Each team needs at least 2 players!');return;}
+
+    // Build grid: 25 random words, assign colors: 9 red, 8 blue, 7 neutral, 1 death
+    var pool=tgShuffle(TG_WORDS.slice());
+    var selected=pool.slice(0,25);
+    var colors=['red','red','red','red','red','red','red','red','red',
+                'blue','blue','blue','blue','blue','blue','blue','blue',
+                'neutral','neutral','neutral','neutral','neutral','neutral','neutral',
+                'death'];
+    colors=tgShuffle(colors);
+    var grid=selected.map(function(w,i){return {word:w,color:colors[i]};});
+
+    // Assign roles: first player on each team = clue giver, rest = guessers
+    // Use shuffled order within each team
+    var redShuffled=tgShuffle(red.map(function(p){return p.id;}));
+    var blueShuffled=tgShuffle(blue.map(function(p){return p.id;}));
+    var roles={};
+    redShuffled.forEach(function(id,i){roles[id]=i===0?'clue':'guesser';});
+    blueShuffled.forEach(function(id,i){roles[id]=i===0?'clue':'guesser';});
+
+    // Guesser turn order within each team
+    var redGuessers=redShuffled.slice(1);
+    var blueGuessers=blueShuffled.slice(1);
+
+    var updates={};
+    Object.keys(roles).forEach(function(id){updates['players/'+id+'/role']=roles[id];});
+    updates.grid=grid;
+    updates.revealed={};
+    updates.phase='play';
+    updates.currentTeam='red';
+    updates.clue=null;
+    updates.bid=0;
+    updates.guessesUsed=0;
+    updates.redLeft=9;
+    updates.blueLeft=8;
+    updates.redGuessers=redGuessers;
+    updates.blueGuessers=blueGuessers;
+    updates.redGuesserIdx=0;
+    updates.blueGuesserIdx=0;
+    updates.redClueGiver=redShuffled[0];
+    updates.blueClueGiver=blueShuffled[0];
+    updates.winner=null;
+    updates.winReason=null;
+
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates);
+  });
+}
+
+// ---- PLAY ----
+function tgRenderPlay(state){
+  tgShowScreen('play');
+  var me=state.players&&state.players[tgMyId];
+  if(!me) return;
+  var myTeam=me.team;
+  var myRole=me.role;
+  var grid=state.grid||[];
+  var revealed=state.revealed||{};
+  var currentTeam=state.currentTeam||'red';
+  var clue=state.clue;
+  var bid=state.bid||0;
+  var guessesUsed=state.guessesUsed||0;
+  var redLeft=state.redLeft||0;
+  var blueLeft=state.blueLeft||0;
+  var isMyTeamTurn=myTeam===currentTeam;
+  var isClueGiver=myRole==='clue';
+  var isActiveClueGiver=isClueGiver&&isMyTeamTurn;
+
+  // Who is the active guesser?
+  var redGuessers=state.redGuessers||[];
+  var blueGuessers=state.blueGuessers||[];
+  var redGuesserIdx=state.redGuesserIdx||0;
+  var blueGuesserIdx=state.blueGuesserIdx||0;
+  var activeGuesserId=currentTeam==='red'
+    ?(redGuessers.length?redGuessers[redGuesserIdx%redGuessers.length]:null)
+    :(blueGuessers.length?blueGuessers[blueGuesserIdx%blueGuessers.length]:null);
+  var isActiveGuesser=tgMyId===activeGuesserId;
+  var canGuess=isMyTeamTurn&&!isClueGiver&&!!clue&&guessesUsed<bid+1&&isActiveGuesser;
+
+  var content=document.getElementById('tg-play-content');
+
+  // Counter bar
+  var html='<div class="counter-bar tg">'
+    +'<div class="counter-red tg">🔴 '+redLeft+' left</div>'
+    +'<div class="counter-blue tg">🔵 '+blueLeft+' left</div>'
+    +'</div>';
+
+  // Turn banner
+  var turnColor=currentTeam==='red'?'#e63946':'#4a90d9';
+  var turnLabel=currentTeam==='red'?'🔴 Red':'🔵 Blue';
+  html+='<div class="turn-banner tg '+currentTeam+'">'+turnLabel+' team\'s turn</div>';
+
+  // Clue display or clue button
+  if(clue){
+    var guessesLeft=bid+1-guessesUsed;
+    html+='<div class="clue-box tg">'
+      +'<div class="clue-word tg">'+tgEsc(clue)+'</div>'
+      +'<div class="clue-bid tg">Bid: '+bid+' word'+(bid!==1?'s':'')+'</div>'
+      +'<div class="clue-guesses tg">Guesses remaining: '+Math.max(0,guessesLeft)+'</div>'
+      +'</div>';
+  } else if(isActiveClueGiver){
+    html+='<div style="text-align:center;margin-bottom:10px;">'
+      +'<button class="btn btn-primary tg" onclick="tgOpenClueDialog()" style="max-width:200px;font-size:1.3rem;">CLUE</button>'
+      +'<div style="color:rgba(255,255,255,.4);font-size:.82rem;margin-top:6px;">Study the board and give your team a clue</div>'
+      +'</div>';
+  } else if(isMyTeamTurn){
+    html+='<div class="clue-box tg" style="color:rgba(255,255,255,.4);">Waiting for clue giver...</div>';
+  } else {
+    var cgId=currentTeam==='red'?state.blueClueGiver:state.redClueGiver;
+    var cgPlayer=state.players&&cgId?state.players[cgId]:null;
+    html+='<div class="clue-box tg" style="color:rgba(255,255,255,.4);">'+(cgPlayer?cgPlayer.emoji+' '+tgEsc(cgPlayer.name)+' is thinking...':'Other team\'s turn')+'</div>';
+  }
+
+  // Active guesser label
+  if(clue&&isMyTeamTurn&&!isClueGiver){
+    var agPlayer=state.players&&activeGuesserId?state.players[activeGuesserId]:null;
+    if(agPlayer){
+      html+='<div style="text-align:center;font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:6px;">'
+        +(isActiveGuesser?'Your turn to guess!':agPlayer.emoji+' '+tgEsc(agPlayer.name)+' is guessing')
+        +'</div>';
+    }
+  }
+
+  // Grid
+  html+='<div class="grid tg">';
+  grid.forEach(function(card,idx){
+    var isRevealed=!!revealed[idx];
+    var displayColor='beige';
+    if(isRevealed) displayColor=card.color==='neutral'?'neutral':card.color;
+    // Clue givers always see colors
+    else if(isClueGiver) displayColor=card.color==='neutral'?'neutral':card.color;
+
+    var clickable=!isRevealed&&canGuess;
+    html+='<div class="word-card tg '+displayColor+(isRevealed?' revealed':'')+'" '
+      +(clickable?'onclick="tgClickWord('+idx+')"':'')
+      +'>'+tgEsc(card.word)+'</div>';
+  });
+  html+='</div>';
+
+  // Pass button for active guesser
+  if(canGuess){
+    html+='<div style="margin-top:10px;">'
+      +'<button class="btn btn-secondary tg" onclick="tgAskPass()">Pass Turn</button>'
+      +'</div>';
+  }
+
+  content.innerHTML=html;
+
+  // Check if host needs to end turn (all guesses used)
+  if(tgIsHost&&clue&&guessesUsed>=bid+1){
+    tgEndTurn();
+  }
+}
+
+function tgOpenClueDialog(){
+  document.getElementById('tg-clue-word-input').value='';
+  document.getElementById('tg-clue-bid-input').value='2';
+  document.getElementById('tg-clue-dialog').style.display='flex';
+}
+function tgCloseClueDialog(){
+  document.getElementById('tg-clue-dialog').style.display='none';
+}
+function tgSubmitClue(){
+  var word=document.getElementById('tg-clue-word-input').value.trim();
+  var bid=parseInt(document.getElementById('tg-clue-bid-input').value)||1;
+  if(!word){alert('Enter a clue word!');return;}
+  if(word.indexOf(' ')!==-1){alert('Clue must be one word only!');return;}
+  tgCloseClueDialog();
+  tgDb.ref('rooms/tg/'+tgRoomCode).update({clue:word,bid:bid,guessesUsed:0});
+}
+
+function tgClickWord(idx){
+  var state=tgLastState;
+  if(!state||!state.grid) return;
+  var card=state.grid[idx];
+  tgPendingGuessIdx=idx;
+  document.getElementById('tg-guess-word-display').textContent=card.word;
+  document.getElementById('tg-guess-confirm').style.display='flex';
+}
+function tgCancelGuess(){
+  tgPendingGuessIdx=null;
+  document.getElementById('tg-guess-confirm').style.display='none';
+}
+function tgConfirmGuess(){
+  document.getElementById('tg-guess-confirm').style.display='none';
+  var idx=tgPendingGuessIdx;
+  tgPendingGuessIdx=null;
+  if(idx===null||!tgLastState) return;
+  var state=tgLastState;
+  var card=state.grid[idx];
+  var currentTeam=state.currentTeam;
+  var revealed=Object.assign({},state.revealed||{});
+  revealed[idx]=true;
+  var guessesUsed=(state.guessesUsed||0)+1;
+  var redLeft=state.redLeft||0;
+  var blueLeft=state.blueLeft||0;
+  var updates={};
+  updates['revealed/'+idx]=true;
+
+  if(card.color==='death'){
+    // Game over - other team wins
+    var winner=currentTeam==='red'?'blue':'red';
+    updates.phase='ended';
+    updates.winner=winner;
+    updates.winReason='death';
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates);
+    return;
+  }
+
+  if(card.color==='red') redLeft--;
+  if(card.color==='blue') blueLeft--;
+  updates.redLeft=redLeft;
+  updates.blueLeft=blueLeft;
+
+  // Check win
+  if(redLeft<=0){
+    updates.phase='ended'; updates.winner='red'; updates.winReason='allwords';
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates); return;
+  }
+  if(blueLeft<=0){
+    updates.phase='ended'; updates.winner='blue'; updates.winReason='allwords';
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates); return;
+  }
+
+  // Wrong color or neutral - end turn
+  if(card.color!==currentTeam){
+    updates.guessesUsed=guessesUsed;
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates).then(function(){tgEndTurn();});
+    return;
+  }
+
+  // Correct! Check if guesses exhausted
+  updates.guessesUsed=guessesUsed;
+  // Advance guesser index
+  var redGuessers=state.redGuessers||[];
+  var blueGuessers=state.blueGuessers||[];
+  if(currentTeam==='red'&&redGuessers.length>1) updates.redGuesserIdx=((state.redGuesserIdx||0)+1)%redGuessers.length;
+  if(currentTeam==='blue'&&blueGuessers.length>1) updates.blueGuesserIdx=((state.blueGuesserIdx||0)+1)%blueGuessers.length;
+
+  if(guessesUsed>=state.bid+1){
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates).then(function(){tgEndTurn();});
+  } else {
+    tgDb.ref('rooms/tg/'+tgRoomCode).update(updates);
+  }
+}
+
+function tgEndTurn(){
+  var state=tgLastState;
+  if(!state) return;
+  var nextTeam=state.currentTeam==='red'?'blue':'red';
+  tgDb.ref('rooms/tg/'+tgRoomCode).update({currentTeam:nextTeam,clue:null,bid:0,guessesUsed:0});
+}
+
+function tgAskPass(){
+  tgConfirm('End your turn?','You still have guesses remaining.',function(){
+    tgEndTurn();
+  });
+}
+
+function tgConfirm(title,msg,cb){
+  document.getElementById('tg-confirm-title').textContent=title;
+  document.getElementById('tg-confirm-msg').textContent=msg;
+  tgConfirmCb=cb;
+  document.getElementById('tg-confirm').style.display='flex';
+  document.getElementById('tg-confirm-ok').onclick=function(){
+    document.getElementById('tg-confirm').style.display='none';
+    if(tgConfirmCb) tgConfirmCb();
+  };
+}
+function tgConfirmCancel(){
+  document.getElementById('tg-confirm').style.display='none';
+  tgConfirmCb=null;
+}
+
+// ---- ENDED ----
+function tgRenderEnded(state){
+  tgShowScreen('ended');
+  var winner=state.winner||'red';
+  var reason=state.winReason||'allwords';
+  var color=winner==='red'?'#e63946':'#4a90d9';
+  var label=winner==='red'?'🔴 Red':'🔵 Blue';
+  var reasonText=reason==='death'?'The Death Card was revealed!':'All words found!';
+  var content=document.getElementById('tg-ended-content');
+  content.innerHTML='<div class="win-banner tg" style="color:'+color+';">'+label+' Wins!</div>'
+    +'<div style="color:rgba(255,255,255,.5);margin-bottom:20px;">'+reasonText+'</div>'
+    +'<div style="display:flex;gap:16px;justify-content:center;">'
+    +'<div style="text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#e63946;">'+(9-(state.redLeft||0))+'</div><div style="color:rgba(255,255,255,.4);font-size:.85rem;">Red found</div></div>'
+    +'<div style="text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#4a90d9;">'+(8-(state.blueLeft||0))+'</div><div style="color:rgba(255,255,255,.4);font-size:.85rem;">Blue found</div></div>'
+    +'</div>';
+}
+
+function tgEsc(s){
+  if(!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function tgShuffle(a){
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function tgResetLocalState(){
+  tgRoomCode=''; tgMyId=''; tgMyName=''; tgIsHost=false; tgLastState=null;
+  tgPendingGuessIdx=null; tgConfirmCb=null;
+  if(tgDb&&tgRoomCode) tgDb.ref('rooms/tg/'+tgRoomCode).off();
+}
+</script>
+
 <script>
 function selectGame(game) {
   if (game === 'whofarted') {
@@ -2734,6 +3503,11 @@ function selectGame(game) {
     tpResetLocalState();
     showScreen('tp-home');
     tpRenderEmojiPicker();
+  } else if (game === 'tangents') {
+    document.body.className = 'game-tangents';
+    tgResetLocalState();
+    showScreen('tg-home');
+    tgRenderEmojiPicker();
   } else if (game === 'scotty') {
     document.body.className = 'game-scotty';
     skResetLocalState();
@@ -2751,8 +3525,9 @@ function goHome() {
   if (wfDb && wfRoomCode) { wfDb.ref('rooms/wf/' + wfRoomCode).off(); }
   if (fbDb && fbRoomCode) { fbDb.ref('rooms/fb/' + fbRoomCode).off(); }
   if (tpDb && tpRoomCode) { tpDb.ref('rooms/tp/' + tpRoomCode).off(); }
+  if (tgDb && tgRoomCode) { tgDb.ref('rooms/tg/' + tgRoomCode).off(); }
   if (skDb && skRoomCode) { skDb.ref('rooms/sk/' + skRoomCode).off(); }
-  wfRoomCode = ''; fbRoomCode = ''; fbMyId = ''; tpRoomCode = ''; tpMyId = ''; skRoomCode = ''; skMyId = '';
+  wfRoomCode = ''; fbRoomCode = ''; fbMyId = ''; tpRoomCode = ''; tpMyId = ''; tgRoomCode = ''; tgMyId = ''; skRoomCode = ''; skMyId = '';
   document.body.className = 'game-none';
   showScreen('assbox-home');
 }
