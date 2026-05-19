@@ -2736,47 +2736,51 @@ function skRenderPlay(state){
     });
     html+='</div>';
 
-    // Voting: guess who Scotty is OR guess the category
+    // Voting: strictly separated — Scotty only sees category guess, non-Scotty only sees vote
     var myVoteVal=votes[skMyId];
     var myCatVote=catVotes[skMyId];
 
-    if(!isNoScotty&&isScotty&&!myCatVote){
-      // Scotty guesses the category
-      html+='<div class="card sk" style="margin-bottom:10px;">'
-        +'<div style="font-weight:700;margin-bottom:8px;color:#f9c74f;">You\'re Scotty! Guess the category:</div>'
-        +'<input type="text" id="sk-cat-guess-input" placeholder="What was the category?">'
-        +'<button class="btn btn-primary sk" onclick="skSubmitCatGuess()" style="margin-top:10px;">Submit Guess</button>'
-        +'</div>';
-    } else if(!isNoScotty&&isScotty&&myCatVote){
-      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Category guess submitted! Waiting for votes...</div>';
-    }
-
-    if(!isScotty&&!myVoteVal){
-      html+='<div class="card sk" style="margin-bottom:10px;">'
-        +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Guess the Scotty:</div>';
-      Object.values(players).forEach(function(p){
-        if(p.id===skMyId) return;
-        html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
-          +p.emoji+' '+skEsc(p.name)+'</button>';
-      });
-      html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Guess the Scotty</button>'
-        +'</div>';
-    } else if(!isScotty&&myVoteVal){
-      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
-    }
-
-    if(isNoScotty&&!myVoteVal){
-      html+='<div class="card sk" style="margin-bottom:10px;">'
-        +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">No Scotty - guess who you think will get the most votes:</div>';
-      Object.values(players).forEach(function(p){
-        if(p.id===skMyId) return;
-        html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
-          +p.emoji+' '+skEsc(p.name)+'</button>';
-      });
-      html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Submit Vote</button>'
-        +'</div>';
-    } else if(isNoScotty&&myVoteVal){
-      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
+    if(isNoScotty){
+      // No-Scotty round: everyone votes on who they think will get most votes
+      if(!myVoteVal){
+        html+='<div class="card sk" style="margin-bottom:10px;">'
+          +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">No Scotty round — guess who will get the most votes:</div>';
+        Object.values(players).forEach(function(p){
+          if(p.id===skMyId) return;
+          html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
+            +p.emoji+' '+skEsc(p.name)+'</button>';
+        });
+        html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Submit Vote</button>'
+          +'</div>';
+      } else {
+        html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
+      }
+    } else if(isScotty){
+      // Scotty only: guess the category — never sees vote buttons
+      if(!myCatVote){
+        html+='<div class="card sk" style="margin-bottom:10px;">'
+          +'<div style="font-weight:700;margin-bottom:8px;color:#f9c74f;">You\'re Scotty! Guess the category:</div>'
+          +'<input type="text" id="sk-cat-guess-input" placeholder="What was the category?">'
+          +'<button class="btn btn-primary sk" onclick="skSubmitCatGuess()" style="margin-top:10px;">Submit Guess</button>'
+          +'</div>';
+      } else {
+        html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Category guess submitted! Waiting for votes...</div>';
+      }
+    } else {
+      // Non-Scotty: vote on who Scotty is — never sees category guess box
+      if(!myVoteVal){
+        html+='<div class="card sk" style="margin-bottom:10px;">'
+          +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Guess the Scotty:</div>';
+        Object.values(players).forEach(function(p){
+          if(p.id===skMyId) return;
+          html+='<button class="vote-btn-player sk" data-pid="'+p.id+'" onclick="skToggleScottyVote(this)">'
+            +p.emoji+' '+skEsc(p.name)+'</button>';
+        });
+        html+='<button class="btn btn-primary sk" onclick="skSubmitVote()" style="margin-top:10px;">Guess the Scotty</button>'
+          +'</div>';
+      } else {
+        html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Vote submitted! Waiting for others...</div>';
+      }
     }
   }
 
@@ -2829,7 +2833,11 @@ function skCheckTallyReady(state){
 
   var nonScottyCount=isNoScotty?n:n-1;
   if(Object.keys(votes).length<nonScottyCount) return;
-  if(!isNoScotty&&Object.keys(catVotes).length<1) return; // Scotty must guess
+  // In normal rounds, Scotty must also submit their category guess before tallying
+  if(!isNoScotty){
+    var scottyId=round.scottyId;
+    if(!catVotes[scottyId]) return; // wait for Scotty's cat guess
+  }
 
   skTallyRound(state);
 }
