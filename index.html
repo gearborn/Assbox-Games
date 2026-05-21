@@ -347,6 +347,84 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 /* End screen */
 .tg .win-banner { font-family:'Fredoka One',cursive; font-size:2.5rem; text-align:center; margin-bottom:16px; }
 
+
+/* ============================================================
+   TV / JACKBOX MODE STYLES
+   ============================================================ */
+body.game-tv { background: #0a0a14; color: #fff; }
+
+/* Shared game home screen layout (each game gets this) */
+.game-home-screen { justify-content: center; text-align: center; }
+.game-home-title { font-family: 'Fredoka One', cursive; font-size: clamp(2rem,8vw,3.5rem); margin-bottom: 20px; }
+.create-room-btn { background: linear-gradient(135deg, #f9d56e, #f2994a); color: #1a1000; font-family: 'Fredoka One', cursive; font-size: 1.3rem; padding: 16px 32px; border: none; border-radius: 16px; cursor: pointer; width: 100%; max-width: 400px; margin-bottom: 6px; transition: all .15s; }
+.create-room-btn:hover { filter: brightness(1.05); transform: scale(1.01); }
+.create-room-btn:active { transform: scale(.97); }
+.home-divider { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 400px; margin: 8px 0; }
+.home-divider::before, .home-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,.15); }
+.home-divider span { font-size: .8rem; color: rgba(255,255,255,.35); font-weight: 700; white-space: nowrap; }
+.join-form { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 400px; }
+.join-form input { padding: 13px 15px; border-radius: 12px; border: 2px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-size: 1rem; font-family: 'Nunito', sans-serif; outline: none; width: 100%; }
+.join-form input:focus { border-color: #f9d56e; }
+.join-form input::placeholder { color: rgba(255,255,255,.35); }
+.join-form .code-row { display: flex; gap: 8px; }
+.join-form .code-row input { letter-spacing: 4px; font-size: 1.1rem; text-transform: uppercase; }
+.join-form .join-btn { padding: 13px 20px; border-radius: 12px; border: none; background: rgba(255,255,255,.12); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.join-form .join-btn:hover { background: rgba(255,255,255,.2); }
+.icon-picker-wrap { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 4px 0; }
+.icon-picker-wrap button { font-size: 1.4rem; padding: 5px; background: transparent; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all .1s; }
+.icon-picker-wrap button.ipselected { background: rgba(249,213,110,.2); border-color: #f9d56e; }
+
+/* Phone waiting room */
+#screen-phone-waiting { background: #0f0f1a; justify-content: center; text-align: center; }
+.pw-code { font-family: 'Fredoka One', cursive; font-size: 3rem; letter-spacing: 8px; color: #f9d56e; }
+.everybodys-in-btn { background: linear-gradient(135deg, #55efc4, #00b894); color: #001a0d; font-family: 'Fredoka One', cursive; font-size: 1.3rem; padding: 16px 32px; border: none; border-radius: 16px; cursor: pointer; width: 100%; margin-top: 12px; transition: all .15s; }
+.everybodys-in-btn:hover { filter: brightness(1.05); }
+.everybodys-in-btn:active { transform: scale(.97); }
+
+/* TV Screens - fullscreen */
+.tv-screen { width: 100%; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 40px; }
+.tv-screen.hidden { display: none !important; }
+.tv-room-code { font-family: 'Fredoka One', cursive; font-size: clamp(5rem,15vw,9rem); letter-spacing: 14px; color: #f9d56e; text-shadow: 0 0 50px rgba(249,213,110,.3); line-height: 1; }
+.tv-room-label { font-size: 1rem; color: rgba(255,255,255,.4); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.tv-player-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 24px; max-width: 900px; }
+.tv-player-chip { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tv-player-avatar { font-size: 3rem; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; }
+.tv-player-name { font-weight: 700; font-size: 1rem; color: rgba(255,255,255,.8); }
+
+/* TV Fishbowl */
+.tv-timer-big { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.tv-timer-big-num { font-family: 'Fredoka One', cursive; font-size: 5.5rem; position: absolute; }
+
+/* TV WF */
+.tv-wf-countdown { font-family: 'Boogaloo', cursive; font-size: clamp(10rem,28vw,20rem); color: #F9C22E; -webkit-text-stroke: 3px #5C3A1E; line-height: 1; animation: tvPop .3s ease; }
+@keyframes tvPop { from{transform:scale(1.3);opacity:.5} to{transform:scale(1);opacity:1} }
+
+/* TV Tangents */
+.tv-tg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; max-width: 860px; }
+.tv-tg-card { border-radius: 10px; padding: 10px 6px; text-align: center; font-size: clamp(.65rem, 1.1vw, .9rem); font-weight: 700; min-height: 58px; display: flex; align-items: center; justify-content: center; line-height: 1.2; border: 2px solid transparent; word-break: break-word; transition: background .5s, border-color .5s; }
+.tv-tg-beige { background: #d4b896; color: #3d2b1a; border-color: #b8956a; }
+.tv-tg-red { background: #e63946; color: #fff; border-color: #c1121f; }
+.tv-tg-blue { background: #4a90d9; color: #fff; border-color: #1565c0; }
+.tv-tg-neutral { background: #c4a882; color: #3d2b1a; border-color: #a88760; }
+.tv-tg-death { background: #111; color: #fff; border-color: #000; }
+.tv-tg-counter { display: flex; gap: 24px; justify-content: center; margin-bottom: 14px; }
+.tv-tg-ctr-r { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #e63946; background: rgba(230,57,70,.15); border: 2px solid rgba(230,57,70,.4); border-radius: 12px; padding: 8px 24px; }
+.tv-tg-ctr-b { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #4a90d9; background: rgba(74,144,217,.15); border: 2px solid rgba(74,144,217,.4); border-radius: 12px; padding: 8px 24px; }
+.tv-tg-clue-box { background: rgba(232,213,183,.08); border: 2px solid rgba(232,213,183,.25); border-radius: 14px; padding: 12px 28px; text-align: center; margin-bottom: 12px; }
+.tv-tg-clue-word { font-family: 'Fredoka One', cursive; font-size: 2.8rem; color: #e8d5b7; }
+.tv-tg-clue-info { font-size: 1rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+.tv-tg-turn { font-family: 'Fredoka One', cursive; font-size: 1.3rem; text-align: center; padding: 7px; border-radius: 10px; margin-bottom: 10px; }
+
+/* TV chain */
+.tv-chain-entry { border-radius: 12px; overflow: hidden; margin-bottom: 10px; border: 1px solid rgba(255,255,255,.1); }
+.tv-chain-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 5px 14px; background: rgba(255,255,255,.06); color: rgba(255,255,255,.45); }
+.tv-chain-text { padding: 12px; font-size: 1.2rem; font-weight: 700; color: #fff; }
+.tv-chain-img { width: 100%; display: block; max-height: 280px; object-fit: contain; background: #fff; }
+
+/* Team icon colors for Tangents */
+.tg-icon-red { filter: drop-shadow(0 0 6px rgba(230,57,70,.9)); }
+.tg-icon-blue { filter: drop-shadow(0 0 6px rgba(74,144,217,.9)); }
+
 </style>
 </head>
 <body class="game-none">
@@ -402,18 +480,21 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 <!-- ============================================================
      WHO FARTED - ALL SCREENS
      ============================================================ -->
-<div id="screen-wf-home" class="screen wf hidden">
-  <button class="back-btn" onclick="goHome()">← Back</button>
+<div id="screen-wf-home" class="screen wf hidden" style="text-align:center;justify-content:center;">
+  <button class="back-btn" onclick="goHome()" style="align-self:flex-start;">← Back</button>
   <div class="logo">💨 Who<br><span>Farted?</span></div>
   <div class="tagline">The social deduction gas game</div>
-  <div style="flex:1;"></div>
-  <input type="text" id="wf-player-name-input" placeholder="YOUR NAME" maxlength="12" autocomplete="off" spellcheck="false">
-  <button class="btn btn-primary" onclick="wfCreateRoom()">💩 HOST A GAME</button>
-  <div class="or-divider">or</div>
-  <input type="text" id="wf-join-code-input" placeholder="ROOM CODE" maxlength="4" autocomplete="off" spellcheck="false">
-  <button class="btn btn-yellow" onclick="wfJoinRoom()">💨 JOIN GAME</button>
-  <div style="flex:1;"></div>
-  <small>Play on any phone browser - no app needed!</small>
+  <div style="height:16px;"></div>
+  <button class="create-room-btn" onclick="wfCreateTV()" style="background:var(--wf-brown);color:var(--wf-yellow);">📺 Create Room</button>
+  <div class="home-divider" style="max-width:400px;"><span style="color:var(--wf-muted);">or join on your phone</span></div>
+  <div class="join-form">
+    <input type="text" id="wf-player-name-input" placeholder="YOUR NAME" maxlength="12" autocomplete="off" style="text-transform:uppercase;letter-spacing:2px;border-color:var(--wf-border);background:var(--wf-card);color:var(--wf-text);">
+    <div class="icon-picker-wrap" id="ip-wf"></div>
+    <div class="code-row">
+      <input type="text" id="wf-join-code-input" placeholder="ROOM CODE" maxlength="4" autocomplete="off" style="text-transform:uppercase;letter-spacing:4px;border-color:var(--wf-border);background:var(--wf-card);color:var(--wf-text);">
+      <button class="join-btn" onclick="wfJoinTV()" style="background:var(--wf-brown);color:var(--wf-yellow);">Join →</button>
+    </div>
+  </div>
 </div>
 
 <div id="screen-wf-lobby" class="screen wf hidden">
@@ -539,21 +620,19 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
      FISHBOWL - ALL SCREENS
      ============================================================ -->
 <div id="screen-fb-home" class="screen fb hidden" style="text-align:center;justify-content:center;">
-  <div style="font-size:5rem;margin-bottom:12px;">🐟</div>
-  <div style="font-family:Fredoka One,cursive;font-size:clamp(2rem,8vw,3.5rem);background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;">Fishbowl</div>
-  <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+  <button class="back-btn fb" onclick="goHome()" style="align-self:flex-start;">← Back</button>
+  <div style="font-size:4rem;margin-bottom:8px;">🐟</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.8rem,7vw,3rem);background:linear-gradient(135deg,#f9d56e,#f2994a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Fishbowl</div>
+  <button class="create-room-btn" onclick="fbCreateTV()">📺 Create Room</button>
+  <div class="home-divider"><span>or join on your phone</span></div>
+  <div class="join-form">
     <input type="text" id="fb-player-name" placeholder="Your name...">
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-      <!-- emoji picker rendered by JS -->
-      <div id="fb-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
-    </div>
-    <button class="btn btn-primary" onclick="fbCreateRoom()">Create Game</button>
-    <div style="display:flex;gap:8px;">
-      <input type="text" id="fb-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.1rem;">
-      <button class="btn btn-secondary" style="width:auto;white-space:nowrap;padding:14px 16px;" onclick="fbJoinRoom()">Join</button>
+    <div class="icon-picker-wrap" id="ip-fb"></div>
+    <div class="code-row">
+      <input type="text" id="fb-join-code" placeholder="Room code...">
+      <button class="join-btn" onclick="fbJoinTV()">Join →</button>
     </div>
   </div>
-  <button class="back-btn fb" onclick="goHome()" style="margin-top:12px;">← Back to Games</button>
 </div>
 
 <div id="screen-fb-lobby" class="screen fb hidden">
@@ -621,18 +700,19 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
      TANGENTS - ALL SCREENS
      ============================================================ -->
 <div id="screen-tg-home" class="screen tg hidden" style="text-align:center;justify-content:center;">
-  <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
-  <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
-  <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
+  <button class="back-btn tg" onclick="goHome()" style="align-self:flex-start;">← Back</button>
+  <div style="font-size:3rem;margin-bottom:8px;">🔴🔵</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
+  <button class="create-room-btn" onclick="tgCreateTV()" style="background:linear-gradient(135deg,#e63946,#4a90d9);color:#fff;">📺 Create Room</button>
+  <div class="home-divider"><span>or join on your phone</span></div>
+  <div class="join-form">
     <input type="text" id="tg-player-name" placeholder="Your name...">
-    <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
-    <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
-    <div style="display:flex;gap:8px;">
-      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
-      <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
+    <div class="icon-picker-wrap" id="ip-tg"></div>
+    <div class="code-row">
+      <input type="text" id="tg-join-code" placeholder="Room code...">
+      <button class="join-btn" onclick="tgJoinTV()">Join →</button>
     </div>
   </div>
-  <button class="back-btn tg" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
 </div>
 
 <div id="screen-tg-lobby" class="screen tg hidden">
@@ -710,18 +790,19 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
      SCOTTY DOESN'T KNOW - ALL SCREENS
      ============================================================ -->
 <div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
-  <div style="font-size:4rem;margin-bottom:8px;">🕵️</div>
+  <button class="back-btn sk" onclick="goHome()" style="align-self:flex-start;">← Back</button>
+  <div style="font-size:3.5rem;margin-bottom:8px;">🕵️</div>
   <div style="font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Scotty<br>Doesn't Know</div>
-  <div class="card sk" style="display:flex;flex-direction:column;gap:11px;">
+  <button class="create-room-btn" onclick="skCreateTV()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;">📺 Create Room</button>
+  <div class="home-divider"><span>or join on your phone</span></div>
+  <div class="join-form">
     <input type="text" id="sk-player-name" placeholder="Your name...">
-    <div id="sk-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
-    <button class="btn btn-primary sk" onclick="skCreateRoom()">Create Game</button>
-    <div style="display:flex;gap:8px;">
-      <input type="text" id="sk-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
-      <button class="btn btn-secondary sk" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="skJoinRoom()">Join</button>
+    <div class="icon-picker-wrap" id="ip-sk"></div>
+    <div class="code-row">
+      <input type="text" id="sk-join-code" placeholder="Room code...">
+      <button class="join-btn" onclick="skJoinTV()">Join →</button>
     </div>
   </div>
-  <button class="back-btn sk" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
 </div>
 
 <div id="screen-sk-lobby" class="screen sk hidden">
@@ -766,18 +847,19 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
      TELEPHONE PICTIONARY - ALL SCREENS
      ============================================================ -->
 <div id="screen-tp-home" class="screen tp hidden" style="text-align:center;justify-content:center;">
-  <div style="font-size:4.5rem;margin-bottom:8px;">🎨</div>
-  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.8rem,7vw,3rem);background:linear-gradient(135deg,#f9c74f,#f3722c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Pictionary<br>Telephone</div>
-  <div class="card" style="display:flex;flex-direction:column;gap:11px;">
+  <button class="back-btn tp" onclick="goHome()" style="align-self:flex-start;">← Back</button>
+  <div style="font-size:3.5rem;margin-bottom:8px;">🎨</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#f9c74f,#f3722c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Pictionary Telephone</div>
+  <button class="create-room-btn" onclick="tpCreateTV()" style="background:linear-gradient(135deg,#f9c74f,#f3722c);color:#1a0800;">📺 Create Room</button>
+  <div class="home-divider"><span>or join on your phone</span></div>
+  <div class="join-form">
     <input type="text" id="tp-player-name" placeholder="Your name...">
-    <div id="tp-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
-    <button class="btn btn-primary" onclick="tpCreateRoom()">Create Game</button>
-    <div style="display:flex;gap:8px;">
-      <input type="text" id="tp-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
-      <button class="btn btn-secondary" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tpJoinRoom()">Join</button>
+    <div class="icon-picker-wrap" id="ip-tp"></div>
+    <div class="code-row">
+      <input type="text" id="tp-join-code" placeholder="Room code...">
+      <button class="join-btn" onclick="tpJoinTV()">Join →</button>
     </div>
   </div>
-  <button class="back-btn tp" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
 </div>
 
 <div id="screen-tp-lobby" class="screen tp hidden">
@@ -832,6 +914,67 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
     </div>
     <div id="tp-viewer-content"></div>
   </div>
+</div>
+
+
+<!-- ============================================================
+     PHONE WAITING ROOM (shown on phones after joining)
+     ============================================================ -->
+<div id="screen-phone-waiting" class="screen hidden" style="background:#0f0f1a;justify-content:center;text-align:center;">
+  <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;" id="pw-game-name"></div>
+  <div style="color:rgba(255,255,255,.4);font-size:.9rem;margin-bottom:4px;">Room Code</div>
+  <div class="pw-code" id="pw-room-code">----</div>
+  <div style="color:rgba(255,255,255,.35);font-size:.85rem;margin-top:10px;margin-bottom:16px;">Waiting for everyone to join...</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;" id="pw-players"></div>
+  <button class="everybodys-in-btn" id="pw-everybodys-in" onclick="everybodysIn()" style="display:none;max-width:380px;">🎉 Everybody's In!</button>
+  <div style="color:rgba(255,255,255,.3);font-size:.8rem;margin-top:10px;" id="pw-waiting-msg">Waiting for host to start...</div>
+</div>
+
+<!-- ============================================================
+     TV WAITING ROOM
+     ============================================================ -->
+<div id="screen-tv-waiting" class="screen hidden" style="background:#0f0f1a;justify-content:center;text-align:center;">
+  <div style="font-size:1rem;color:rgba(255,255,255,.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;" id="tv-wait-game-label"></div>
+  <div class="tv-room-label">Room Code</div>
+  <div class="tv-room-code" id="tv-room-code-display">----</div>
+  <div style="font-size:1.1rem;color:rgba(255,255,255,.45);margin-top:16px;">Players joined:</div>
+  <div class="tv-player-grid" id="tv-waiting-players"></div>
+  <div style="font-size:.9rem;color:rgba(255,255,255,.25);margin-top:24px;">Open this site on phones and enter the code above</div>
+</div>
+
+<!-- ============================================================
+     TV FISHBOWL
+     ============================================================ -->
+<div id="screen-tv-fishbowl" class="screen hidden" style="background:#0f0f1a;align-items:center;justify-content:flex-start;padding-top:28px;">
+  <div id="tv-fb-content" style="width:100%;max-width:960px;"></div>
+</div>
+
+<!-- ============================================================
+     TV WHO FARTED
+     ============================================================ -->
+<div id="screen-tv-whofarted" class="screen hidden" style="background:var(--wf-bg);justify-content:center;">
+  <div id="tv-wf-content" style="width:100%;max-width:860px;text-align:center;"></div>
+</div>
+
+<!-- ============================================================
+     TV PICTIONARY TELEPHONE
+     ============================================================ -->
+<div id="screen-tv-tp" class="screen hidden" style="background:#1a1a2e;justify-content:center;">
+  <div id="tv-tp-content" style="width:100%;max-width:960px;"></div>
+</div>
+
+<!-- ============================================================
+     TV SCOTTY DOESN'T KNOW
+     ============================================================ -->
+<div id="screen-tv-scotty" class="screen hidden" style="background:#0d1117;justify-content:center;">
+  <div id="tv-sk-content" style="width:100%;max-width:860px;"></div>
+</div>
+
+<!-- ============================================================
+     TV TANGENTS
+     ============================================================ -->
+<div id="screen-tv-tangents" class="screen hidden" style="background:#1a0f0f;align-items:center;justify-content:flex-start;padding:20px 32px;">
+  <div id="tv-tg-content" style="width:100%;max-width:920px;margin:0 auto;"></div>
 </div>
 
 <!-- ============================================================
@@ -912,7 +1055,7 @@ function wfInitDb() {
 function wfCreateRoom() {
   const name = document.getElementById('wf-player-name-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = true; wfRoomCode = genRoomCode();
   const pd = { id:wfPlayerId, name:wfPlayerName, emoji:wfRandomEmoji(), score:0, isHost:true, forcedFart:false, connected:true };
   const rd = { code:wfRoomCode, phase:'lobby', round:1, players:{[wfPlayerId]:pd}, choices:{}, votes:{}, testReady:{}, hostId:wfPlayerId, createdAt:Date.now() };
@@ -928,7 +1071,7 @@ function wfJoinRoom() {
   const code = document.getElementById('wf-join-code-input').value.trim().toUpperCase();
   if (!name) { wfShowError('Enter your name!'); return; }
   if (code.length !== 4) { wfShowError('Enter a 4-letter room code!'); return; }
-  if (!wfInitDb()) { wfShowError('Firebase not configured!'); return; }
+  if (!wfInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY') { wfShowError('Firebase not configured! Add your project credentials.'); return; }
   wfPlayerName = name; wfPlayerId = wfGenId(); wfIsHost = false; wfRoomCode = code;
   wfDb.ref('rooms/wf/'+code).once('value').then(snap=>{
     if (!snap.exists()) { wfShowError('Room not found!'); return; }
@@ -1177,7 +1320,8 @@ function fbShowNotif(icon,title,body,durationMs){
 function fbCreateRoom(){
   const name=document.getElementById('fb-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
-  if(!fbInitDb()){alert('Firebase not configured!');return;}
+  if(!fbInitDb()){alert('Firebase not configured! Check your firebaseConfig values.');return;}
+  if(FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet - please add your project credentials to the FIREBASE_CONFIG block.');return;}
   fbMyId=genId();
   fbRoomCode=genRoomCode();
   const player={id:fbMyId,name,emoji:fbMyEmoji,words:[],ready:false,teamIdx:null,connected:true};
@@ -1207,7 +1351,7 @@ function fbJoinRoom(){
   const code=document.getElementById('fb-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!fbInitDb()){alert('Firebase not configured!');return;}
+  if(!fbInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase is not configured yet.');return;}
   fbMyId=genId();fbRoomCode=code;
   fbDb.ref('rooms/fb/'+code).once('value').then(snap=>{
     if(!snap.exists()){alert('Room not found!');return;}
@@ -1757,18 +1901,19 @@ function fbRenderEnded(state){
      SCOTTY DOESN'T KNOW - ALL SCREENS
      ============================================================ -->
 <div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
-  <div style="font-size:4rem;margin-bottom:8px;">🕵️</div>
+  <button class="back-btn sk" onclick="goHome()" style="align-self:flex-start;">← Back</button>
+  <div style="font-size:3.5rem;margin-bottom:8px;">🕵️</div>
   <div style="font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Scotty<br>Doesn't Know</div>
-  <div class="card sk" style="display:flex;flex-direction:column;gap:11px;">
+  <button class="create-room-btn" onclick="skCreateTV()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;">📺 Create Room</button>
+  <div class="home-divider"><span>or join on your phone</span></div>
+  <div class="join-form">
     <input type="text" id="sk-player-name" placeholder="Your name...">
-    <div id="sk-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
-    <button class="btn btn-primary sk" onclick="skCreateRoom()">Create Game</button>
-    <div style="display:flex;gap:8px;">
-      <input type="text" id="sk-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
-      <button class="btn btn-secondary sk" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="skJoinRoom()">Join</button>
+    <div class="icon-picker-wrap" id="ip-sk"></div>
+    <div class="code-row">
+      <input type="text" id="sk-join-code" placeholder="Room code...">
+      <button class="join-btn" onclick="skJoinTV()">Join →</button>
     </div>
   </div>
-  <button class="back-btn sk" onclick="goHome()" style="margin-top:14px;">← Back to Games</button>
 </div>
 
 <div id="screen-sk-lobby" class="screen sk hidden">
@@ -2436,7 +2581,7 @@ function skPickEmoji(btn){
 function skCreateRoom(){
   var name=document.getElementById('sk-player-name').value.trim();
   if(!name){alert('Enter your name!');return;}
-  if(!skInitDb()){alert('Firebase not configured!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=true; skRoomCode=genRoomCode();
   var player={id:skMyId,name:skMyName,emoji:skMyEmoji,score:0,connected:true};
   var room={code:skRoomCode,phase:'lobby',hostId:skMyId,players:{},
@@ -2455,7 +2600,7 @@ function skJoinRoom(){
   var code=document.getElementById('sk-join-code').value.trim().toUpperCase();
   if(!name){alert('Enter your name!');return;}
   if(code.length!==4){alert('Enter a 4-letter room code!');return;}
-  if(!skInitDb()){alert('Firebase not configured!');return;}
+  if(!skInitDb()||FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){alert('Firebase not configured!');return;}
   skMyId=genId(); skMyName=name; skIsHost=false; skRoomCode=code;
   skDb.ref('rooms/sk/'+code).once('value').then(function(snap){
     if(!snap.exists()){alert('Room not found!');return;}
@@ -3490,6 +3635,674 @@ function tgResetLocalState(){
   tgPendingGuessIdx=null; tgConfirmCb=null;
   if(tgDb&&tgRoomCode) tgDb.ref('rooms/tg/'+tgRoomCode).off();
 }
+</script>
+
+
+<!-- ============================================================
+     JACKBOX TV JAVASCRIPT
+     ============================================================ -->
+<script>
+var AB_EMOJIS=['🦊','🐼','🦁','🐸','🦋','🐙','🦄','🐧','🦀','🐳','🦩','🐺','🦔','🐨','🦘','🐯','🎭','🃏','🕵️','🎨','🌈','⚡','🔥','💎'];
+var abSelectedEmoji={fb:'🦊',wf:'🐸',tp:'🎨',sk:'🕵️',tg:'🔴'};
+var abIsTV=false;
+var abGame='';
+var abRoomCode='';
+var abMyId='';
+var abMyName='';
+var abDb=null;
+var tvTimerInterval=null;
+var tvWfCdInterval=null;
+var tvWfCdVal=5;
+
+// ---- ICON PICKER INIT ----
+function ipInit(prefix){
+  var p=document.getElementById('ip-'+prefix);
+  if(!p)return;
+  var cur=abSelectedEmoji[prefix]||AB_EMOJIS[0];
+  p.innerHTML=AB_EMOJIS.map(function(em){
+    return '<button data-em="'+em+'" data-prefix="'+prefix+'" onclick="ipPick(this)" class="'+(em===cur?'ipselected':'')+'">' + em + '</button>';
+  }).join('');
+}
+function ipPick(btn){
+  var prefix=btn.getAttribute('data-prefix');
+  abSelectedEmoji[prefix]=btn.getAttribute('data-em');
+  var all=document.querySelectorAll('#ip-'+prefix+' button');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('ipselected');
+  btn.classList.add('ipselected');
+}
+
+// Call ipInit when each game home screen becomes visible
+// Patch selectGame to init pickers
+var _origSelectGame=window.selectGame;
+
+// ---- CREATE ROOM (TV) ----
+function abCreateTV(game){
+  var db=getDb();
+  if(!db){alert('Firebase not configured!');return;}
+  abIsTV=true; abGame=game; abDb=db;
+  abRoomCode=genRoomCode(); abMyId='tv-'+genId();
+  var room={code:abRoomCode,game:game,phase:'waiting',players:{},tvId:abMyId,createdAt:Date.now()};
+  db.ref('rooms/ab/'+abRoomCode).set(room).then(function(){
+    document.getElementById('tv-wait-game-label').textContent={
+      fishbowl:'🐟 Fishbowl',whofarted:'💨 Who Farted?',
+      tp:'🎨 Pictionary Telephone',scotty:'🕵️ Scotty Doesn\'t Know',tangents:'🔴 Tangents'
+    }[game]||game;
+    document.getElementById('tv-room-code-display').textContent=abRoomCode;
+    document.getElementById('tv-waiting-players').innerHTML='';
+    showScreen('tv-waiting');
+    abListenWaiting();
+  }).catch(function(e){alert('Error creating room: '+e.message);});
+}
+
+function fbCreateTV(){abCreateTV('fishbowl');}
+function wfCreateTV(){abCreateTV('whofarted');}
+function tpCreateTV(){abCreateTV('tp');}
+function skCreateTV(){abCreateTV('scotty');}
+function tgCreateTV(){abCreateTV('tangents');}
+
+// ---- JOIN ROOM (Phone) ----
+function abJoinTV(game,nameId,codeId,pickerPrefix){
+  var name=document.getElementById(nameId)?document.getElementById(nameId).value.trim():'';
+  var code=document.getElementById(codeId)?document.getElementById(codeId).value.trim().toUpperCase():'';
+  var emoji=abSelectedEmoji[pickerPrefix]||'🦊';
+  if(!name){alert('Enter your name!');return;}
+  if(code.length!==4){alert('Enter the 4-letter room code!');return;}
+  var db=getDb();
+  if(!db){alert('Firebase not configured!');return;}
+  abIsTV=false; abGame=game; abDb=db; abRoomCode=code; abMyName=name;
+  abMyId=genId();
+  db.ref('rooms/ab/'+code).once('value').then(function(snap){
+    if(!snap.exists()){alert('Room not found!');return;}
+    var room=snap.val();
+    if(room.game!==game){alert('Wrong game! This room is for: '+room.game);return;}
+    if(room.phase==='ended'){alert('This game has ended!');return;}
+    var player={id:abMyId,name:name,emoji:emoji,team:'',connected:true};
+    db.ref('rooms/ab/'+code+'/players/'+abMyId).set(player).then(function(){
+      db.ref('rooms/ab/'+code+'/players/'+abMyId+'/connected').onDisconnect().set(false);
+      // Also add to game-specific room if it exists
+      abAddToGameRoom(game,code,abMyId,name,emoji,db);
+      // Listen for phase changes
+      abListenAsPlayer(game,code,abMyId);
+    });
+  });
+}
+
+function fbJoinTV(){abJoinTV('fishbowl','fb-player-name','fb-join-code','fb');}
+function wfJoinTV(){abJoinTV('whofarted','wf-player-name-input','wf-join-code-input','wf');}
+function tpJoinTV(){abJoinTV('tp','tp-player-name','tp-join-code','tp');}
+function skJoinTV(){abJoinTV('scotty','sk-player-name','sk-join-code','sk');}
+function tgJoinTV(){abJoinTV('tangents','tg-player-name','tg-join-code','tg');}
+
+function abAddToGameRoom(game,code,myId,name,emoji,db){
+  if(game==='fishbowl'){
+    db.ref('rooms/fb/'+code+'/players/'+myId).once('value').then(function(s){
+      if(!s.exists()) db.ref('rooms/fb/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,words:[],ready:false,teamIdx:null,connected:true});
+    });
+  } else if(game==='whofarted'){
+    db.ref('rooms/wf/'+code+'/players/'+myId).once('value').then(function(s){
+      if(!s.exists()) db.ref('rooms/wf/'+code+'/players/'+myId).set({id:myId,name:name.toUpperCase(),emoji:emoji,score:0,isHost:false,forcedFart:false,connected:true});
+    });
+  } else if(game==='tp'){
+    db.ref('rooms/tp/'+code+'/players/'+myId).once('value').then(function(s){
+      if(!s.exists()) db.ref('rooms/tp/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,connected:true});
+    });
+  } else if(game==='scotty'){
+    db.ref('rooms/sk/'+code+'/players/'+myId).once('value').then(function(s){
+      if(!s.exists()) db.ref('rooms/sk/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,score:0,connected:true});
+    });
+  } else if(game==='tangents'){
+    db.ref('rooms/tg/'+code+'/players/'+myId).once('value').then(function(s){
+      if(!s.exists()) db.ref('rooms/tg/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,team:'',role:'',connected:true});
+    });
+  }
+}
+
+// ---- PHONE: Listen for phase + show waiting room ----
+function abListenAsPlayer(game,code,myId){
+  abDb.ref('rooms/ab/'+code).on('value',function(snap){
+    if(!snap.exists()) return;
+    var room=snap.val();
+    var players=Object.values(room.players||{}).filter(function(p){return p.connected!==false;});
+    var isFirst=players.length>0&&players[0].id===myId;
+
+    if(room.phase==='waiting'||room.phase==='starting'){
+      showScreen('phone-waiting');
+      var gameName={fishbowl:'🐟 Fishbowl',whofarted:'💨 Who Farted?',tp:'🎨 Pictionary Telephone',scotty:'🕵️ Scotty Doesn\'t Know',tangents:'🔴 Tangents'}[game]||game;
+      document.getElementById('pw-game-name').textContent=gameName;
+      document.getElementById('pw-room-code').textContent=code;
+      document.getElementById('pw-players').innerHTML=players.map(function(p){
+        return '<div class="player-chip" style="background:rgba(255,255,255,.1);">'+p.emoji+' '+p.name+'</div>';
+      }).join('');
+      var eib=document.getElementById('pw-everybodys-in');
+      eib.style.display='block'; // all players see it
+      document.getElementById('pw-waiting-msg').textContent=room.phase==='starting'?'Starting...':'Waiting for everyone...';
+    } else if(room.phase==='playing'){
+      // Hand off to game-specific listener
+      abDb.ref('rooms/ab/'+code).off();
+      abStartGameAsPlayer(game,code,myId);
+    }
+  });
+}
+
+function abStartGameAsPlayer(game,code,myId){
+  var db=abDb;
+  if(game==='fishbowl'){
+    fbMyId=myId; fbDb=db; fbRoomCode=code;
+    fbListenRoom();
+  } else if(game==='whofarted'){
+    wfPlayerId=myId; wfDb=db; wfRoomCode=code; wfIsHost=false;
+    wfListenRoom();
+  } else if(game==='tp'){
+    tpMyId=myId; tpDb=db; tpRoomCode=code; tpMyName=abMyName;
+    tpListenRoom();
+  } else if(game==='scotty'){
+    skMyId=myId; skDb=db; skRoomCode=code; skMyName=abMyName;
+    skListenRoom();
+  } else if(game==='tangents'){
+    tgMyId=myId; tgDb=db; tgRoomCode=code;
+    tgListenRoom();
+  }
+}
+
+// ---- EVERYBODY'S IN ----
+function everybodysIn(){
+  var db=getDb();
+  if(!db) return;
+  db.ref('rooms/ab/'+abRoomCode+'/phase').set('starting').then(function(){
+    document.getElementById('pw-everybodys-in').disabled=true;
+    document.getElementById('pw-waiting-msg').textContent='Starting...';
+  });
+}
+
+// ---- TV: Listen to waiting room ----
+function abListenWaiting(){
+  abDb.ref('rooms/ab/'+abRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    var room=snap.val();
+    var players=Object.values(room.players||{}).filter(function(p){return p.connected!==false;});
+    // Update player list
+    document.getElementById('tv-waiting-players').innerHTML=players.map(function(p){
+      return '<div class="tv-player-chip"><div class="tv-player-avatar">'+p.emoji+'</div><div class="tv-player-name">'+p.name+'</div></div>';
+    }).join('');
+    if(room.phase==='starting'){
+      abDb.ref('rooms/ab/'+abRoomCode).off();
+      abTVLaunch(abGame,abRoomCode,players);
+    }
+  });
+}
+
+// ---- TV: Launch game ----
+function abTVLaunch(game,code,players){
+  var db=abDb;
+  // Mark as playing
+  db.ref('rooms/ab/'+code+'/phase').set('playing');
+
+  if(game==='fishbowl'){
+    fbMyId='tv-'+genId(); fbDb=db; fbRoomCode=code; fbIsHost=true;
+    // Build players obj from ab room players (they've already added themselves)
+    db.ref('rooms/fb/'+code).once('value').then(function(snap){
+      var existing=snap.exists()?snap.val():{};
+      var fbPlayers=existing.players||{};
+      // Ensure all ab players are in fb room
+      players.forEach(function(p){
+        if(!fbPlayers[p.id]) fbPlayers[p.id]={id:p.id,name:p.name,emoji:p.emoji,words:[],ready:false,teamIdx:null,connected:true};
+      });
+      if(!snap.exists()){
+        db.ref('rooms/fb/'+code).set({
+          code:code,phase:'lobby',hostId:fbMyId,players:fbPlayers,
+          teams:[],fishbowl:[],scores:[0,0],round:0,teamPlayers:[[],[]],
+          teamTurnPointers:[0,0],activeTurnTeam:0,currentWord:null,wordsLeft:[],
+          passedWords:[],passCount:0,roundWords:[],turnActive:false,
+          nameProposals:{},nameVotes:{},teamNames:['Team 1','Team 2'],createdAt:Date.now()
+        });
+      } else {
+        db.ref('rooms/fb/'+code+'/players').set(fbPlayers);
+      }
+      showScreen('tv-fishbowl');
+      tvListenFb();
+    });
+  } else if(game==='whofarted'){
+    wfDb=db; wfRoomCode=code; wfIsHost=true; wfPlayerId='tv-'+genId();
+    db.ref('rooms/wf/'+code).once('value').then(function(snap){
+      var wfPlayers={};
+      players.forEach(function(p,i){
+        wfPlayers[p.id]={id:p.id,name:p.name.toUpperCase(),emoji:p.emoji,score:0,isHost:i===0,forcedFart:false,connected:true};
+      });
+      if(!snap.exists()){
+        db.ref('rooms/wf/'+code).set({code:code,phase:'test',round:1,players:wfPlayers,choices:{},votes:{},testReady:{},hostId:players[0]&&players[0].id,createdAt:Date.now()});
+      } else {
+        db.ref('rooms/wf/'+code+'/players').update(wfPlayers);
+        db.ref('rooms/wf/'+code+'/phase').set('test');
+      }
+      showScreen('tv-whofarted');
+      tvListenWf();
+    });
+  } else if(game==='tp'){
+    tpDb=db; tpRoomCode=code; tpMyId='tv';
+    db.ref('rooms/tp/'+code).once('value').then(function(snap){
+      var tpPlayers={};
+      players.forEach(function(p){tpPlayers[p.id]={id:p.id,name:p.name,emoji:p.emoji,connected:true};});
+      var order=abShuffle(players.map(function(p){return p.id;}));
+      var chains={};
+      order.forEach(function(pid){chains[pid]={ownerId:pid,entries:{}};});
+      if(!snap.exists()){
+        db.ref('rooms/tp/'+code).set({code:code,phase:'play',hostId:'tv',players:tpPlayers,
+          chains:chains,playerOrder:order,round:0,totalRounds:order.length,roundSubmitted:{},createdAt:Date.now()});
+      } else {
+        db.ref('rooms/tp/'+code).update({players:tpPlayers,chains:chains,playerOrder:order,phase:'play',round:0,totalRounds:order.length});
+      }
+      showScreen('tv-tp');
+      tvListenTp();
+    });
+  } else if(game==='scotty'){
+    skDb=db; skRoomCode=code; skMyId='tv'; skIsHost=true;
+    db.ref('rooms/sk/'+code).once('value').then(function(snap){
+      var skPlayers={};
+      players.forEach(function(p){skPlayers[p.id]={id:p.id,name:p.name,emoji:p.emoji,score:0,connected:true};});
+      if(!snap.exists()){
+        db.ref('rooms/sk/'+code).set({code:code,phase:'categories',hostId:'tv',players:skPlayers,catSubmissions:{},categories:[],playerOrder:[],scottyCounts:{},roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},createdAt:Date.now()});
+      } else {
+        db.ref('rooms/sk/'+code).update({players:skPlayers,phase:'categories',catSubmissions:{}});
+      }
+      showScreen('tv-scotty');
+      tvListenSk();
+    });
+  } else if(game==='tangents'){
+    tgDb=db; tgRoomCode=code; tgMyId='tv'; tgIsHost=true;
+    db.ref('rooms/tg/'+code).once('value').then(function(snap){
+      var tgPlayers={};
+      players.forEach(function(p){tgPlayers[p.id]={id:p.id,name:p.name,emoji:p.emoji,team:p.team||'',role:'',connected:true};});
+      if(!snap.exists()){
+        db.ref('rooms/tg/'+code).set({code:code,phase:'lobby',hostId:'tv',players:tgPlayers,grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,redLeft:9,blueLeft:8,createdAt:Date.now()});
+      } else {
+        db.ref('rooms/tg/'+code+'/players').set(tgPlayers);
+        db.ref('rooms/tg/'+code+'/phase').set('lobby');
+      }
+      showScreen('tv-tangents');
+      tvListenTg();
+    });
+  }
+}
+
+function abShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+// ============================================================
+// TV RENDERERS
+// ============================================================
+
+// ---- TV FISHBOWL ----
+function tvListenFb(){
+  fbDb.ref('rooms/fb/'+fbRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tvRenderFb(snap.val());
+  });
+}
+
+function tvRenderFb(state){
+  var content=document.getElementById('tv-fb-content');
+  if(!content) return;
+  var phase=state.phase;
+  var scores=state.scores||[0,0];
+  var teamNames=state.teamNames||['Team 1','Team 2'];
+  var round=state.round||0;
+  var roundNames=['Taboo','Charades','Password'];
+  var teamColors=['#74b9ff','#fd79a8'];
+  var players=state.players||{};
+
+  if(phase==='ended'){
+    var w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
+    content.innerHTML='<div style="text-align:center;padding:20px;">'
+      +'<div style="font-family:Fredoka One,cursive;font-size:3.5rem;color:#f9d56e;">🐟 Game Over!</div>'
+      +(w>=0?'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#55efc4;margin:12px 0;">'+teamNames[w]+' wins!</div>':'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;margin:12px 0;">Tie!</div>')
+      +'<div style="display:flex;justify-content:center;gap:40px;margin-top:20px;">'
+      +[0,1].map(function(ti){return '<div style="text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:4.5rem;color:'+teamColors[ti]+';">'+scores[ti]+'</div><div style="color:rgba(255,255,255,.5);font-size:1.1rem;">'+teamNames[ti]+'</div></div>';}).join('<div style="font-family:Fredoka One,cursive;font-size:2rem;color:rgba(255,255,255,.25);align-self:center;padding:0 12px;">vs</div>')
+      +'</div></div>';
+    return;
+  }
+
+  if(phase!=='playing'){
+    content.innerHTML='<div style="text-align:center;padding:40px;">'
+      +'<div style="font-family:Fredoka One,cursive;font-size:3rem;color:#f9d56e;margin-bottom:16px;">🐟 Fishbowl</div>'
+      +'<div style="font-size:1.3rem;color:rgba(255,255,255,.45);">Setting up... ('+phase+')</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;">'
+      +Object.values(players).map(function(p){return '<div style="background:rgba(255,255,255,.08);border-radius:999px;padding:8px 18px;font-weight:700;">'+p.emoji+' '+p.name+'</div>';}).join('')
+      +'</div></div>';
+    return;
+  }
+
+  var activeTurnTeam=state.activeTurnTeam||0;
+  var tp2=state.teamPlayers||[[],[]];
+  var ptr=state.teamTurnPointers||[0,0];
+  var cgId=tp2[activeTurnTeam]&&tp2[activeTurnTeam].length?tp2[activeTurnTeam][ptr[activeTurnTeam]%tp2[activeTurnTeam].length]:null;
+  var cg=cgId?players[cgId]:null;
+  var wordsLeft=(state.wordsLeft&&state.wordsLeft.length||0)+(state.passedWords&&state.passedWords.length||0)+(state.currentWord?1:0);
+
+  var html='<div style="display:flex;gap:24px;align-items:flex-start;">';
+  // Score panel
+  html+='<div style="display:flex;flex-direction:column;gap:12px;min-width:180px;">';
+  [0,1].forEach(function(ti){
+    html+='<div style="background:rgba(255,255,255,.06);border:2.5px solid '+(ti===activeTurnTeam?teamColors[ti]:'rgba(255,255,255,.1)')+';border-radius:16px;padding:18px 24px;text-align:center;">'
+      +'<div style="font-size:.9rem;color:rgba(255,255,255,.45);">'+teamNames[ti]+'</div>'
+      +'<div style="font-family:Fredoka One,cursive;font-size:4rem;color:'+teamColors[ti]+';">'+scores[ti]+'</div>'
+      +'</div>';
+  });
+  html+='</div>';
+  // Main
+  html+='<div style="flex:1;text-align:center;">';
+  html+='<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:rgba(255,255,255,.45);margin-bottom:6px;">Round '+(round+1)+': '+(roundNames[round]||'')+'</div>';
+  html+='<div style="font-size:1rem;color:rgba(255,255,255,.35);margin-bottom:20px;">'+wordsLeft+' words left</div>';
+
+  if(state.turnActive&&state.turnStartedAt){
+    var elapsed=Math.floor((Date.now()-state.turnStartedAt)/1000);
+    var tLeft=Math.max(0,60-elapsed);
+    var color=tLeft<=10?'#e84393':tLeft<=20?'#fdcb6e':'#55efc4';
+    var circ=2*Math.PI*72;
+    var offset=circ*(1-tLeft/60);
+    html+='<div style="position:relative;display:inline-flex;align-items:center;justify-content:center;">'
+      +'<svg width="170" height="170" style="transform:rotate(-90deg);">'
+      +'<circle cx="85" cy="85" r="72" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/>'
+      +'<circle cx="85" cy="85" r="72" fill="none" stroke="'+color+'" stroke-width="10" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'" stroke-linecap="round"/>'
+      +'</svg>'
+      +'<span style="font-family:Fredoka One,cursive;font-size:5.5rem;position:absolute;color:'+color+';">'+tLeft+'</span>'
+      +'</div>';
+    html+='<div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:'+teamColors[activeTurnTeam]+';margin-top:10px;">'+(cg?cg.emoji+' '+cg.name:'')+' giving clues</div>';
+    tvStartFbTimerTV(state.turnStartedAt);
+  } else {
+    if(tvTimerInterval){clearInterval(tvTimerInterval);tvTimerInterval=null;}
+    html+='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:rgba(255,255,255,.35);margin-bottom:12px;">Waiting for '+(cg?cg.emoji+' '+cg.name:'clue giver')+'...</div>';
+    html+='<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:'+teamColors[activeTurnTeam]+';">'+teamNames[activeTurnTeam]+' team turn</div>' ;
+  }
+  html+='</div></div>';
+  content.innerHTML=html;
+}
+
+var tvFbTurnAt=0;
+function tvStartFbTimerTV(startedAt){
+  if(tvFbTurnAt===startedAt) return;
+  tvFbTurnAt=startedAt;
+  if(tvTimerInterval) clearInterval(tvTimerInterval);
+  tvTimerInterval=setInterval(function(){
+    if(fbDb&&fbRoomCode) fbDb.ref('rooms/fb/'+fbRoomCode).once('value').then(function(snap){if(snap.exists()) tvRenderFb(snap.val());});
+  },1000);
+}
+
+// ---- TV WHO FARTED ----
+function tvListenWf(){
+  wfDb.ref('rooms/wf/'+wfRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tvRenderWf(snap.val());
+  });
+}
+
+function tvRenderWf(state){
+  var content=document.getElementById('tv-wf-content');
+  if(!content) return;
+  var phase=state.phase;
+  var r=state.round||1;
+  var players=Object.values(state.players||{}).sort(function(a,b){return b.score-a.score;});
+
+  function scoreBoard(){
+    return '<div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px;">'
+      +players.map(function(p){
+        return '<div style="background:var(--wf-bg);border:2px solid var(--wf-border);border-radius:14px;padding:14px 20px;text-align:center;">'
+          +'<div style="font-size:2rem;">'+p.emoji+'</div>'
+          +'<div style="font-family:Boogaloo,cursive;font-size:1.3rem;color:var(--wf-brown);">'+p.name+'</div>'
+          +'<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);">'+p.score+'</div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }
+
+  if(phase==='lobby'||phase==='test'){
+    if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
+    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3.5rem;color:var(--wf-brown);margin-bottom:8px;">💨 Who Farted?</div>'
+      +'<div style="font-family:Boogaloo,cursive;font-size:1.8rem;color:var(--wf-muted);">Round '+r+' of '+WF_TOTAL_ROUNDS+' — Sound check on phones!</div>'
+      +scoreBoard();
+  } else if(phase==='choose'){
+    if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
+    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);margin-bottom:16px;">Round '+r+' — Choose on your phone!</div>'
+      +'<div style="font-size:6rem;">🍑 💨</div>'
+      +'<div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-muted);margin-top:12px;">Fart or Hold It?</div>'
+      +scoreBoard();
+  } else if(phase==='countdown'){
+    tvStartWfCountdown(content);
+  } else if(phase==='vote'){
+    if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
+    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3rem;color:var(--wf-brown);margin-bottom:16px;">🕵️ Who Farted?! Vote on your phone!</div>'
+      +scoreBoard();
+  } else if(phase==='results'||phase==='final'){
+    if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
+    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);margin-bottom:16px;">'+(phase==='final'?'🏆 Final Scores!':'Round '+r+' Results')+'</div>'+scoreBoard();
+  }
+}
+
+function tvStartWfCountdown(content){
+  if(tvWfCdInterval) return;
+  tvWfCdVal=5;
+  function tick(){
+    if(!content) return;
+    if(tvWfCdVal<=0){
+      content.innerHTML='<div class="tv-wf-countdown">💨</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">COUGH to cover it! 🤧</div>';
+      clearInterval(tvWfCdInterval); tvWfCdInterval=null; return;
+    }
+    content.innerHTML='<div class="tv-wf-countdown">'+tvWfCdVal+'</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">Phones under your butt!</div>';
+    tvWfCdVal--;
+  }
+  tick();
+  tvWfCdInterval=setInterval(tick,1000);
+}
+
+// ---- TV PICTIONARY TELEPHONE ----
+function tvListenTp(){
+  tpDb.ref('rooms/tp/'+tpRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tvRenderTp(snap.val());
+  });
+}
+
+function tvRenderTp(state){
+  var content=document.getElementById('tv-tp-content');
+  if(!content) return;
+  var phase=state.phase;
+  var players=state.players||{};
+  var order=state.playerOrder||[];
+  var round=state.round||0;
+  var total=state.totalRounds||order.length;
+
+  if(phase==='play'){
+    var html='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:10px;">🎨 Pictionary Telephone</div>';
+    html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.45);text-align:center;margin-bottom:20px;">Round '+(round+1)+' of '+total+' — '+(round%2===0?'Writing ✏️':'Drawing 🖌️')+'</div>';
+    html+='<div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">';
+    order.forEach(function(pid){
+      var p=players[pid];
+      if(!p) return;
+      var chainOwnerIdx=(order.indexOf(pid)-round+order.length)%order.length;
+      var chainOwnerId=order[chainOwnerIdx];
+      var entries=(state.chains&&state.chains[chainOwnerId]&&state.chains[chainOwnerId].entries)||{};
+      var done=!!entries['e'+round];
+      html+='<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">'
+        +'<div style="font-size:3rem;width:80px;height:80px;border-radius:50%;background:'+(done?'rgba(85,239,196,.1)':'rgba(249,199,79,.05)')+';border:2px solid '+(done?'#55efc4':'rgba(249,199,79,.2)')+';display:flex;align-items:center;justify-content:center;">'+p.emoji+'</div>'
+        +'<div style="font-weight:700;font-size:.95rem;">'+p.name+'</div>'
+        +'<div style="font-size:.8rem;color:'+(done?'#55efc4':'rgba(255,255,255,.4)')+';">'+(done?'✓ Done':'...')+'</div>'
+        +'</div>';
+    });
+    html+='</div>';
+    content.innerHTML=html;
+  } else if(phase==='present'){
+    var presentIdx=state.presentIdx||0;
+    var presenterId=order[presentIdx];
+    var chain=(state.chains&&state.chains[presenterId])||{entries:{}};
+    var entries=chain.entries||{};
+    var pp=players[presenterId];
+    var html='<div style="display:flex;gap:28px;">';
+    html+='<div style="min-width:160px;text-align:center;">'
+      +'<div style="font-size:3.5rem;">'+(pp?pp.emoji:'?')+'</div>'
+      +'<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#f9c74f;margin-top:8px;">'+(pp?pp.name:'?')+'</div>'
+      +'<div style="font-size:.85rem;color:rgba(255,255,255,.35);margin-top:4px;">presenting</div>'
+      +'<div style="font-size:.8rem;color:rgba(255,255,255,.25);margin-top:14px;">'+(presentIdx+1)+' / '+order.length+'</div>'
+      +'</div>';
+    html+='<div style="flex:1;overflow-y:auto;max-height:75vh;">';
+    for(var i=0;i<order.length;i++){
+      var entry=entries['e'+i];
+      if(!entry) break;
+      var ap=players[entry.authorId];
+      var lbl=i===0?'Original phrase':(entry.type==='drawing'?'Drawing by '+(ap?ap.name:entry.authorName||'?'):'Described by '+(ap?ap.name:entry.authorName||'?'));
+      html+='<div class="tv-chain-entry"><div class="tv-chain-label">'+lbl+'</div>';
+      if(entry.type==='drawing') html+='<img class="tv-chain-img" src="'+entry.data+'">';
+      else html+='<div class="tv-chain-text">'+entry.data+'</div>';
+      html+='</div>';
+    }
+    html+='</div></div>';
+    content.innerHTML=html;
+  } else if(phase==='gallery'){
+    content.innerHTML='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:16px;">🖼️ Gallery — Browse all chains on your phones!</div>'
+      +'<div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">'
+      +order.map(function(pid){var p=players[pid];return '<div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="font-size:2.5rem;">'+( p?p.emoji:'?')+'</div><div style="font-weight:700;">'+(p?p.name:'?')+'</div></div>';}).join('')
+      +'</div>';
+  }
+}
+
+// ---- TV SCOTTY ----
+function tvListenSk(){
+  skDb.ref('rooms/sk/'+skRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tvRenderSk(snap.val());
+  });
+}
+
+function tvRenderSk(state){
+  var content=document.getElementById('tv-sk-content');
+  if(!content) return;
+  var phase=state.phase;
+  var players=Object.values(state.players||{});
+
+  function scoreBoard(){
+    var sorted=players.slice().sort(function(a,b){return b.score-a.score;});
+    return '<div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px;">'
+      +sorted.map(function(p){
+        return '<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:14px 20px;text-align:center;min-width:100px;">'
+          +'<div style="font-size:2rem;">'+p.emoji+'</div>'
+          +'<div style="font-weight:700;margin-top:4px;">'+p.name+'</div>'
+          +'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#7ee8a2;">'+(p.score||0)+'</div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }
+
+  var html='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#7ee8a2;text-align:center;margin-bottom:16px;">🕵️ Scotty Doesn\'t Know</div>';
+
+  if(phase==='categories'){
+    var subs=state.catSubmissions||{};
+    html+='<div style="font-size:1.2rem;color:rgba(255,255,255,.45);text-align:center;margin-bottom:16px;">Players are entering categories...</div>';
+    html+='<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">';
+    players.forEach(function(p){
+      var done=!!subs[p.id];
+      html+='<div style="background:rgba(255,255,255,.06);border:2px solid '+(done?'#7ee8a2':'rgba(255,255,255,.1)')+';border-radius:12px;padding:12px 20px;text-align:center;">'
+        +'<div style="font-size:2rem;">'+p.emoji+'</div>'
+        +'<div style="font-weight:700;margin-top:4px;">'+p.name+'</div>'
+        +'<div style="font-size:.85rem;color:'+(done?'#7ee8a2':'rgba(255,255,255,.4)')+';margin-top:4px;">'+(done?'✓ Ready':'Thinking...')+'</div>'
+        +'</div>';
+    });
+    html+=scoreBoard();
+  } else if(phase==='play'||phase==='results'){
+    var round=state.currentRound;
+    var roundIdx=state.roundIdx||0;
+    var total=state.totalRounds||0;
+    html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.45);text-align:center;margin-bottom:14px;">Round '+(roundIdx+1)+' of '+total+(round&&round.isNoScotty?' — No Scotty Round!':'')+'</div>';
+    if(phase==='results'&&round&&!round.isNoScotty){
+      var sp=round.scottyId?(state.players||{})[round.scottyId]:null;
+      html+='<div style="background:rgba(255,255,255,.06);border-radius:14px;padding:14px;text-align:center;margin-bottom:14px;max-width:400px;margin-left:auto;margin-right:auto;">'
+        +'<div style="font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:4px;">Scotty was...</div>'
+        +'<div style="font-size:2rem;">'+(sp?sp.emoji:'?')+'</div>'
+        +'<div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:#f94144;">'+(sp?sp.name:'?')+'</div>'
+        +'<div style="margin-top:8px;color:'+(state.roundCaughtScotty?'#7ee8a2':'#f94144')+';font-weight:700;">'+(state.roundCaughtScotty?'🎯 Caught!':'🕵️ Escaped!')+'</div>'
+        +'<div style="font-size:.9rem;color:rgba(255,255,255,.45);margin-top:4px;">Category: '+round.category+'</div>'
+        +'<div style="font-size:.9rem;color:'+(state.roundCatCorrect?'#7ee8a2':'#f94144')+';margin-top:2px;">Guess: '+(state.roundCatGuess||'?')+' — '+(state.roundCatCorrect?'Correct!':'Wrong!')+'</div>'
+        +'</div>';
+    }
+    html+=scoreBoard();
+  } else if(phase==='final'){
+    html+='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#7ee8a2;text-align:center;margin-bottom:16px;">Final Scores!</div>';
+    html+=scoreBoard();
+  }
+  content.innerHTML=html;
+}
+
+// ---- TV TANGENTS ----
+function tvListenTg(){
+  tgDb.ref('rooms/tg/'+tgRoomCode).on('value',function(snap){
+    if(!snap.exists()) return;
+    tvRenderTg(snap.val());
+  });
+}
+
+function tvRenderTg(state){
+  var content=document.getElementById('tv-tg-content');
+  if(!content) return;
+  var grid=state.grid||[];
+  var revealed=state.revealed||{};
+  var currentTeam=state.currentTeam||'red';
+  var clue=state.clue; var bid=state.bid||0; var guessesUsed=state.guessesUsed||0;
+  var redLeft=state.redLeft||0; var blueLeft=state.blueLeft||0;
+  var players=state.players||{};
+  var tc=currentTeam==='red'?'#e63946':'#4a90d9';
+  var tbg=currentTeam==='red'?'rgba(230,57,70,.15)':'rgba(74,144,217,.15)';
+
+  var html='<div class="tv-tg-counter"><div class="tv-tg-ctr-r">🔴 '+redLeft+' left</div><div class="tv-tg-ctr-b">🔵 '+blueLeft+' left</div></div>';
+
+  // Clue givers label
+  var cgId=currentTeam==='red'?state.redClueGiver:state.blueClueGiver;
+  var cg=cgId?players[cgId]:null;
+  var turnTxt=(currentTeam==='red'?'🔴 Red':'🔵 Blue')+' team turn'+(cg?' — '+cg.emoji+' '+cg.name+' is clue giver':'');
+  html+='<div class="tv-tg-turn" style="background:'+tbg+';color:'+tc+';">'+turnTxt+'</div>';
+
+  if(clue){
+    html+='<div class="tv-tg-clue-box"><div class="tv-tg-clue-word">'+clue+'</div><div class="tv-tg-clue-info">Bid: '+bid+' &nbsp;|&nbsp; Guesses left: '+Math.max(0,bid+1-guessesUsed)+'</div></div>';
+  } else if(state.phase!=='lobby'){
+    html+='<div class="tv-tg-clue-box" style="color:rgba(255,255,255,.3);">Waiting for clue giver...</div>';
+  }
+
+  if(state.phase==='ended'){
+    html+='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:'+(state.winner==='red'?'#e63946':'#4a90d9')+';text-align:center;margin-bottom:10px;">'+(state.winner==='red'?'🔴 Red':'🔵 Blue')+' Wins!</div>';
+  }
+
+  // Team player icons
+  var redPs=Object.values(players).filter(function(p){return p.team==='red';});
+  var bluePs=Object.values(players).filter(function(p){return p.team==='blue';});
+  html+='<div style="display:flex;gap:20px;justify-content:center;margin-bottom:10px;">';
+  if(redPs.length){html+='<div style="display:flex;gap:8px;align-items:center;">';redPs.forEach(function(p){html+='<span class="tg-icon-red" style="font-size:1.5rem;" title="'+p.name+'">'+p.emoji+'</span>';});html+='<span style="color:rgba(255,255,255,.3);font-size:.8rem;"> Red</span></div>';}
+  if(bluePs.length){html+='<div style="display:flex;gap:8px;align-items:center;">';bluePs.forEach(function(p){html+='<span class="tg-icon-blue" style="font-size:1.5rem;" title="'+p.name+'">'+p.emoji+'</span>';});html+='<span style="color:rgba(255,255,255,.3);font-size:.8rem;"> Blue</span></div>';}
+  html+='</div>';
+
+  if(state.phase==='lobby'){
+    html+='<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:12px;">Players: choose your team on your phone</div>';
+  }
+
+  // Grid - beige until revealed
+  if(grid.length){
+    html+='<div class="tv-tg-grid">';
+    grid.forEach(function(card,idx){
+      var isRev=!!revealed[idx];
+      var cls='tv-tg-beige';
+      if(isRev) cls=card.color==='neutral'?'tv-tg-neutral':card.color==='death'?'tv-tg-death':'tv-tg-'+card.color;
+      html+='<div class="tv-tg-card '+cls+'">'+card.word+'</div>';
+    });
+    html+='</div>';
+  }
+  content.innerHTML=html;
+}
+
+// ---- INIT icon pickers when game screens open ----
+// Override selectGame to also init pickers
+var _sgOrig=window.selectGame||function(){};
+window.selectGame=function(game){
+  _sgOrig(game);
+  setTimeout(function(){
+    var map={fishbowl:'fb',whofarted:'wf',tp:'tp',scotty:'sk',tangents:'tg'};
+    var prefix=map[game];
+    if(prefix) ipInit(prefix);
+  },50);
+};
 </script>
 
 <script>
