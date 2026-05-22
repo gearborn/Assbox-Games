@@ -235,7 +235,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 .tp .prompt-box { background:rgba(249,199,79,.1); border:2px solid rgba(249,199,79,.4); border-radius:14px; padding:14px; font-size:1.1rem; font-weight:700; color:#f9c74f; text-align:center; word-break:break-word; margin-bottom:12px; }
 .tp canvas { border-radius:12px; touch-action:none; display:block; cursor:crosshair; background:#fff; }
 .tp .canvas-wrap { position:relative; width:100%; }
-.tp .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); display:flex; align-items:center; justify-content:center; z-index:1000; }
+.tp .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); display:flex; align-items:center; justify-content:center; z-index:200; }
 .tp .confirm-box { background:#1e1e3a; border:2px solid rgba(249,199,79,.5); border-radius:20px; padding:28px 24px; text-align:center; max-width:320px; width:90%; }
 .tp .confirm-box h3 { font-family:Fredoka One,cursive; color:#f9c74f; font-size:1.4rem; margin-bottom:10px; }
 .tp .confirm-box p { color:rgba(255,255,255,.65); margin-bottom:20px; font-size:.95rem; }
@@ -348,11 +348,8 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 .tg .win-banner { font-family:'Fredoka One',cursive; font-size:2.5rem; text-align:center; margin-bottom:16px; }
 
 
-/* ============================================================
-   TV / JACKBOX MODE STYLES
-   ============================================================ */
+/* ─── TV / JACKBOX ─────────────────────────────── */
 .create-room-btn{background:linear-gradient(135deg,#f9d56e,#f2994a);color:#1a1000;font-family:'Fredoka One',cursive;font-size:1.2rem;padding:15px 28px;border:none;border-radius:14px;cursor:pointer;width:100%;max-width:400px;margin-bottom:6px;transition:all .15s;}
-.create-room-btn:hover{filter:brightness(1.05);}
 .create-room-btn:active{transform:scale(.97);}
 .home-divider{display:flex;align-items:center;gap:10px;width:100%;max-width:400px;margin:8px 0;}
 .home-divider::before,.home-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.15);}
@@ -364,14 +361,12 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 .join-form .code-row{display:flex;gap:8px;}
 .join-form .code-row input{letter-spacing:4px;font-size:1.05rem;text-transform:uppercase;}
 .join-form .join-btn{padding:12px 18px;border-radius:12px;border:none;background:rgba(255,255,255,.12);color:#fff;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.join-form .join-btn:hover{background:rgba(255,255,255,.2);}
 .icon-picker-wrap{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:4px 0;}
 .icon-picker-wrap button{font-size:1.3rem;padding:5px;background:transparent;border:2px solid transparent;border-radius:8px;cursor:pointer;transition:all .1s;}
 .icon-picker-wrap button.ipselected{background:rgba(249,213,110,.2);border-color:#f9d56e;}
 #screen-phone-waiting{background:#0f0f1a;justify-content:center;text-align:center;}
 .pw-code{font-family:'Fredoka One',cursive;font-size:3rem;letter-spacing:8px;color:#f9d56e;}
 .everybodys-in-btn{background:linear-gradient(135deg,#55efc4,#00b894);color:#001a0d;font-family:'Fredoka One',cursive;font-size:1.2rem;padding:15px 28px;border:none;border-radius:14px;cursor:pointer;width:100%;margin-top:12px;transition:all .15s;}
-.everybodys-in-btn:hover{filter:brightness(1.05);}
 .everybodys-in-btn:active{transform:scale(.97);}
 .tv-room-code{font-family:'Fredoka One',cursive;font-size:clamp(4.5rem,13vw,8rem);letter-spacing:12px;color:#f9d56e;text-shadow:0 0 40px rgba(249,213,110,.3);line-height:1;}
 .tv-room-label{font-size:1rem;color:rgba(255,255,255,.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
@@ -401,6 +396,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 .tv-chain-img{width:100%;display:block;max-height:260px;object-fit:contain;background:#fff;}
 .tg-icon-red{filter:drop-shadow(0 0 5px rgba(230,57,70,.9));}
 .tg-icon-blue{filter:drop-shadow(0 0 5px rgba(74,144,217,.9));}
+.tp .confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:1000;}
 
 </style>
 </head>
@@ -438,7 +434,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
       <div class="game-card" onclick="selectGame('scotty')">
         <div class="game-card-icon">🕵️</div>
         <div>
-          <div class="game-card-name">Scotty Doesn't Know</div>
+          <div class="game-card-name">Scotty Doesn\'t Know</div>
           <div class="game-card-desc">Hidden categories · Bluff & guess · 4+ players</div>
         </div>
       </div>
@@ -603,10 +599,10 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <button class="create-room-btn" onclick="fbCreateTV()">📺 Create Room</button>
   <div class="home-divider"><span>or join on your phone</span></div>
   <div class="join-form">
-    <input type="text" id="fb-player-name" placeholder="Name...">
+    <input type="text" id="fb-player-name" placeholder="Name">
     <div class="icon-picker-wrap" id="ip-fb"></div>
     <div class="code-row">
-      <input type="text" id="fb-join-code" placeholder="Room Code...">
+      <input type="text" id="fb-join-code" placeholder="Room Code">
       <button class="join-btn" onclick="fbJoinTV()">Join →</button>
     </div>
   </div>
@@ -683,10 +679,10 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <button class="create-room-btn" onclick="tgCreateTV()" style="background:linear-gradient(135deg,#e63946,#4a90d9);color:#fff;">📺 Create Room</button>
   <div class="home-divider"><span>or join on your phone</span></div>
   <div class="join-form">
-    <input type="text" id="tg-player-name" placeholder="Name...">
+    <input type="text" id="tg-player-name" placeholder="Name">
     <div class="icon-picker-wrap" id="ip-tg"></div>
     <div class="code-row">
-      <input type="text" id="tg-join-code" placeholder="Room Code...">
+      <input type="text" id="tg-join-code" placeholder="Room Code">
       <button class="join-btn" onclick="tgJoinTV()">Join →</button>
     </div>
   </div>
@@ -704,6 +700,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
     <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
     <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
   </div>
+  <div id="tg-role-select" class="card tg" style="display:none;width:100%;padding:14px;"></div>
   <div id="tg-lobby-host-btn" style="width:100%;display:none;">
     <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
   </div>
@@ -769,14 +766,14 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 <div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
   <button class="back-btn sk" onclick="goHome()" style="align-self:flex-start;">← Back</button>
   <div style="font-size:3.2rem;margin-bottom:8px;">🕵️</div>
-  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.7rem,6vw,2.6rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;">Scotty Doesn't Know</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.7rem,6vw,2.6rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;">Scotty Doesn\'t Know</div>
   <button class="create-room-btn" onclick="skCreateTV()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;">📺 Create Room</button>
   <div class="home-divider"><span>or join on your phone</span></div>
   <div class="join-form">
-    <input type="text" id="sk-player-name" placeholder="Name...">
+    <input type="text" id="sk-player-name" placeholder="Name">
     <div class="icon-picker-wrap" id="ip-sk"></div>
     <div class="code-row">
-      <input type="text" id="sk-join-code" placeholder="Room Code...">
+      <input type="text" id="sk-join-code" placeholder="Room Code">
       <button class="join-btn" onclick="skJoinTV()">Join →</button>
     </div>
   </div>
@@ -830,10 +827,10 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <button class="create-room-btn" onclick="tpCreateTV()" style="background:linear-gradient(135deg,#f9c74f,#f3722c);color:#1a0800;">📺 Create Room</button>
   <div class="home-divider"><span>or join on your phone</span></div>
   <div class="join-form">
-    <input type="text" id="tp-player-name" placeholder="Name...">
+    <input type="text" id="tp-player-name" placeholder="Name">
     <div class="icon-picker-wrap" id="ip-tp"></div>
     <div class="code-row">
-      <input type="text" id="tp-join-code" placeholder="Room Code...">
+      <input type="text" id="tp-join-code" placeholder="Room Code">
       <button class="join-btn" onclick="tpJoinTV()">Join →</button>
     </div>
   </div>
@@ -894,7 +891,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 </div>
 
 
-<!-- PHONE WAITING ROOM -->
+<!-- PHONE WAITING -->
 <div id="screen-phone-waiting" class="screen hidden" style="background:#0f0f1a;justify-content:center;text-align:center;">
   <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;" id="pw-game-name"></div>
   <div style="color:rgba(255,255,255,.4);font-size:.9rem;margin-bottom:4px;">Room Code</div>
@@ -904,8 +901,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <button class="everybodys-in-btn" id="pw-everybodys-in" onclick="everybodysIn()" style="max-width:360px;">🎉 Everybody's In!</button>
   <div style="color:rgba(255,255,255,.3);font-size:.8rem;margin-top:10px;" id="pw-waiting-msg"></div>
 </div>
-
-<!-- TV WAITING ROOM -->
+<!-- TV WAITING -->
 <div id="screen-tv-waiting" class="screen hidden" style="background:#0f0f1a;justify-content:center;text-align:center;">
   <div style="font-size:1rem;color:rgba(255,255,255,.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;" id="tv-wait-game-label"></div>
   <div class="tv-room-label">Room Code</div>
@@ -914,32 +910,26 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <div class="tv-player-grid" id="tv-waiting-players"></div>
   <div style="font-size:.9rem;color:rgba(255,255,255,.22);margin-top:20px;">Open this site on phones and enter the code above</div>
 </div>
-
 <!-- TV FISHBOWL -->
 <div id="screen-tv-fishbowl" class="screen hidden" style="background:#0f0f1a;align-items:center;justify-content:flex-start;padding:28px 32px;">
   <div id="tv-fb-content" style="width:100%;max-width:960px;"></div>
 </div>
-
 <!-- TV WHO FARTED -->
 <div id="screen-tv-whofarted" class="screen hidden" style="background:var(--wf-bg);justify-content:center;">
   <div id="tv-wf-content" style="width:100%;max-width:860px;text-align:center;"></div>
 </div>
-
-<!-- TV PICTIONARY TELEPHONE -->
+<!-- TV PICTIONARY -->
 <div id="screen-tv-tp" class="screen hidden" style="background:#1a1a2e;justify-content:center;">
   <div id="tv-tp-content" style="width:100%;max-width:960px;"></div>
 </div>
-
 <!-- TV SCOTTY -->
 <div id="screen-tv-scotty" class="screen hidden" style="background:#0d1117;justify-content:center;">
   <div id="tv-sk-content" style="width:100%;max-width:860px;"></div>
 </div>
-
 <!-- TV TANGENTS -->
 <div id="screen-tv-tangents" class="screen hidden" style="background:#1a0f0f;align-items:center;justify-content:flex-start;padding:20px 32px;">
   <div id="tv-tg-content" style="width:100%;max-width:920px;margin:0 auto;"></div>
 </div>
-
 <!-- ============================================================
      FIREBASE CONFIG - Replace with your Assbox project config
      ============================================================ -->
@@ -1087,7 +1077,7 @@ function wfStartGame() {
 }
 
 function wfUpdateTestUI(state) {
-  wfMyChoice=null; // Reset choice at start of each new round
+  wfMyChoice=null; // Reset for new round
   wfShowScreen('test');
   const r = state.round||1; wfCurrentRound=r;
   document.getElementById('wf-test-round-label').textContent=`Round ${r} of ${WF_TOTAL_ROUNDS}`;
@@ -1108,21 +1098,22 @@ function wfPlayTestFart() {
 
 function wfUpdateChooseUI(state) {
   wfShowScreen('choose');
-  // Don't reset wfMyChoice if player already chose this round
-  if(!wfMyChoice) wfMyChoice=null;
+  // Don't reset wfMyChoice if already set this round - reset happens in wfUpdateTestUI
   const r=state.round||1;
   document.getElementById('wf-choose-round-label').textContent=`Round ${r} of ${WF_TOTAL_ROUNDS}`;
   document.getElementById('wf-choose-progress').style.width=(r/WF_TOTAL_ROUNDS*100)+'%';
   const mp=(state.players||{})[wfPlayerId];
   const fb=document.getElementById('wf-forced-banner'),fb2=document.getElementById('wf-fart-btn'),hb=document.getElementById('wf-hold-btn');
   if(!fb||!fb2||!hb) return;
-  if (mp&&mp.forcedFart){fb.style.display='block';hb.disabled=true;hb.style.opacity='0.3';fb2.disabled=false;}
-  else{fb.style.display='none';hb.disabled=false;hb.style.opacity='1';fb2.disabled=false;}
-  // If already chose, lock in the choice visually
   if(wfMyChoice){
+    // Already chose - lock buttons
     fb2.disabled=true;hb.disabled=true;
     fb2.style.opacity=wfMyChoice==='fart'?'1':'0.4';
     hb.style.opacity=wfMyChoice==='hold'?'1':'0.4';
+  } else if(mp&&mp.forcedFart){
+    fb.style.display='block';hb.disabled=true;hb.style.opacity='0.3';fb2.disabled=false;
+  } else {
+    fb.style.display='none';hb.disabled=false;hb.style.opacity='1';fb2.disabled=false;
   }
   const choices=state.choices||{};const players=Object.values(state.players||{});
   document.getElementById('wf-choose-wait-avatars').innerHTML=players.map(p=>`<div class="wait-avatar ${choices[p.id]?'done':''}">${p.emoji} ${p.name} ${choices[p.id]?'✅':'⏳'}</div>`).join('');
@@ -1177,7 +1168,7 @@ function wfTallyVotes(state){
     const av=vids.filter(v=>v!=='__none__');
     farters.filter(fid=>fid!==vid).forEach(fid=>{
       if(av.includes(fid)){deltas[vid]+=1;breakdown[vid].push(`+1 caught ${(players[fid]&&players[fid].name)||fid}`);}
-      else{deltas[vid]-=2;wrongCounts[vid]++;breakdown[vid].push(`-2 missed ${(players[fid]&&players[fid].name)||fid}`);}
+      // No penalty for missing a farter
     });
     av.forEach(v=>{if(!farters.includes(v)&&v!==vid){deltas[vid]-=2;wrongCounts[vid]++;breakdown[vid].push(`-2 wrong vote on ${(players[v]&&players[v].name)||v}`);}});
   });
@@ -1796,11 +1787,11 @@ function fbRenderEnded(state){
   <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
   <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
   <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
-    <input type="text" id="tg-player-name" placeholder="Name...">
+    <input type="text" id="tg-player-name" placeholder="Your name...">
     <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
     <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
     <div style="display:flex;gap:8px;">
-      <input type="text" id="tg-join-code" placeholder="Room Code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
       <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
     </div>
   </div>
@@ -1819,6 +1810,7 @@ function fbRenderEnded(state){
     <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
     <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
   </div>
+  <div id="tg-role-select" class="card tg" style="display:none;width:100%;padding:14px;"></div>
   <div id="tg-lobby-host-btn" style="width:100%;display:none;">
     <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
   </div>
@@ -1885,11 +1877,11 @@ function fbRenderEnded(state){
   <div style="font-size:4rem;margin-bottom:8px;">🕵️</div>
   <div style="font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,7vw,2.8rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Scotty<br>Doesn't Know</div>
   <div class="card sk" style="display:flex;flex-direction:column;gap:11px;">
-    <input type="text" id="sk-player-name" placeholder="Name...">
+    <input type="text" id="sk-player-name" placeholder="Your name...">
     <div id="sk-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
     <button class="btn btn-primary sk" onclick="skCreateRoom()">Create Game</button>
     <div style="display:flex;gap:8px;">
-      <input type="text" id="sk-join-code" placeholder="Room Code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <input type="text" id="sk-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
       <button class="btn btn-secondary sk" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="skJoinRoom()">Join</button>
     </div>
   </div>
@@ -2077,40 +2069,30 @@ function tpRenderPlay(state){
   // Which chain am I working on this round?
   // Round 0: each person works on their own chain (write phrase)
   // Round r: person at index myIdx works on chain belonging to order[(myIdx - r + order.length) % order.length]
-  // Per-player advancement: find first round where I haven't submitted
-  // and either it's round 0 or the previous entry exists
-  var myRound=round; // start from global round, find my actual current round
-  for(var r=0;r<totalRounds;r++){
-    var coi=(myIdx-r+order.length)%order.length;
-    var coid=order[coi];
-    var ch=(state.chains&&state.chains[coid])||{entries:{}};
-    var ents=ch.entries||{};
-    if(!ents['e'+r]){
-      // Haven't submitted for round r - check if it's available
-      var prevOk=(r===0)||(ents['e'+(r-1)]!==undefined);
-      if(prevOk){myRound=r;break;}
-      else{myRound=r;break;} // waiting for prev, still set round
-    }
-    // Already submitted for round r, check next
+  // Per-player round: find first round where I haven't submitted yet
+  var myRound=round;
+  for(var rr=0;rr<totalRounds;rr++){
+    var coi2=(myIdx-rr+order.length)%order.length;
+    var coid2=order[coi2];
+    var ch2=(state.chains&&state.chains[coid2])||{entries:{}};
+    if(!ch2.entries||!ch2.entries['e'+rr]){myRound=rr;break;}
   }
-  var roundForMe=myRound;
-  var chainOwnerIdx=(myIdx-roundForMe+order.length)%order.length;
+  var chainOwnerIdx=(myIdx-myRound+order.length)%order.length;
   var chainOwnerId=order[chainOwnerIdx];
   var chain=(state.chains&&state.chains[chainOwnerId])||{entries:{}};
   var entries=chain.entries||{};
-  var myEntryKey='e'+roundForMe;
+  var myEntryKey='e'+myRound;
   var alreadySubmitted=!!entries[myEntryKey];
-  var prevEntry=roundForMe>0?entries['e'+(roundForMe-1)]:null;
-  var waitingForPrev=roundForMe>0&&!prevEntry;
-  var isDrawRound=roundForMe%2===1;
+  var prevEntry=myRound>0?entries['e'+(myRound-1)]:null;
+  var waitingForPrev=myRound>0&&!prevEntry;
+  var isDrawRound=myRound%2===1;
 
-  // Round type: even = write text, odd = draw
   if(alreadySubmitted){
     content.innerHTML='<div style="text-align:center;padding:20px 0;">'
       +'<div style="font-size:3rem;margin-bottom:12px;">'+( isDrawRound?'🖌️':'✏️')+'</div>'
       +'<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f9c74f;margin-bottom:8px;">Submitted!</div>'
       +'<div class="alert-waiting">Waiting to receive your next '+(isDrawRound?'phrase':'drawing')+'...</div>'
-      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(round+1)+' of '+totalRounds+'</div>'
+      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(myRound+1)+' of '+totalRounds+'</div>'
       +'</div>';
     return;
   }
@@ -2120,7 +2102,7 @@ function tpRenderPlay(state){
       +'<div style="font-size:3rem;margin-bottom:12px;">⏳</div>'
       +'<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f9c74f;margin-bottom:8px;">Hang tight!</div>'
       +'<div class="alert-waiting">Waiting to receive your '+(isDrawRound?'phrase to draw':'drawing to describe')+'...</div>'
-      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(round+1)+' of '+totalRounds+'</div>'
+      +'<div style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:10px;">Round '+(myRound+1)+' of '+totalRounds+'</div>'
       +'</div>';
     return;
   }
@@ -2152,35 +2134,32 @@ function tpRenderPlay(state){
   }
 
   content.innerHTML='<div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">'
-    +'<div style="font-family:Fredoka One,cursive;color:#f9c74f;font-size:1.1rem;">Round '+(round+1)+' of '+totalRounds+'</div>'
+    +'<div style="font-family:Fredoka One,cursive;color:#f9c74f;font-size:1.1rem;">Round '+(myRound+1)+' of '+totalRounds+'</div>'
     +'<div style="font-size:.8rem;color:rgba(255,255,255,.4);">'+(isDrawRound?'Draw it!':'Describe it!')+'</div>'
     +'</div>'
     +promptHtml;
 
-  if(isDrawRound && !waitingForPrev && !alreadySubmitted) tpInitCanvas();
+  if(isDrawRound&&!waitingForPrev&&!alreadySubmitted) tpInitCanvas();
 
   // Check if all submitted this round and I am host -> advance
   if(tpIsHost) tpCheckAdvanceRound(state);
 }
 
 function tpCheckAdvanceRound(state){
+  if(!tpIsHost) return;
   var order=state.playerOrder||[];
-  var totalRounds=state.totalRounds||order.length;
+  var total=state.totalRounds||order.length;
   var chains=state.chains||{};
-  // Check if ALL entries across ALL chains are complete
-  var allComplete=true;
-  for(var r=0;r<totalRounds;r++){
-    var roundDone=order.every(function(pid){
-      var chainOwnerIdx=(order.indexOf(pid)-r+order.length)%order.length;
-      var chainOwnerId=order[chainOwnerIdx];
-      var entries=(chains[chainOwnerId]&&chains[chainOwnerId].entries)||{};
-      return !!entries['e'+r];
-    });
-    if(!roundDone){allComplete=false;break;}
+  // Check all entries in all chains are complete
+  for(var r=0;r<total;r++){
+    for(var pi=0;pi<order.length;pi++){
+      var coi=(pi-r+order.length)%order.length;
+      var ents=(chains[order[coi]]&&chains[order[coi]].entries)||{};
+      if(!ents['e'+r]) return; // not done yet
+    }
   }
-  if(allComplete&&totalRounds>0){
-    tpDb.ref('rooms/tp/'+tpRoomCode).update({phase:'present',presentIdx:0,presentAcks:{}});
-  }
+  // All done - go to presentations
+  tpDb.ref('rooms/tp/'+tpRoomCode).update({phase:'present',presentIdx:0,presentAcks:{}});
 }
 
 function tpGetMyRound(){
@@ -2188,14 +2167,14 @@ function tpGetMyRound(){
   if(!state) return 0;
   var order=state.playerOrder||[];
   var myIdx=order.indexOf(tpMyId);
-  var totalRounds=state.totalRounds||order.length;
-  for(var r=0;r<totalRounds;r++){
+  var total=state.totalRounds||order.length;
+  for(var r=0;r<total;r++){
     var coi=(myIdx-r+order.length)%order.length;
     var coid=order[coi];
     var ents=((state.chains&&state.chains[coid]&&state.chains[coid].entries)||{});
     if(!ents['e'+r]) return r;
   }
-  return totalRounds-1;
+  return total;
 }
 
 function tpSubmitPhrase(){
@@ -2231,11 +2210,10 @@ function tpSubmitDrawing(){
 // ---- CANVAS ----
 function tpInitCanvas(){
   setTimeout(function(){
-    var newCanvas=document.getElementById('tp-canvas');
-    if(!newCanvas) return;
-    // Don't re-initialize if it's the same canvas element (preserves drawing)
-    if(tpCanvas===newCanvas&&tpCtx) return;
-    tpCanvas=newCanvas;
+    var nc=document.getElementById('tp-canvas');
+    if(!nc) return;
+    if(tpCanvas===nc&&tpCtx) return; // same canvas, keep drawing
+    tpCanvas=nc;
     var wrap=tpCanvas.parentElement;
     var w=wrap.offsetWidth||340;
     tpCanvas.width=w;
@@ -2476,11 +2454,11 @@ function tpResetLocalState(){
   <div style="font-size:4rem;margin-bottom:8px;">🔴🔵</div>
   <div style="font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3rem);background:linear-gradient(135deg,#e63946,#4a90d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;">Tangents</div>
   <div class="card tg" style="display:flex;flex-direction:column;gap:11px;">
-    <input type="text" id="tg-player-name" placeholder="Name...">
+    <input type="text" id="tg-player-name" placeholder="Your name...">
     <div id="tg-emoji-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
     <button class="btn btn-primary tg" onclick="tgCreateRoom()">Create Game</button>
     <div style="display:flex;gap:8px;">
-      <input type="text" id="tg-join-code" placeholder="Room Code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
+      <input type="text" id="tg-join-code" placeholder="Room code..." style="text-transform:uppercase;letter-spacing:4px;font-size:1.05rem;">
       <button class="btn btn-secondary tg" style="width:auto;white-space:nowrap;padding:13px 14px;" onclick="tgJoinRoom()">Join</button>
     </div>
   </div>
@@ -2499,6 +2477,7 @@ function tpResetLocalState(){
     <button class="btn btn-red tg" onclick="tgJoinTeam('red')" style="flex:1;">Join Red</button>
     <button class="btn btn-blue tg" onclick="tgJoinTeam('blue')" style="flex:1;">Join Blue</button>
   </div>
+  <div id="tg-role-select" class="card tg" style="display:none;width:100%;padding:14px;"></div>
   <div id="tg-lobby-host-btn" style="width:100%;display:none;">
     <button class="btn btn-primary tg" onclick="tgStartGame()">Start Game →</button>
   </div>
@@ -2859,7 +2838,7 @@ function skRenderPlay(state){
   // Answer phase
   if(!myAnswer){
     html+='<div class="card sk" style="margin-bottom:10px;">'
-      +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">'+(isScotty?'Say something out loud that sounds like it fits! 🗣️':'Say something from the category out loud! 🗣️')+'</div>'
+      +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">'+(isScotty?'🗣️ Say something that sounds like it fits!':'🗣️ Say your answer out loud!')+'</div>'
       +'<button class="btn btn-primary sk" onclick="skSubmitAnswer()" style="margin-top:10px;">Submit Answer</button>'
       +'</div>';
   } else if(!allAnswered){
@@ -2946,7 +2925,7 @@ function skToggleScottyVote(btn){
 }
 
 function skSubmitAnswer(){
-  // Answer is verbal - just mark that this player has said their answer
+  // Verbal - just mark as done
   skDb.ref('rooms/sk/'+skRoomCode+'/answers/'+skMyId).set('__said__');
 }
 
@@ -2986,6 +2965,7 @@ function skCheckTallyReady(state){
 }
 
 function skTallyRound(state){
+  if(state.phase==='results'||state.phase==='final') return;
   var round=state.currentRound;
   var players=state.players||{};
   var playerIds=Object.keys(players);
@@ -3086,11 +3066,12 @@ function skCategoryMatch(guess,category){
   var g=guess.toLowerCase().replace(/[^a-z0-9]/g,' ').trim();
   var c=category.toLowerCase().replace(/[^a-z0-9]/g,' ').trim();
   if(g===c) return true;
-  // Check if key words match
-  var gWords=g.split(' ').filter(function(w){return w.length>3;});
-  var cWords=c.split(' ').filter(function(w){return w.length>3;});
-  var matches=gWords.filter(function(w){return cWords.indexOf(w)!==-1;});
-  return matches.length>0&&matches.length>=Math.min(gWords.length,cWords.length)*0.6;
+  if(g.indexOf(c)!==-1||c.indexOf(g)!==-1) return true;
+  var gW=g.split(' ').filter(function(w){return w.length>2;});
+  var cW=c.split(' ').filter(function(w){return w.length>2;});
+  if(!gW.length||!cW.length) return false;
+  var matches=gW.filter(function(gw){return cW.some(function(cw){return cw.indexOf(gw)!==-1||gw.indexOf(cw)!==-1;});});
+  return matches.length>0&&matches.length>=Math.min(gW.length,cW.length)*0.5;
 }
 
 // ---- RESULTS ----
@@ -3158,22 +3139,32 @@ function skRenderResults(state){
 
   if(state.isLastRound){
     html+='<button class="btn btn-primary sk" onclick="skEndGame()">See Final Results 🏆</button>';
-  } else if(skIsHost){
-    html+='<button class="btn btn-primary sk" onclick="skNextRound()">Next Round →</button>';
   } else {
-    html+='<div style="color:rgba(255,255,255,.4);text-align:center;font-size:.9rem;">Waiting for host to continue...</div>';
+    html+='<button class="btn btn-primary sk" onclick="skMarkReady()">Ready for Next Round</button>';
   }
 
   content.innerHTML=html;
 }
 
+function skMarkReady(){
+  if(!skDb||!skRoomCode||!skMyId) return;
+  skDb.ref('rooms/sk/'+skRoomCode+'/skReadied/'+skMyId).set(true).then(function(){
+    skDb.ref('rooms/sk/'+skRoomCode).once('value').then(function(snap){
+      if(!snap.exists()) return;
+      var st=snap.val();
+      var rd=st.skReadied||{};
+      var pl=Object.values(st.players||{});
+      if(pl.length>0&&pl.every(function(p){return rd[p.id];})) skNextRound();
+    });
+  });
+}
 function skNextRound(){
-  if(!skIsHost||!skLastState) return;
+  if(!skLastState) return;
   var next=skLastState.nextRound;
   var nextIdx=skLastState.nextRoundIdx;
   skDb.ref('rooms/sk/'+skRoomCode).update({
     phase:'play',currentRound:next,roundIdx:nextIdx,
-    answers:{},votes:{},catVotes:{},
+    answers:{},votes:{},catVotes:{},skReadied:{},
     roundDeltas:null,roundVoteTally:null,roundCaughtScotty:null,
     roundCatGuess:null,roundCatCorrect:null,nextRound:null
   });
@@ -3304,6 +3295,9 @@ function tgRenderLobby(state){
   var red=players.filter(function(p){return p.team==='red';});
   var blue=players.filter(function(p){return p.team==='blue';});
   var isHost=state.hostId===tgMyId;
+  var me=state.players&&state.players[tgMyId];
+  var myTeam=me&&me.team;
+  var myRole=me&&me.role;
 
   var td=document.getElementById('tg-teams-display');
   td.innerHTML=['red','blue'].map(function(t){
@@ -3330,6 +3324,16 @@ function tgRenderLobby(state){
   hb.style.display=(isHost&&ok)?'block':'none';
 }
 
+function tgSetRole(role){
+  if(!tgLastState||!tgMyId) return;
+  var me=tgLastState.players&&tgLastState.players[tgMyId];
+  if(!me||!me.team) return;
+  var teamPl=Object.values(tgLastState.players||{}).filter(function(p){return p.team===me.team;});
+  if(role==='clue'&&teamPl.some(function(p){return p.role==='clue'&&p.id!==tgMyId;})){
+    alert('Your team already has a clue giver!');return;
+  }
+  tgDb.ref('rooms/tg/'+tgRoomCode+'/players/'+tgMyId+'/role').set(role);
+}
 function tgJoinTeam(team){
   tgDb.ref('rooms/tg/'+tgRoomCode+'/players/'+tgMyId+'/team').set(team);
 }
@@ -3357,8 +3361,10 @@ function tgStartGame(){
     var redShuffled=tgShuffle(red.map(function(p){return p.id;}));
     var blueShuffled=tgShuffle(blue.map(function(p){return p.id;}));
     var roles={};
-    redShuffled.forEach(function(id,i){roles[id]=i===0?'clue':'guesser';});
-    blueShuffled.forEach(function(id,i){roles[id]=i===0?'clue':'guesser';});
+    var redClue=red.find(function(p){return p.role==='clue';})||red[0];
+    var blueClue=blue.find(function(p){return p.role==='clue';})||blue[0];
+    red.forEach(function(p){roles[p.id]=p.id===redClue.id?'clue':'guesser';});
+    blue.forEach(function(p){roles[p.id]=p.id===blueClue.id?'clue':'guesser';});
 
     // Guesser turn order within each team
     var redGuessers=redShuffled.slice(1);
@@ -3668,13 +3674,11 @@ function ipPick(btn){
   btn.classList.add('ipselected');
 }
 
-// Create Room (TV)
 function abCreateTV(game){
   var db=getDb();
   if(!db){alert('Firebase not configured!');return;}
   abIsTV=true;abGame=game;abDb=db;abRoomCode=genRoomCode();abMyId='tv-'+genId();
-  var room={code:abRoomCode,game:game,phase:'waiting',players:{},tvId:abMyId,createdAt:Date.now()};
-  db.ref('rooms/ab/'+abRoomCode).set(room).then(function(){
+  db.ref('rooms/ab/'+abRoomCode).set({code:abRoomCode,game:game,phase:'waiting',players:{},tvId:abMyId,createdAt:Date.now()}).then(function(){
     var names={fishbowl:'🐟 Fishbowl',whofarted:'💨 Who Farted?',tp:'🎨 Pictionary Telephone',scotty:'🕵️ Scotty Doesn\'t Know',tangents:'🔴 Tangents'};
     document.getElementById('tv-wait-game-label').textContent=names[game]||game;
     document.getElementById('tv-room-code-display').textContent=abRoomCode;
@@ -3689,7 +3693,6 @@ function tpCreateTV(){abCreateTV('tp');}
 function skCreateTV(){abCreateTV('scotty');}
 function tgCreateTV(){abCreateTV('tangents');}
 
-// Join Room (Phone)
 function abJoinTV(game,nameId,codeId,prefix){
   var name=document.getElementById(nameId)?document.getElementById(nameId).value.trim():'';
   var code=document.getElementById(codeId)?document.getElementById(codeId).value.trim().toUpperCase():'';
@@ -3702,22 +3705,21 @@ function abJoinTV(game,nameId,codeId,prefix){
   db.ref('rooms/ab/'+code).once('value').then(function(snap){
     if(!snap.exists()){alert('Room not found!');return;}
     var room=snap.val();
-    if(room.game!==game){alert('This room is for '+room.game+', not '+game);return;}
+    if(room.game!==game){alert('This room is for '+room.game);return;}
     if(room.phase==='ended'){alert('Game already ended!');return;}
-    // Check if player with same name already exists (reconnect)
-    var existingPlayers=Object.values(room.players||{});
-    var existing=existingPlayers.find(function(p){return p.name.toLowerCase()===name.toLowerCase();});
+    // Reconnect: reuse existing player if same name
+    var existing=Object.values(room.players||{}).find(function(p){return p.name.toLowerCase()===name.toLowerCase();});
     if(existing){
-      abMyId=existing.id; // Reuse existing ID
+      abMyId=existing.id;
       db.ref('rooms/ab/'+code+'/players/'+abMyId+'/connected').set(true);
       db.ref('rooms/ab/'+code+'/players/'+abMyId+'/connected').onDisconnect().set(false);
     } else {
       abMyId=genId();
-      var player={id:abMyId,name:name,emoji:emoji,team:'',connected:true};
-      db.ref('rooms/ab/'+code+'/players/'+abMyId).set(player);
+      db.ref('rooms/ab/'+code+'/players/'+abMyId).set({id:abMyId,name:name,emoji:emoji,team:'',connected:true});
+      db.ref('rooms/ab/'+code+'/players/'+abMyId+'/connected').onDisconnect().set(false);
     }
     abAddToGameRoom(game,code,abMyId,name,emoji,db);
-    abListenAsPlayer(game,code,abMyId,name,emoji);
+    abListenAsPlayer(game,code,abMyId);
   });
 }
 function fbJoinTV(){abJoinTV('fishbowl','fb-player-name','fb-join-code','fb');}
@@ -3727,20 +3729,17 @@ function skJoinTV(){abJoinTV('scotty','sk-player-name','sk-join-code','sk');}
 function tgJoinTV(){abJoinTV('tangents','tg-player-name','tg-join-code','tg');}
 
 function abAddToGameRoom(game,code,myId,name,emoji,db){
-  var addFb=function(){db.ref('rooms/fb/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/fb/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,words:[],ready:false,teamIdx:null,connected:true});});};
-  var addWf=function(){db.ref('rooms/wf/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/wf/'+code+'/players/'+myId).set({id:myId,name:name.toUpperCase(),emoji:emoji,score:0,isHost:false,forcedFart:false,connected:true});});};
-  var addTp=function(){db.ref('rooms/tp/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/tp/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,connected:true});});};
-  var addSk=function(){db.ref('rooms/sk/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/sk/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,score:0,connected:true});});};
-  var addTg=function(){db.ref('rooms/tg/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/tg/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,team:'',role:'',connected:true});});};
-  if(game==='fishbowl') addFb();
-  else if(game==='whofarted') addWf();
-  else if(game==='tp') addTp();
-  else if(game==='scotty') addSk();
-  else if(game==='tangents') addTg();
+  var sets={
+    fishbowl:function(){db.ref('rooms/fb/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/fb/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,words:[],ready:false,teamIdx:null,connected:true});});},
+    whofarted:function(){db.ref('rooms/wf/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/wf/'+code+'/players/'+myId).set({id:myId,name:name.toUpperCase(),emoji:emoji,score:0,isHost:false,forcedFart:false,connected:true});});},
+    tp:function(){db.ref('rooms/tp/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/tp/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,connected:true});});},
+    scotty:function(){db.ref('rooms/sk/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/sk/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,score:0,connected:true});});},
+    tangents:function(){db.ref('rooms/tg/'+code+'/players/'+myId).once('value').then(function(s){if(!s.exists())db.ref('rooms/tg/'+code+'/players/'+myId).set({id:myId,name:name,emoji:emoji,team:'',role:'',connected:true});});}
+  };
+  if(sets[game]) sets[game]();
 }
 
-// Phone: listen to ab room and show waiting screen
-function abListenAsPlayer(game,code,myId,name,emoji){
+function abListenAsPlayer(game,code,myId){
   var db=abDb;
   db.ref('rooms/ab/'+code).on('value',function(snap){
     if(!snap.exists()) return;
@@ -3748,8 +3747,8 @@ function abListenAsPlayer(game,code,myId,name,emoji){
     var players=Object.values(room.players||{}).filter(function(p){return p.connected!==false;});
     if(room.phase==='waiting'||room.phase==='starting'){
       showScreen('phone-waiting');
-      var gn={fishbowl:'🐟 Fishbowl',whofarted:'💨 Who Farted?',tp:'🎨 Pictionary Telephone',scotty:'🕵️ Scotty Doesn\'t Know',tangents:'🔴 Tangents'};
-      document.getElementById('pw-game-name').textContent=gn[game]||game;
+      var names={fishbowl:'🐟 Fishbowl',whofarted:'💨 Who Farted?',tp:'🎨 Pictionary Telephone',scotty:'🕵️ Scotty Doesn\'t Know',tangents:'🔴 Tangents'};
+      document.getElementById('pw-game-name').textContent=names[game]||game;
       document.getElementById('pw-room-code').textContent=code;
       document.getElementById('pw-players').innerHTML=players.map(function(p){return '<div class="player-chip" style="background:rgba(255,255,255,.1);">'+p.emoji+' '+p.name+'</div>';}).join('');
       document.getElementById('pw-everybodys-in').disabled=false;
@@ -3770,16 +3769,13 @@ function abStartGameAsPlayer(game,code,myId){
   else if(game==='tangents'){tgMyId=myId;tgDb=db;tgRoomCode=code;tgListenRoom();}
 }
 
-// Everybody's In button
 function everybodysIn(){
-  var db=getDb();
-  if(!db) return;
+  var db=getDb();if(!db)return;
   document.getElementById('pw-everybodys-in').disabled=true;
   document.getElementById('pw-waiting-msg').textContent='Starting...';
   db.ref('rooms/ab/'+abRoomCode+'/phase').set('starting');
 }
 
-// TV: listen to waiting room
 function abListenWaiting(){
   abDb.ref('rooms/ab/'+abRoomCode).on('value',function(snap){
     if(!snap.exists()) return;
@@ -3795,7 +3791,6 @@ function abListenWaiting(){
   });
 }
 
-// TV: launch game after Everybody's In
 function abTVLaunch(game,code,players){
   var db=abDb;
 
@@ -3804,41 +3799,36 @@ function abTVLaunch(game,code,players){
     db.ref('rooms/fb/'+code).once('value').then(function(snap){
       var ep=snap.exists()&&snap.val().players?snap.val().players:{};
       players.forEach(function(p){if(!ep[p.id])ep[p.id]={id:p.id,name:p.name,emoji:p.emoji,words:[],ready:false,teamIdx:null,connected:true};});
-      var base={code:code,phase:'lobby',hostId:fbMyId,players:ep,teams:[],fishbowl:[],scores:[0,0],round:0,teamPlayers:[[],[]],teamTurnPointers:[0,0],activeTurnTeam:0,currentWord:null,wordsLeft:[],passedWords:[],passCount:0,roundWords:[],turnActive:false,nameProposals:{},nameVotes:{},teamNames:['Team 1','Team 2'],createdAt:Date.now()};
-      var p2=snap.exists()?db.ref('rooms/fb/'+code+'/players').set(ep):db.ref('rooms/fb/'+code).set(base);
-      p2.then(function(){
+      var setOp=snap.exists()?db.ref('rooms/fb/'+code+'/players').set(ep):db.ref('rooms/fb/'+code).set({code:code,phase:'lobby',hostId:fbMyId,players:ep,teams:[],fishbowl:[],scores:[0,0],round:0,teamPlayers:[[],[]],teamTurnPointers:[0,0],activeTurnTeam:0,currentWord:null,wordsLeft:[],passedWords:[],passCount:0,roundWords:[],turnActive:false,nameProposals:{},nameVotes:{},teamNames:['Team 1','Team 2'],createdAt:Date.now()});
+      setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-fishbowl');
-        tvListenFb();
-        // TV also runs host logic
+        var fbTvGuard=false;
+        // Single listener for TV display + host logic
         fbDb.ref('rooms/fb/'+code).on('value',function(s2){
           if(!s2.exists()) return;
           fbLastState=s2.val();
           var st=fbLastState;
-          if(st.phase==='lobby'&&st.hostId===fbMyId){
-            // Auto-advance from lobby to entry immediately
-            fbStartEntry();
-          } else if(st.phase==='entry'&&st.hostId===fbMyId){
-            var all=Object.values(st.players||{}).every(function(p){return p.ready;});
-            if(all&&Object.values(st.players||{}).length>0) fbAssignTeams();
-          } else if(st.phase==='naming'&&st.hostId===fbMyId){
-            if(fbAllTeamsNamed(st)) fbStartGame();
-          }
+          tvRenderFb(st);
+          if(st.hostId!==fbMyId) return;
+          if(st.phase==='lobby'&&!fbTvGuard){fbTvGuard=true;fbStartEntry();}
+          else if(st.phase==='entry'){var allR=Object.values(st.players||{});if(allR.length>0&&allR.every(function(p){return p.ready;}))fbAssignTeams();}
+          else if(st.phase==='naming'){if(fbAllTeamsNamed(st))fbStartGame();}
         });
       });
     });
 
   } else if(game==='whofarted'){
     wfDb=db;wfRoomCode=code;wfIsHost=true;wfPlayerId='tv-'+genId();
-    var wfPs={};players.forEach(function(p,i){wfPs[p.id]={id:p.id,name:p.name.toUpperCase(),emoji:p.emoji,score:0,isHost:false,forcedFart:false,connected:true};});
+    var wfPs={};players.forEach(function(p){wfPs[p.id]={id:p.id,name:p.name.toUpperCase(),emoji:p.emoji,score:0,isHost:false,forcedFart:false,connected:true};});
     db.ref('rooms/wf/'+code).once('value').then(function(snap){
       var base={code:code,phase:'test',round:1,players:wfPs,choices:{},votes:{},testReady:{},hostId:'tv',createdAt:Date.now()};
-      var p2=snap.exists()?db.ref('rooms/wf/'+code).update({players:wfPs,phase:'test',round:1,testReady:{},choices:{},votes:{}}):db.ref('rooms/wf/'+code).set(base);
-      p2.then(function(){
+      var setOp=snap.exists()?db.ref('rooms/wf/'+code).update({players:wfPs,phase:'test',round:1,testReady:{},choices:{},votes:{}}):db.ref('rooms/wf/'+code).set(base);
+      setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-whofarted');
         tvListenWf();
-        wfListenRoom(); // TV runs host logic
+        wfListenRoom();
       });
     });
 
@@ -3851,20 +3841,20 @@ function abTVLaunch(game,code,players){
       db.ref('rooms/ab/'+code+'/phase').set('playing');
       showScreen('tv-tp');
       tvListenTp();
-      tpListenRoom(); // TV runs host logic
+      tpListenRoom();
     });
 
   } else if(game==='scotty'){
     skDb=db;skRoomCode=code;skMyId='tv';skIsHost=true;
     var skPs={};players.forEach(function(p){skPs[p.id]={id:p.id,name:p.name,emoji:p.emoji,score:0,connected:true};});
     db.ref('rooms/sk/'+code).once('value').then(function(snap){
-      var base={code:code,phase:'categories',hostId:'tv',players:skPs,catSubmissions:{},categories:[],playerOrder:[],scottyCounts:{},roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},createdAt:Date.now()};
-      var p2=snap.exists()?db.ref('rooms/sk/'+code).update({players:skPs,phase:'categories',catSubmissions:{}}):db.ref('rooms/sk/'+code).set(base);
-      p2.then(function(){
+      var base={code:code,phase:'categories',hostId:'tv',players:skPs,catSubmissions:{},categories:[],playerOrder:[],scottyCounts:{},roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},skReadied:{},createdAt:Date.now()};
+      var setOp=snap.exists()?db.ref('rooms/sk/'+code).update({players:skPs,phase:'categories',catSubmissions:{},skReadied:{}}):db.ref('rooms/sk/'+code).set(base);
+      setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-scotty');
         tvListenSk();
-        skListenRoom(); // TV runs host logic
+        skListenRoom();
       });
     });
 
@@ -3872,9 +3862,7 @@ function abTVLaunch(game,code,players){
     tgDb=db;tgRoomCode=code;tgMyId='tv';tgIsHost=true;
     var tgPs={};players.forEach(function(p){tgPs[p.id]={id:p.id,name:p.name,emoji:p.emoji,team:p.team||'',role:'',connected:true};});
     db.ref('rooms/tg/'+code).once('value').then(function(snap){
-      var setOp = snap.exists()
-        ? db.ref('rooms/tg/'+code+'/players').set(tgPs)
-        : db.ref('rooms/tg/'+code).set({code:code,phase:'lobby',hostId:'tv',players:tgPs,grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,redLeft:9,blueLeft:8,createdAt:Date.now()});
+      var setOp=snap.exists()?db.ref('rooms/tg/'+code+'/players').set(tgPs):db.ref('rooms/tg/'+code).set({code:code,phase:'lobby',hostId:'tv',players:tgPs,grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,redLeft:9,blueLeft:8,createdAt:Date.now()});
       setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-tangents');
@@ -3887,248 +3875,213 @@ function abTVLaunch(game,code,players){
 
 function abShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
-// ============================================================
-// TV RENDERERS
-// ============================================================
+// ── TV RENDERERS ──────────────────────────────────────────
 
 function tvListenFb(){
-  fbDb.ref('rooms/fb/'+fbRoomCode).on('value',function(snap){
-    if(!snap.exists()) return;
-    tvRenderFb(snap.val());
-  });
+  fbDb.ref('rooms/fb/'+fbRoomCode).on('value',function(snap){if(!snap.exists())return;tvRenderFb(snap.val());});
 }
-
 function tvRenderFb(state){
-  var content=document.getElementById('tv-fb-content');
-  if(!content) return;
+  var el=document.getElementById('tv-fb-content');if(!el)return;
   var phase=state.phase,scores=state.scores||[0,0],teamNames=state.teamNames||['Team 1','Team 2'],round=state.round||0,players=state.players||{};
-  var teamColors=['#74b9ff','#fd79a8'];
-  var roundNames=['Taboo','Charades','Password'];
-
+  var tc=['#74b9ff','#fd79a8'],rn=['Taboo','Charades','Password'];
   if(phase!=='playing'){
     var sh='<div style="text-align:center;padding:24px;"><div style="font-family:Fredoka One,cursive;font-size:3rem;color:#f9d56e;margin-bottom:12px;">🐟 Fishbowl</div>';
     if(phase==='lobby') sh+='<div style="font-size:1.2rem;color:rgba(255,255,255,.4);">Waiting for players...</div>';
     else if(phase==='entry'){var rc=Object.values(players).filter(function(p){return p.ready;}).length;sh+='<div style="font-size:1.2rem;color:rgba(255,255,255,.4);">Words submitted: '+rc+'/'+Object.values(players).length+'</div>';}
     else if(phase==='teams'){
       var t0=Object.values(players).filter(function(p){return p.teamIdx===0;}),t1=Object.values(players).filter(function(p){return p.teamIdx===1;});
-      sh+='<div style="font-size:1.1rem;color:rgba(255,255,255,.4);margin-bottom:14px;">Players arranging teams...</div>';
-      sh+='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:14px;">';
-      [t0,t1].forEach(function(team,ti){var tc=teamColors[ti];sh+='<div style="background:rgba(255,255,255,.06);border:2px solid '+tc+';border-radius:14px;padding:12px 18px;min-width:130px;"><div style="font-family:Fredoka One,cursive;color:'+tc+';margin-bottom:8px;">Team '+(ti+1)+'</div>'+team.map(function(p){return '<div>'+p.emoji+' '+p.name+'</div>';}).join('')+'</div>';});
+      sh+='<div style="font-size:1.1rem;color:rgba(255,255,255,.4);margin-bottom:12px;">Players arranging teams...</div><div style="display:flex;gap:16px;justify-content:center;margin-bottom:14px;">';
+      [t0,t1].forEach(function(team,ti){sh+='<div style="background:rgba(255,255,255,.06);border:2px solid '+tc[ti]+';border-radius:14px;padding:12px 18px;min-width:130px;"><div style="font-family:Fredoka One,cursive;color:'+tc[ti]+';margin-bottom:8px;">Team '+(ti+1)+'</div>'+team.map(function(p){return '<div>'+p.emoji+' '+p.name+'</div>';}).join('')+'</div>';});
       sh+='</div>';
       if(t0.length>=1&&t1.length>=1) sh+='<button onclick="fbLockTeams()" style="background:linear-gradient(135deg,#f9d56e,#f2994a);color:#1a1000;font-family:Fredoka One,cursive;font-size:1.1rem;padding:12px 24px;border:none;border-radius:12px;cursor:pointer;">Lock Teams →</button>';
     } else if(phase==='naming'){
-      var tn=state.teamNames||['Team 1','Team 2'];
-      sh+='<div style="font-size:1.1rem;color:rgba(255,255,255,.4);margin-bottom:12px;">Voting on team names...</div>';
-      sh+='<div style="display:flex;gap:20px;justify-content:center;margin-bottom:14px;">';
-      [0,1].forEach(function(ti){sh+='<div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:'+teamColors[ti]+';">'+tn[ti]+'</div>';});
+      sh+='<div style="font-size:1.1rem;color:rgba(255,255,255,.4);margin-bottom:12px;">Voting on team names...</div><div style="display:flex;gap:20px;justify-content:center;margin-bottom:14px;">';
+      (state.teamNames||['Team 1','Team 2']).forEach(function(n,ti){sh+='<div style="font-family:Fredoka One,cursive;font-size:1.5rem;color:'+tc[ti]+';">'+n+'</div>';});
       sh+='</div>';
       if(typeof fbAllTeamsNamed==='function'&&fbAllTeamsNamed(state)) sh+='<button onclick="fbStartGame()" style="background:linear-gradient(135deg,#f9d56e,#f2994a);color:#1a1000;font-family:Fredoka One,cursive;font-size:1.1rem;padding:12px 24px;border:none;border-radius:12px;cursor:pointer;">Start Playing! 🎉</button>';
     } else if(phase==='ended'){
-      var w2=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
-      sh+=(w2>=0?'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#55efc4;">'+teamNames[w2]+' wins!</div>':'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;">Tie!</div>');
-      sh+='<div style="display:flex;justify-content:center;gap:32px;margin-top:14px;">'+[0,1].map(function(ti){return '<div style="text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:4rem;color:'+teamColors[ti]+';">'+scores[ti]+'</div><div style="color:rgba(255,255,255,.45);">'+teamNames[ti]+'</div></div>';}).join('')+'</div>';
+      var w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
+      sh+=(w>=0?'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#55efc4;">'+teamNames[w]+' wins!</div>':'<div style="font-family:Fredoka One,cursive;font-size:2.5rem;">Tie!</div>');
+      sh+='<div style="display:flex;justify-content:center;gap:32px;margin-top:14px;">'+[0,1].map(function(ti){return '<div style="text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:4rem;color:'+tc[ti]+';">'+scores[ti]+'</div><div style="color:rgba(255,255,255,.45);">'+teamNames[ti]+'</div></div>';}).join('')+'</div>';
     }
     sh+='<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;">'+Object.values(players).map(function(p){return '<div style="background:rgba(255,255,255,.08);border-radius:999px;padding:7px 16px;font-weight:700;">'+p.emoji+' '+p.name+'</div>';}).join('')+'</div></div>';
-    content.innerHTML=sh;
-    return;
+    el.innerHTML=sh;return;
   }
-
-  var activeTurnTeam=state.activeTurnTeam||0,tp2=state.teamPlayers||[[],[]],ptr=state.teamTurnPointers||[0,0];
-  var cgId=tp2[activeTurnTeam]&&tp2[activeTurnTeam].length?tp2[activeTurnTeam][ptr[activeTurnTeam]%tp2[activeTurnTeam].length]:null;
+  var att=state.activeTurnTeam||0,tp2=state.teamPlayers||[[],[]],ptr=state.teamTurnPointers||[0,0];
+  var cgId=tp2[att]&&tp2[att].length?tp2[att][ptr[att]%tp2[att].length]:null;
   var cg=cgId?players[cgId]:null;
   var wl=(state.wordsLeft&&state.wordsLeft.length||0)+(state.passedWords&&state.passedWords.length||0)+(state.currentWord?1:0);
-  var html='<div style="display:flex;gap:20px;align-items:flex-start;">';
-  html+='<div style="display:flex;flex-direction:column;gap:10px;min-width:170px;">';
-  [0,1].forEach(function(ti){html+='<div style="background:rgba(255,255,255,.06);border:2.5px solid '+(ti===activeTurnTeam?teamColors[ti]:'rgba(255,255,255,.1)')+';border-radius:14px;padding:16px 20px;text-align:center;"><div style="font-size:.85rem;color:rgba(255,255,255,.45);">'+teamNames[ti]+'</div><div style="font-family:Fredoka One,cursive;font-size:3.5rem;color:'+teamColors[ti]+';">'+scores[ti]+'</div></div>';});
-  html+='</div><div style="flex:1;text-align:center;">';
-  html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);margin-bottom:5px;">Round '+(round+1)+': '+(roundNames[round]||'')+'</div>';
-  html+='<div style="font-size:.9rem;color:rgba(255,255,255,.3);margin-bottom:16px;">'+wl+' words left</div>';
+  var h='<div style="display:flex;gap:20px;align-items:flex-start;"><div style="display:flex;flex-direction:column;gap:10px;min-width:170px;">';
+  [0,1].forEach(function(ti){h+='<div style="background:rgba(255,255,255,.06);border:2.5px solid '+(ti===att?tc[ti]:'rgba(255,255,255,.1)')+';border-radius:14px;padding:16px 20px;text-align:center;"><div style="font-size:.85rem;color:rgba(255,255,255,.45);">'+teamNames[ti]+'</div><div style="font-family:Fredoka One,cursive;font-size:3.5rem;color:'+tc[ti]+';">'+scores[ti]+'</div></div>';});
+  h+='</div><div style="flex:1;text-align:center;"><div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);margin-bottom:5px;">Round '+(round+1)+': '+(rn[round]||'')+'</div><div style="font-size:.9rem;color:rgba(255,255,255,.3);margin-bottom:16px;">'+wl+' words left</div>';
   if(state.turnActive&&state.turnStartedAt){
     var elapsed=Math.floor((Date.now()-state.turnStartedAt)/1000),tLeft=Math.max(0,60-elapsed);
     var color=tLeft<=10?'#e84393':tLeft<=20?'#fdcb6e':'#55efc4',circ=2*Math.PI*70,offset=circ*(1-tLeft/60);
-    html+='<div style="position:relative;display:inline-flex;align-items:center;justify-content:center;"><svg width="158" height="158" style="transform:rotate(-90deg);"><circle cx="79" cy="79" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/><circle cx="79" cy="79" r="70" fill="none" stroke="'+color+'" stroke-width="10" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'" stroke-linecap="round"/></svg><span style="font-family:Fredoka One,cursive;font-size:5rem;position:absolute;color:'+color+';">'+tLeft+'</span></div>';
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:'+teamColors[activeTurnTeam]+';margin-top:8px;">'+(cg?cg.emoji+' '+cg.name:'')+' giving clues</div>';
+    h+='<div style="position:relative;display:inline-flex;align-items:center;justify-content:center;"><svg width="158" height="158" style="transform:rotate(-90deg);"><circle cx="79" cy="79" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/><circle cx="79" cy="79" r="70" fill="none" stroke="'+color+'" stroke-width="10" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'" stroke-linecap="round"/></svg><span style="font-family:Fredoka One,cursive;font-size:5rem;position:absolute;color:'+color+';">'+tLeft+'</span></div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:'+tc[att]+';margin-top:8px;">'+(cg?cg.emoji+' '+cg.name:'')+' giving clues</div>';
     if(tvFbTurnAt!==state.turnStartedAt){tvFbTurnAt=state.turnStartedAt;if(tvTimerInterval)clearInterval(tvTimerInterval);tvTimerInterval=setInterval(function(){if(fbDb&&fbRoomCode)fbDb.ref('rooms/fb/'+fbRoomCode).once('value').then(function(s){if(s.exists())tvRenderFb(s.val());});},1000);}
   } else {
     if(tvTimerInterval){clearInterval(tvTimerInterval);tvTimerInterval=null;tvFbTurnAt=0;}
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.8rem;color:rgba(255,255,255,.3);margin-bottom:10px;">Waiting for '+(cg?cg.emoji+' '+cg.name:'clue giver')+'...</div>';
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:'+teamColors[activeTurnTeam]+';">'+teamNames[activeTurnTeam]+' team turn</div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.8rem;color:rgba(255,255,255,.3);margin-bottom:10px;">Waiting for '+(cg?cg.emoji+' '+cg.name:'clue giver')+'...</div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:'+tc[att]+';">'+teamNames[att]+' team turn</div>';
   }
-  html+='</div></div>';
-  content.innerHTML=html;
+  h+='</div></div>';el.innerHTML=h;
 }
 
 function tvListenWf(){wfDb.ref('rooms/wf/'+wfRoomCode).on('value',function(snap){if(!snap.exists())return;tvRenderWf(snap.val());});}
-
 function tvRenderWf(state){
-  var content=document.getElementById('tv-wf-content');
-  if(!content) return;
+  var el=document.getElementById('tv-wf-content');if(!el)return;
   var phase=state.phase,r=state.round||1;
-  function sb(){
-    var sorted=Object.values(state.players||{}).sort(function(a,b){return b.score-a.score;});
-    return '<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">'+sorted.map(function(p){return '<div style="background:var(--wf-bg);border:2px solid var(--wf-border);border-radius:14px;padding:12px 18px;text-align:center;"><div style="font-size:2rem;">'+p.emoji+'</div><div style="font-family:Boogaloo,cursive;font-size:1.2rem;color:var(--wf-brown);">'+p.name+'</div><div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);">'+p.score+'</div></div>';}).join('')+'</div>';
-  }
+  function sb(){return '<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">'+Object.values(state.players||{}).sort(function(a,b){return b.score-a.score;}).map(function(p){return '<div style="background:var(--wf-bg);border:2px solid var(--wf-border);border-radius:14px;padding:12px 18px;text-align:center;"><div style="font-size:2rem;">'+p.emoji+'</div><div style="font-family:Boogaloo,cursive;font-size:1.2rem;color:var(--wf-brown);">'+p.name+'</div><div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);">'+p.score+'</div></div>';}).join('')+'</div>';}
   if(phase==='lobby'||phase==='test'){
     if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
-    // Auto-advance test when all ready
-    if(phase==='test'&&abIsTV){var tr=state.testReady||{},pl=Object.values(state.players||{});if(pl.length>0&&pl.every(function(p){return tr[p.id];})){wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'choose',choices:{}});}}
-    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3.5rem;color:var(--wf-brown);margin-bottom:8px;">💨 Who Farted?</div><div style="font-family:Boogaloo,cursive;font-size:1.8rem;color:var(--wf-muted);">Round '+r+' of '+WF_TOTAL_ROUNDS+' — Sound check on phones!</div>'+sb();
+    if(phase==='test'){var tr=state.testReady||{},pl=Object.values(state.players||{});if(pl.length>0&&pl.every(function(p){return tr[p.id];})){wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'choose',choices:{}}); }}
+    el.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3.5rem;color:var(--wf-brown);margin-bottom:8px;">💨 Who Farted?</div><div style="font-family:Boogaloo,cursive;font-size:1.8rem;color:var(--wf-muted);">Round '+r+' of '+WF_TOTAL_ROUNDS+' — Sound check on phones!</div>'+sb();
   } else if(phase==='choose'){
     if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
-    if(abIsTV){var ch=state.choices||{},pl2=Object.values(state.players||{});if(pl2.length>0&&pl2.every(function(p){return ch[p.id];})){wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'countdown'});}}
-    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);margin-bottom:14px;">Round '+r+' — Choose on your phone!</div><div style="font-size:5rem;">🍑 💨</div>'+sb();
+    var ch=state.choices||{},pl2=Object.values(state.players||{});
+    if(pl2.length>0&&pl2.every(function(p){return ch[p.id];})){wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'countdown'}); }
+    el.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);margin-bottom:14px;">Round '+r+' — Choose on your phone!</div><div style="font-size:5rem;">🍑 💨</div>'+sb();
   } else if(phase==='countdown'){
     if(!tvWfCdInterval){
       tvWfCdVal=5;
-      function tick(){
-        if(!content){clearInterval(tvWfCdInterval);tvWfCdInterval=null;return;}
-        if(tvWfCdVal<=0){content.innerHTML='<div class="tv-wf-countdown">💨</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">COUGH to cover it! 🤧</div>';clearInterval(tvWfCdInterval);tvWfCdInterval=null;
-          // Advance to vote phase after 2.8s
+      (function tick(){
+        if(!el){clearInterval(tvWfCdInterval);tvWfCdInterval=null;return;}
+        if(tvWfCdVal<=0){
+          el.innerHTML='<div class="tv-wf-countdown">💨</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">COUGH to cover it! 🤧</div>';
+          clearInterval(tvWfCdInterval);tvWfCdInterval=null;
           setTimeout(function(){if(wfDb&&wfRoomCode)wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'vote',votes:{}});},2800);
-          return;}
-        content.innerHTML='<div class="tv-wf-countdown">'+tvWfCdVal+'</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">Phones under your butt!</div>';
-        tvWfCdVal--;
-      }
-      tick();tvWfCdInterval=setInterval(tick,1000);
+          return;
+        }
+        el.innerHTML='<div class="tv-wf-countdown">'+tvWfCdVal+'</div><div style="font-family:Boogaloo,cursive;font-size:2rem;color:var(--wf-brown);">Phones under your butt!</div>';
+        tvWfCdVal--;tvWfCdInterval=setTimeout(tick,1000);
+      })();
     }
   } else if(phase==='vote'){
     if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
-    if(abIsTV){var vt=state.votes||{},pl3=Object.values(state.players||{});if(pl3.length>0&&pl3.every(function(p){return vt[p.id]!==undefined;})){wfTallyVotes(state);}}
-    content.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3rem;color:var(--wf-brown);margin-bottom:14px;">🕵️ Who Farted?! Vote on your phone!</div>'+sb();
+    var vt=state.votes||{},pl3=Object.values(state.players||{});
+    if(pl3.length>0&&pl3.every(function(p){return vt[p.id]!==undefined;})){wfTallyVotes(state); }
+    el.innerHTML='<div style="font-family:Boogaloo,cursive;font-size:3rem;color:var(--wf-brown);margin-bottom:14px;">🕵️ Who Farted?! Vote on your phone!</div>'+sb();
   } else if(phase==='results'||phase==='final'){
     if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
     var rh='<div style="font-family:Boogaloo,cursive;font-size:2.5rem;color:var(--wf-brown);margin-bottom:14px;">'+(phase==='final'?'🏆 Final Scores!':'Round '+r+' Results')+'</div>'+sb();
-    if(phase==='results') rh+='<div style="text-align:center;margin-top:18px;"><button onclick="wfNextRound()" style="background:var(--wf-brown);color:var(--wf-yellow);font-family:Boogaloo,cursive;font-size:1.5rem;padding:14px 28px;border:none;border-radius:14px;cursor:pointer;">'+(state.isLastRound?'🏆 Final Results':'▶ Next Round')+'</button></div>';
-    content.innerHTML=rh;
+    if(phase==='results') rh+='<div style="text-align:center;margin-top:18px;"><button onclick="wfNextRound()" style="background:var(--wf-brown);color:var(--wf-yellow);font-family:Boogaloo,cursive;font-size:1.5rem;padding:14px 28px;border:none;border-radius:14px;cursor:pointer;">'+(state.isLastRound?'🏆 Final Results':'Next Round')+'</button></div>';
+    el.innerHTML=rh;
   }
 }
 
 function tvListenTp(){tpDb.ref('rooms/tp/'+tpRoomCode).on('value',function(snap){if(!snap.exists())return;tvRenderTp(snap.val());});}
-
 function tvRenderTp(state){
-  var content=document.getElementById('tv-tp-content');
-  if(!content) return;
+  var el=document.getElementById('tv-tp-content');if(!el)return;
   var phase=state.phase,players=state.players||{},order=state.playerOrder||[],round=state.round||0,total=state.totalRounds||order.length;
   if(phase==='play'){
-    var html='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:10px;">🎨 Pictionary Telephone</div>';
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:18px;">Round '+(round+1)+' of '+total+' — '+(round%2===0?'Writing ✏️':'Drawing 🖌️')+'</div>';
-    html+='<div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">';
+    var h='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:10px;">🎨 Pictionary Telephone</div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:18px;">Round '+(round+1)+' of '+total+' — '+(round%2===0?'Writing ✏️':'Drawing 🖌️')+'</div>';
+    h+='<div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">';
     order.forEach(function(pid){
       var p=players[pid];if(!p)return;
-      var chainOwnerIdx=(order.indexOf(pid)-round+order.length)%order.length;
-      var chainOwnerId=order[chainOwnerIdx];
-      var entries=(state.chains&&state.chains[chainOwnerId]&&state.chains[chainOwnerId].entries)||{};
-      var done=!!entries['e'+round];
-      html+='<div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="font-size:2.8rem;width:72px;height:72px;border-radius:50%;background:'+(done?'rgba(85,239,196,.1)':'rgba(249,199,79,.05)')+';border:2px solid '+(done?'#55efc4':'rgba(249,199,79,.2)')+';display:flex;align-items:center;justify-content:center;">'+p.emoji+'</div><div style="font-weight:700;font-size:.9rem;">'+p.name+'</div><div style="font-size:.78rem;color:'+(done?'#55efc4':'rgba(255,255,255,.4)')+';">'+(done?'✓ Done':'...')+'</div></div>';
+      // Check if this player has submitted for their current round
+      var submitted=false;
+      for(var rr=0;rr<total;rr++){
+        var coi=(order.indexOf(pid)-rr+order.length)%order.length;
+        var ents=((state.chains&&state.chains[order[coi]]&&state.chains[order[coi]].entries)||{});
+        if(!ents['e'+rr]){submitted=false;break;}
+        if(rr===total-1) submitted=true;
+      }
+      h+='<div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="font-size:2.8rem;width:72px;height:72px;border-radius:50%;background:rgba(249,199,79,.05);border:2px solid rgba(249,199,79,.2);display:flex;align-items:center;justify-content:center;">'+p.emoji+'</div><div style="font-weight:700;font-size:.9rem;">'+p.name+'</div></div>';
     });
-    html+='</div>';
-    content.innerHTML=html;
+    h+='</div>';el.innerHTML=h;
   } else if(phase==='present'){
-    var presentIdx=state.presentIdx||0,presenterId=order[presentIdx];
-    var chain=(state.chains&&state.chains[presenterId])||{entries:{}};
-    var entries2=chain.entries||{},pp=players[presenterId];
-    var html2='<div style="display:flex;gap:24px;">';
-    html2+='<div style="min-width:150px;text-align:center;"><div style="font-size:3rem;">'+(pp?pp.emoji:'?')+'</div><div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#f9c74f;margin-top:7px;">'+(pp?pp.name:'?')+'</div><div style="font-size:.8rem;color:rgba(255,255,255,.35);margin-top:4px;">presenting</div><div style="font-size:.78rem;color:rgba(255,255,255,.22);margin-top:12px;">'+(presentIdx+1)+'/'+order.length+'</div></div>';
-    html2+='<div style="flex:1;overflow-y:auto;max-height:75vh;">';
-    for(var i=0;i<order.length;i++){var ent=entries2['e'+i];if(!ent)break;var ap=players[ent.authorId];var lbl=i===0?'Original phrase':(ent.type==='drawing'?'Drawing by '+(ap?ap.name:ent.authorName||'?'):'Described by '+(ap?ap.name:ent.authorName||'?'));html2+='<div class="tv-chain-entry"><div class="tv-chain-label">'+lbl+'</div>';if(ent.type==='drawing')html2+='<img class="tv-chain-img" src="'+ent.data+'">';else html2+='<div class="tv-chain-text">'+ent.data+'</div>';html2+='</div>';}
-    html2+='</div></div>';
-    content.innerHTML=html2;
+    var pi=state.presentIdx||0,pid2=order[pi];
+    var chain=(state.chains&&state.chains[pid2])||{entries:{}},ents2=chain.entries||{},pp=players[pid2];
+    var h2='<div style="display:flex;gap:24px;"><div style="min-width:150px;text-align:center;"><div style="font-size:3rem;">'+(pp?pp.emoji:'?')+'</div><div style="font-family:Fredoka One,cursive;font-size:1.3rem;color:#f9c74f;margin-top:7px;">'+(pp?pp.name:'?')+'</div><div style="font-size:.8rem;color:rgba(255,255,255,.35);margin-top:4px;">presenting</div><div style="font-size:.78rem;color:rgba(255,255,255,.22);margin-top:12px;">'+(pi+1)+'/'+order.length+'</div></div>';
+    h2+='<div style="flex:1;overflow-y:auto;max-height:75vh;">';
+    for(var ri=0;ri<order.length;ri++){var ent=ents2['e'+ri];if(!ent)break;var ap=players[ent.authorId];var lbl=ri===0?'Original phrase':(ent.type==='drawing'?'Drawing by '+(ap?ap.name:ent.authorName||'?'):'Described by '+(ap?ap.name:ent.authorName||'?'));h2+='<div class="tv-chain-entry"><div class="tv-chain-label">'+lbl+'</div>';if(ent.type==='drawing')h2+='<img class="tv-chain-img" src="'+ent.data+'">';else h2+='<div class="tv-chain-text">'+ent.data+'</div>';h2+='</div>';}
+    h2+='</div></div>';el.innerHTML=h2;
   } else if(phase==='gallery'){
-    content.innerHTML='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:16px;">🖼️ Gallery — Browse chains on your phones!</div><div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">'+order.map(function(pid){var p=players[pid];return '<div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="font-size:2.5rem;">'+(p?p.emoji:'?')+'</div><div style="font-weight:700;">'+(p?p.name:'?')+'</div></div>';}).join('')+'</div>';
+    el.innerHTML='<div style="font-family:Fredoka One,cursive;font-size:2rem;color:#f9c74f;text-align:center;margin-bottom:16px;">🖼️ Gallery — Browse chains on your phones!</div><div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">'+order.map(function(pid){var p=players[pid];return '<div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="font-size:2.5rem;">'+(p?p.emoji:'?')+'</div><div style="font-weight:700;">'+(p?p.name:'?')+'</div></div>';}).join('')+'</div>';
   }
 }
 
 function tvListenSk(){skDb.ref('rooms/sk/'+skRoomCode).on('value',function(snap){if(!snap.exists())return;tvRenderSk(snap.val());});}
-
 function tvRenderSk(state){
-  var content=document.getElementById('tv-sk-content');
-  if(!content) return;
+  var el=document.getElementById('tv-sk-content');if(!el)return;
   var phase=state.phase,players=Object.values(state.players||{});
-  // TV triggers skBuildRounds when all cats submitted
-  if(phase==='categories'&&abIsTV){
-    var subs=state.catSubmissions||{};
-    if(players.length>=4&&Object.keys(subs).length>=players.length) skBuildRounds(state);
-  }
-  function sb(){
-    var sorted=players.slice().sort(function(a,b){return b.score-a.score;});
-    return '<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px;">'+sorted.map(function(p){return '<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px 18px;text-align:center;min-width:90px;"><div style="font-size:1.8rem;">'+p.emoji+'</div><div style="font-weight:700;margin-top:3px;">'+p.name+'</div><div style="font-family:Fredoka One,cursive;font-size:2.2rem;color:#7ee8a2;">'+(p.score||0)+'</div></div>';}).join('')+'</div>';
-  }
-  var html='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#7ee8a2;text-align:center;margin-bottom:14px;">🕵️ Scotty Doesn\'t Know</div>';
+  if(phase==='categories'&&Object.keys(state.catSubmissions||{}).length>=players.length&&players.length>=4) skBuildRounds(state);
+  function sb(){return '<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px;">'+players.slice().sort(function(a,b){return b.score-a.score;}).map(function(p){return '<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px 18px;text-align:center;min-width:90px;"><div style="font-size:1.8rem;">'+p.emoji+'</div><div style="font-weight:700;margin-top:3px;">'+p.name+'</div><div style="font-family:Fredoka One,cursive;font-size:2.2rem;color:#7ee8a2;">'+(p.score||0)+'</div></div>';}).join('')+'</div>';}
+  var h='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:#7ee8a2;text-align:center;margin-bottom:14px;">🕵️ Scotty Doesn\'t Know</div>';
   if(phase==='categories'){
-    var subs2=state.catSubmissions||{};
-    html+='<div style="font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:14px;">Players entering categories...</div>';
-    html+='<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">';
-    players.forEach(function(p){var done=!!subs2[p.id];html+='<div style="background:rgba(255,255,255,.06);border:2px solid '+(done?'#7ee8a2':'rgba(255,255,255,.1)')+';border-radius:12px;padding:10px 16px;text-align:center;"><div style="font-size:1.8rem;">'+p.emoji+'</div><div style="font-weight:700;margin-top:3px;">'+p.name+'</div><div style="font-size:.82rem;color:'+(done?'#7ee8a2':'rgba(255,255,255,.35)')+';margin-top:3px;">'+(done?'✓ Ready':'...')+'</div></div>';});
-    html+='</div>'+sb();
+    var subs=state.catSubmissions||{};
+    h+='<div style="font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:14px;">Players entering categories...</div><div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">';
+    players.forEach(function(p){var done=!!subs[p.id];h+='<div style="background:rgba(255,255,255,.06);border:2px solid '+(done?'#7ee8a2':'rgba(255,255,255,.1)')+';border-radius:12px;padding:10px 16px;text-align:center;"><div style="font-size:1.8rem;">'+p.emoji+'</div><div style="font-weight:700;margin-top:3px;">'+p.name+'</div><div style="font-size:.82rem;color:'+(done?'#7ee8a2':'rgba(255,255,255,.35)')+';margin-top:3px;">'+(done?'Ready':'...')+'</div></div>';});
+    h+='</div>'+sb();
   } else if(phase==='play'||phase==='results'){
-    // TV triggers tally when all votes/guesses are in
-    if(phase==='play'&&abIsTV) skCheckTallyReady(state);
-    var round=state.currentRound,ri=state.roundIdx||0,total=state.totalRounds||0;
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:12px;">Round '+(ri+1)+' of '+total+(round&&round.isNoScotty?' — No Scotty Round!':'')+'</div>';
-    if(phase==='results'&&round&&!round.isNoScotty){
-      var sp=round.scottyId?(state.players||{})[round.scottyId]:null;
-      html+='<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px;text-align:center;margin-bottom:12px;max-width:380px;margin-left:auto;margin-right:auto;">';
-      html+='<div style="font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:4px;">Scotty was...</div>';
-      html+='<div style="font-size:2rem;">'+(sp?sp.emoji:'?')+'</div>';
-      html+='<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f94144;">'+(sp?sp.name:'?')+'</div>';
-      html+='<div style="margin-top:6px;color:'+(state.roundCaughtScotty?'#7ee8a2':'#f94144')+';font-weight:700;">'+(state.roundCaughtScotty?'🎯 Caught!':'🕵️ Escaped!')+'</div>';
-      html+='<div style="font-size:.88rem;color:rgba(255,255,255,.45);margin-top:3px;">Category: '+round.category+'</div>';
-      html+='<div style="font-size:.88rem;color:'+(state.roundCatCorrect?'#7ee8a2':'#f94144')+';margin-top:2px;">Guess: '+(state.roundCatGuess||'?')+' — '+(state.roundCatCorrect?'Correct!':'Wrong!')+'</div>';
-      html+='</div>';
-      html+=sb();
-      if(state.isLastRound) html+='<div style="text-align:center;margin-top:14px;"><button onclick="skEndGame()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;font-family:Fredoka One,cursive;font-size:1.2rem;padding:12px 24px;border:none;border-radius:12px;cursor:pointer;">Final Results 🏆</button></div>';
-      else html+='<div style="text-align:center;margin-top:14px;"><button onclick="skNextRound()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;font-family:Fredoka One,cursive;font-size:1.2rem;padding:12px 24px;border:none;border-radius:12px;cursor:pointer;">Next Round →</button></div>';
-    } else { html+=sb(); }
+    if(phase==='play') skCheckTallyReady(state);
+    var ri2=state.roundIdx||0,tot2=state.totalRounds||0,rnd=state.currentRound;
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:12px;">Round '+(ri2+1)+' of '+tot2+(rnd&&rnd.isNoScotty?' — No Scotty Round!':'')+'</div>';
+    if(phase==='results'&&rnd&&!rnd.isNoScotty){
+      var sp=rnd.scottyId?(state.players||{})[rnd.scottyId]:null;
+      h+='<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px;text-align:center;margin-bottom:12px;max-width:380px;margin-left:auto;margin-right:auto;">';
+      h+='<div style="font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:4px;">Scotty was...</div>';
+      h+='<div style="font-size:2rem;">'+(sp?sp.emoji:'?')+'</div>';
+      h+='<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#f94144;">'+(sp?sp.name:'?')+'</div>';
+      h+='<div style="margin-top:6px;color:'+(state.roundCaughtScotty?'#7ee8a2':'#f94144')+';font-weight:700;">'+(state.roundCaughtScotty?'Caught!':'Escaped!')+'</div>';
+      h+='<div style="font-size:.88rem;color:rgba(255,255,255,.45);margin-top:3px;">Category: '+rnd.category+'</div>';
+      h+='<div style="font-size:.88rem;color:'+(state.roundCatCorrect?'#7ee8a2':'#f94144')+';margin-top:2px;">Guess: '+(state.roundCatGuess||'?')+' — '+(state.roundCatCorrect?'Correct!':'Wrong!')+'</div>';
+      h+='</div>';
+    }
+    h+=sb();
+    if(phase==='results'){
+      var rd2=state.skReadied||{},allRdy=players.every(function(p){return rd2[p.id];});
+      if(state.isLastRound) h+='<div style="text-align:center;margin-top:14px;"><button onclick="skEndGame()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;font-family:Fredoka One,cursive;font-size:1.2rem;padding:12px 24px;border:none;border-radius:12px;cursor:pointer;">Final Results</button></div>';
+      else if(allRdy) {setTimeout(function(){if(skDb&&skRoomCode&&skLastState&&skLastState.phase==='results')skNextRound();},300);}
+      else h+='<div style="color:rgba(255,255,255,.4);text-align:center;margin-top:12px;font-size:.9rem;">Waiting for players to ready up... ('+Object.keys(rd2).length+'/'+players.length+')</div>';
+    }
   } else if(phase==='final'){
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.8rem;color:#7ee8a2;text-align:center;margin-bottom:14px;">Final Scores!</div>'+sb();
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.8rem;color:#7ee8a2;text-align:center;margin-bottom:14px;">Final Scores!</div>'+sb();
   }
-  content.innerHTML=html;
+  el.innerHTML=h;
 }
 
 function tvListenTg(){tgDb.ref('rooms/tg/'+tgRoomCode).on('value',function(snap){if(!snap.exists())return;tvRenderTg(snap.val());});}
-
 function tvRenderTg(state){
-  var content=document.getElementById('tv-tg-content');
-  if(!content) return;
-  var grid=state.grid||[],revealed=state.revealed||{},currentTeam=state.currentTeam||'red';
-  var clue=state.clue,bid=state.bid||0,guessesUsed=state.guessesUsed||0;
-  var redLeft=state.redLeft||0,blueLeft=state.blueLeft||0,players=state.players||{};
-  var tc=currentTeam==='red'?'#e63946':'#4a90d9',tbg=currentTeam==='red'?'rgba(230,57,70,.15)':'rgba(74,144,217,.15)';
-  var html='<div class="tv-tg-counter"><div class="tv-tg-ctr-r">🔴 '+redLeft+' left</div><div class="tv-tg-ctr-b">🔵 '+blueLeft+' left</div></div>';
-  var cgId=currentTeam==='red'?state.redClueGiver:state.blueClueGiver,cg=cgId?players[cgId]:null;
-  var turnTxt=(currentTeam==='red'?'🔴 Red':'🔵 Blue')+' team turn'+(cg?' — '+cg.emoji+' '+cg.name+' gives clues':'');
-  html+='<div class="tv-tg-turn" style="background:'+tbg+';color:'+tc+';">'+turnTxt+'</div>';
-  if(clue) html+='<div class="tv-tg-clue-box"><div class="tv-tg-clue-word">'+clue+'</div><div class="tv-tg-clue-info">Bid: '+bid+' &nbsp;|&nbsp; Guesses left: '+Math.max(0,bid+1-guessesUsed)+'</div></div>';
-  else if(state.phase!=='lobby') html+='<div class="tv-tg-clue-box" style="color:rgba(255,255,255,.3);">Waiting for clue giver...</div>';
-  if(state.phase==='ended') html+='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:'+(state.winner==='red'?'#e63946':'#4a90d9')+';text-align:center;margin-bottom:10px;">'+(state.winner==='red'?'🔴 Red':'🔵 Blue')+' Wins!</div>';
-  // Team icons
+  var el=document.getElementById('tv-tg-content');if(!el)return;
+  var grid=state.grid||[],rev=state.revealed||{},ct=state.currentTeam||'red';
+  var clue=state.clue,bid=state.bid||0,gu=state.guessesUsed||0,redL=state.redLeft||0,blueL=state.blueLeft||0,players=state.players||{};
+  var tc2=ct==='red'?'#e63946':'#4a90d9',tbg=ct==='red'?'rgba(230,57,70,.15)':'rgba(74,144,217,.15)';
+  var h='<div class="tv-tg-counter"><div class="tv-tg-ctr-r">🔴 '+redL+' left</div><div class="tv-tg-ctr-b">🔵 '+blueL+' left</div></div>';
+  var cgId=ct==='red'?state.redClueGiver:state.blueClueGiver,cg=cgId?players[cgId]:null;
+  h+='<div class="tv-tg-turn" style="background:'+tbg+';color:'+tc2+';">'+(ct==='red'?'🔴 Red':'🔵 Blue')+' team turn'+(cg?' — '+cg.emoji+' '+cg.name+' gives clues':'')+'</div>';
+  if(clue) h+='<div class="tv-tg-clue-box"><div class="tv-tg-clue-word">'+clue+'</div><div class="tv-tg-clue-info">Bid: '+bid+' | Guesses left: '+Math.max(0,bid+1-gu)+'</div></div>';
+  else if(state.phase!=='lobby') h+='<div class="tv-tg-clue-box" style="color:rgba(255,255,255,.3);">Waiting for clue giver...</div>';
+  if(state.phase==='ended') h+='<div style="font-family:Fredoka One,cursive;font-size:2.5rem;color:'+(state.winner==='red'?'#e63946':'#4a90d9')+';text-align:center;margin-bottom:10px;">'+(state.winner==='red'?'🔴 Red':'🔵 Blue')+' Wins!</div>';
   var rPs=Object.values(players).filter(function(p){return p.team==='red';}),bPs=Object.values(players).filter(function(p){return p.team==='blue';});
-  html+='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:8px;">';
-  if(rPs.length){html+='<div style="display:flex;gap:6px;align-items:center;">';rPs.forEach(function(p){html+='<span class="tg-icon-red" style="font-size:1.4rem;" title="'+p.name+'">'+p.emoji+'</span>';});html+='<span style="color:rgba(255,255,255,.3);font-size:.78rem;"> Red</span></div>';}
-  if(bPs.length){html+='<div style="display:flex;gap:6px;align-items:center;">';bPs.forEach(function(p){html+='<span class="tg-icon-blue" style="font-size:1.4rem;" title="'+p.name+'">'+p.emoji+'</span>';});html+='<span style="color:rgba(255,255,255,.3);font-size:.78rem;"> Blue</span></div>';}
-  html+='</div>';
+  h+='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:8px;">';
+  if(rPs.length){h+='<div style="display:flex;gap:6px;align-items:center;">';rPs.forEach(function(p){h+='<span class="tg-icon-red" style="font-size:1.4rem;" title="'+p.name+'">'+p.emoji+'</span>';});h+='<span style="color:rgba(255,255,255,.3);font-size:.78rem;"> Red</span></div>';}
+  if(bPs.length){h+='<div style="display:flex;gap:6px;align-items:center;">';bPs.forEach(function(p){h+='<span class="tg-icon-blue" style="font-size:1.4rem;" title="'+p.name+'">'+p.emoji+'</span>';});h+='<span style="color:rgba(255,255,255,.3);font-size:.78rem;"> Blue</span></div>';}
+  h+='</div>';
   if(state.phase==='lobby'){
-    html+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:10px;">Players: choose your team on your phone</div>';
-    if(rPs.length>=2&&bPs.length>=2) html+='<div style="text-align:center;margin-bottom:10px;"><button onclick="tgStartGame()" style="background:linear-gradient(135deg,#e63946,#4a90d9);color:#fff;font-family:Fredoka One,cursive;font-size:1.2rem;padding:13px 26px;border:none;border-radius:13px;cursor:pointer;">Start Game →</button></div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:10px;">Players: choose your team and role on your phone</div>';
+    if(rPs.length>=2&&bPs.length>=2){
+      var rHasClue=rPs.some(function(p){return p.role==='clue';}),bHasClue=bPs.some(function(p){return p.role==='clue';});
+      if(rHasClue&&bHasClue) h+='<div style="text-align:center;margin-bottom:10px;"><button onclick="tgStartGame()" style="background:linear-gradient(135deg,#e63946,#4a90d9);color:#fff;font-family:Fredoka One,cursive;font-size:1.2rem;padding:13px 26px;border:none;border-radius:13px;cursor:pointer;">Start Game →</button></div>';
+      else h+='<div style="color:rgba(255,255,255,.4);text-align:center;font-size:.9rem;">Waiting for each team to pick a clue giver...</div>';
+    }
   }
   if(grid.length){
-    html+='<div class="tv-tg-grid">';
-    grid.forEach(function(card,idx){var isRev=!!revealed[idx];var cls=isRev?(card.color==='neutral'?'tv-tg-neutral':card.color==='death'?'tv-tg-death':'tv-tg-'+card.color):'tv-tg-beige';html+='<div class="tv-tg-card '+cls+'">'+card.word+'</div>';});
-    html+='</div>';
+    h+='<div class="tv-tg-grid">';
+    grid.forEach(function(card,idx){var isR=!!rev[idx];var cls=isR?(card.color==='neutral'?'tv-tg-neutral':card.color==='death'?'tv-tg-death':'tv-tg-'+card.color):'tv-tg-beige';h+='<div class="tv-tg-card '+cls+'">'+card.word+'</div>';});
+    h+='</div>';
   }
-  content.innerHTML=html;
+  el.innerHTML=h;
 }
-
-// selectGame is defined in the main script block as a var - no override needed here
 </script>
 
 <script>
-// selectGame is defined as an assignment so it doesn't hoist over TV JS override
 var selectGame = function(game) {
   if (game === 'whofarted') {
     document.body.className = 'game-whofarted';
     showScreen('wf-home');
-    ipInit('wf');
   } else if (game === 'tp') {
     document.body.className = 'game-tp';
     tpResetLocalState();
@@ -4149,6 +4102,7 @@ var selectGame = function(game) {
     fbResetLocalState();
     showScreen('fb-home');
     ipInit('fb');
+    ipInit('fb');
   }
 };
 
@@ -4160,8 +4114,8 @@ function goHome() {
   if (skDb && skRoomCode) { skDb.ref('rooms/sk/' + skRoomCode).off(); }
   if (abDb && abRoomCode) { abDb.ref('rooms/ab/' + abRoomCode).off(); }
   wfRoomCode='';fbRoomCode='';fbMyId='';fbIsHost=false;
-  tpRoomCode='';tpMyId='';tgRoomCode='';tgMyId='';skRoomCode='';skMyId='';
-  abRoomCode='';abMyId='';abIsTV=false;abGame='';abMyName='';
+  tpRoomCode='';tpMyId='';tgRoomCode='';tgMyId='';
+  skRoomCode='';skMyId='';abRoomCode='';abMyId='';abIsTV=false;abGame='';abMyName='';
   if(tvTimerInterval){clearInterval(tvTimerInterval);tvTimerInterval=null;}
   if(tvWfCdInterval){clearInterval(tvWfCdInterval);tvWfCdInterval=null;}
   document.body.className = 'game-none';
