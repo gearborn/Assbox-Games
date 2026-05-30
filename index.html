@@ -434,7 +434,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
       <div class="game-card" onclick="selectGame('scotty')">
         <div class="game-card-icon">🕵️</div>
         <div>
-          <div class="game-card-name">Scotty Doesn\'t Know</div>
+          <div class="game-card-name">Scotty Doesn't Know</div>
           <div class="game-card-desc">Hidden categories · Bluff & guess · 4+ players</div>
         </div>
       </div>
@@ -461,7 +461,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
   <button class="create-room-btn" onclick="wfCreateTV()" style="background:var(--wf-brown);color:var(--wf-yellow);">📺 Create Room</button>
   <div class="home-divider" style="max-width:400px;"><span style="color:var(--wf-muted);">or join on your phone</span></div>
   <div class="join-form">
-    <input type="text" id="wf-player-name-input" placeholder="Name" maxlength="12" autocomplete="off" style="text-transform:uppercase;letter-spacing:2px;border-color:var(--wf-border);background:var(--wf-card);color:var(--wf-text);">
+    <input type="text" id="wf-player-name-input" placeholder="Your Name" maxlength="12" autocomplete="off" style="text-transform:uppercase;letter-spacing:2px;border-color:var(--wf-border);background:var(--wf-card);color:var(--wf-text);">
     <div class="icon-picker-wrap" id="ip-wf"></div>
     <div class="code-row">
       <input type="text" id="wf-join-code-input" placeholder="Room Code" maxlength="4" autocomplete="off" style="text-transform:uppercase;letter-spacing:4px;border-color:var(--wf-border);background:var(--wf-card);color:var(--wf-text);">
@@ -766,7 +766,7 @@ body.game-tangents { background: #1a0f0f; color: #fff; }
 <div id="screen-sk-home" class="screen sk hidden" style="text-align:center;justify-content:center;">
   <button class="back-btn sk" onclick="goHome()" style="align-self:flex-start;">← Back</button>
   <div style="font-size:3.2rem;margin-bottom:8px;">🕵️</div>
-  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.7rem,6vw,2.6rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;">Scotty Doesn\'t Know</div>
+  <div style="font-family:Fredoka One,cursive;font-size:clamp(1.7rem,6vw,2.6rem);background:linear-gradient(135deg,#7ee8a2,#43b37e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;">Scotty Doesn't Know</div>
   <button class="create-room-btn" onclick="skCreateTV()" style="background:linear-gradient(135deg,#7ee8a2,#43b37e);color:#001a0d;">📺 Create Room</button>
   <div class="home-divider"><span>or join on your phone</span></div>
   <div class="join-form">
@@ -998,7 +998,16 @@ function wfRandomEmoji() { return WF_PLAYER_EMOJIS[Math.floor(Math.random() * WF
 function wfGenId() { return Math.random().toString(36).substr(2,9); }
 function wfShowScreen(id) { showScreen('wf-' + id); }
 function wfShowError(msg) { alert('❌ ' + msg); }
-function wfPlayFart() { const a = new Audio(WF_FART_SRC); a.volume=1.0; a.play().catch(()=>{}); }
+function wfPlayFart() {
+  try {
+    var a = new Audio(WF_FART_SRC);
+    a.volume = 1.0;
+    var prom = a.play();
+    if(prom && prom.catch) prom.catch(function(e){
+      setTimeout(function(){ try{var a2=new Audio(WF_FART_SRC);a2.volume=1.0;a2.play().catch(function(){});}catch(e2){} },50);
+    });
+  } catch(e) {}
+}
 
 function wfInitDb() {
   wfDb = getDb();
@@ -1162,12 +1171,12 @@ function wfTallyVotes(state){
   const farters=Object.entries(choices).filter(([,c])=>c==='fart').map(([id])=>id);
   const deltas={},breakdown={},wrongCounts={};
   Object.keys(players).forEach(id=>{deltas[id]=0;breakdown[id]=[];wrongCounts[id]=0;});
-  farters.forEach(fid=>{deltas[fid]+=1;breakdown[fid].push('+1 for farting');});
+  farters.forEach(fid=>{deltas[fid]+=3;breakdown[fid].push('+3 for farting');});
   Object.entries(votes).forEach(([vid,vids])=>{
     if(!Array.isArray(vids))vids=[vids];
     const av=vids.filter(v=>v!=='__none__');
     farters.filter(fid=>fid!==vid).forEach(fid=>{
-      if(av.includes(fid)){deltas[vid]+=1;breakdown[vid].push(`+1 caught ${(players[fid]&&players[fid].name)||fid}`);}
+      if(av.includes(fid)){deltas[vid]+=2;breakdown[vid].push(`+2 caught ${(players[fid]&&players[fid].name)||fid}`);}
       // No penalty for missing a farter
     });
     av.forEach(v=>{if(!farters.includes(v)&&v!==vid){deltas[vid]-=2;wrongCounts[vid]++;breakdown[vid].push(`-2 wrong vote on ${(players[v]&&players[v].name)||v}`);}});
@@ -1175,7 +1184,22 @@ function wfTallyVotes(state){
   const cva={};farters.forEach(fid=>cva[fid]=0);
   Object.entries(votes).forEach(([vid,vids])=>{if(!Array.isArray(vids))vids=[vids];const av=vids.filter(v=>v!=='__none__');farters.forEach(fid=>{if(fid!==vid&&av.includes(fid))cva[fid]++;});});
   let escaped=[];
-  if(farters.length>0){const minV=Math.min(...farters.map(fid=>cva[fid]));escaped=farters.filter(fid=>cva[fid]===minV);escaped.forEach(fid=>{deltas[fid]+=2;breakdown[fid].push('+2 escape artist!');});}
+  if(farters.length>0){
+    const nonSelf=n-1; // non-self voters
+    escaped=farters.filter(fid=>{
+      if(cva[fid]>=nonSelf){
+        // Caught by everyone - negate fart bonus, apply -3 penalty
+        deltas[fid]-=3+3; // remove the +3 we gave above, then -3 penalty = -6 net from pre-fart
+        breakdown[fid].push('-3 caught by everyone (negate +3 fart bonus)');
+        return false; // not an escape artist
+      }
+      return true;
+    });
+    const minV=Math.min(...farters.map(fid=>cva[fid]));
+    const trueEscaped=escaped.filter(fid=>cva[fid]===minV);
+    trueEscaped.forEach(fid=>{deltas[fid]+=2;breakdown[fid].push('+2 escape artist!');});
+    escaped=trueEscaped;
+  }
   const nff={};const smelt=[];
   Object.keys(players).forEach(id=>nff[id]=false);
   Object.entries(wrongCounts).forEach(([id,c])=>{if(c>=3){nff[id]=true;smelt.push(id);}});
@@ -1201,12 +1225,10 @@ function wfShowRoundResults(state){
   const sb=document.getElementById('wf-smelt-dealt-banner');
   if(smelt.length){const names=smelt.map(id=>players[id]?players[id].name:id).join(', ');sb.style.display='block';sb.innerHTML=`<div class="smelt-alert">💀 HE WHO SMELT IT DEALT IT!<br>${names} got 3+ wrong - must fart next round!</div>`;}else sb.style.display='none';
   const nb=document.getElementById('wf-next-round-btn'),wn=document.getElementById('wf-waiting-next');
-  if(wfIsHost){nb.style.display='block';nb.textContent=state.isLastRound?'🏆 SEE FINAL RESULTS':'▶️ NEXT ROUND';wn.style.display='none';}
-  else{nb.style.display='none';wn.style.display='block';}
+  nb.style.display='block';nb.textContent=state.isLastRound?'🏆 SEE FINAL RESULTS':'▶️ NEXT ROUND (Play Test Fart)';wn.style.display='none';
 }
 
 function wfNextRound(){
-  if(!wfIsHost)return;
   if(wfGameState.isLastRound)wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'final'});
   else wfDb.ref('rooms/wf/'+wfRoomCode).update({phase:'test',round:wfGameState.nextRound,testReady:{},choices:{},votes:{}});
 }
@@ -2109,7 +2131,7 @@ function tpRenderPlay(state){
 
   // Show the prompt
   var promptHtml='';
-  if(round===0){
+  if(myRound===0){
     promptHtml='<div style="color:rgba(255,255,255,.55);font-size:.9rem;text-align:center;margin-bottom:12px;">Write something that can be drawn - a person, place, thing, or phrase:</div>'
       +'<input type="text" id="tp-phrase-input" placeholder="e.g. a dog surfing" style="font-size:1rem;">'
       +'<button class="btn btn-primary tp" onclick="tpSubmitPhrase()" style="margin-top:10px;">Submit Phrase</button>';
@@ -2133,11 +2155,20 @@ function tpRenderPlay(state){
       +'</div>';
   }
 
+  // Save existing text input value before re-render
+  var savedInput = '';
+  var oldInput = document.getElementById('tp-phrase-input');
+  if(oldInput) savedInput = oldInput.value;
+
   content.innerHTML='<div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">'
     +'<div style="font-family:Fredoka One,cursive;color:#f9c74f;font-size:1.1rem;">Round '+(myRound+1)+' of '+totalRounds+'</div>'
     +'<div style="font-size:.8rem;color:rgba(255,255,255,.4);">'+(isDrawRound?'Draw it!':'Describe it!')+'</div>'
     +'</div>'
     +promptHtml;
+
+  // Restore saved text value
+  var newInput = document.getElementById('tp-phrase-input');
+  if(newInput && savedInput) newInput.value = savedInput;
 
   if(isDrawRound&&!waitingForPrev&&!alreadySubmitted) tpInitCanvas();
 
@@ -2813,10 +2844,11 @@ function skRenderPlay(state){
   // Header
   var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
     +'<div class="round-badge sk">'+roundLabel+'</div>'
-    +(isNoScotty?'<div class="no-scotty-banner sk" style="font-size:.8rem;padding:4px 10px;margin:0;">No Scotty Round!</div>':'')
+    +''/* No-Scotty not revealed until results */
     +'</div>';
 
   if(isNoScotty){
+    // No-Scotty: everyone sees a category (but we don't tell them there's no Scotty)
     html+='<div class="category-box sk">'+skEsc(round.category)+'</div>';
   } else if(isScotty){
     html+='<div class="scotty-screen sk"><div class="scotty-title">SCOTTY<br>DOESN\'T KNOW</div>'
@@ -2879,7 +2911,25 @@ function skRenderPlay(state){
         +'<button class="btn btn-primary sk" onclick="skSubmitCatGuess()" style="margin-top:10px;">Submit Guess</button>'
         +'</div>';
     } else if(!isNoScotty&&isScotty&&myCatVote){
-      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Category guess submitted! Waiting for votes...</div>';
+      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:12px;">Category guess: <strong>'+skEsc(myCatVote)+'</strong><br>Waiting for others to vote...</div>';
+    }
+
+    // Non-Scotty: after Scotty submits category guess, vote if it\'s correct
+    var scottysCatGuess=isNoScotty?null:Object.values(catVotes)[0];
+    var myCatJudgement=state.catJudgements&&state.catJudgements[skMyId];
+    if(!isNoScotty&&!isScotty&&scottysCatGuess&&!myVoteVal===false){
+      // Scotty already guessed - show their guess for non-Scotty to judge
+    }
+    if(!isNoScotty&&!isScotty&&scottysCatGuess&&myVoteVal&&!myCatJudgement){
+      html+='<div class="card sk" style="margin-bottom:10px;">'
+        +'<div style="font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);">Scotty guessed: <em>'+skEsc(scottysCatGuess)+'</em></div>'
+        +'<div style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:10px;">Did they get the category right?</div>'
+        +'<div style="display:flex;gap:8px;">'
+        +'<button class="btn sk" onclick="skJudgeCat(true)" style="flex:1;background:rgba(126,232,162,.2);border:1px solid #7ee8a2;color:#7ee8a2;">Yes, correct!</button>'
+        +'<button class="btn sk" onclick="skJudgeCat(false)" style="flex:1;background:rgba(249,65,68,.2);border:1px solid #f94144;color:#f94144;">No, wrong!</button>'
+        +'</div></div>';
+    } else if(!isNoScotty&&!isScotty&&myCatJudgement){
+      html+='<div style="color:#7ee8a2;font-weight:700;text-align:center;padding:8px;">Category judgement submitted!</div>';
     }
 
     if(!isScotty&&!myVoteVal){
@@ -2911,7 +2961,22 @@ function skRenderPlay(state){
     }
   }
 
+  // Preserve text input values across re-renders
+  var savedCatGuess = '';
+  var oldCatInput = document.getElementById('sk-cat-guess-input');
+  if(oldCatInput) savedCatGuess = oldCatInput.value;
+
   content.innerHTML=html;
+
+  var newCatInput = document.getElementById('sk-cat-guess-input');
+  if(newCatInput && savedCatGuess) newCatInput.value = savedCatGuess;
+
+  // Re-apply selected vote button highlight
+  if(skSelectedVote){
+    var btn=document.querySelector('.vote-btn-player[data-pid="'+skSelectedVote+'"]');
+    if(btn) btn.classList.add('selected');
+  }
+
   if(skIsHost&&allAnswered) skCheckTallyReady(state);
 }
 
@@ -2945,6 +3010,12 @@ function skSubmitCatGuess(){
   });
 }
 
+function skJudgeCat(correct){
+  skDb.ref('rooms/sk/'+skRoomCode+'/catJudgements/'+skMyId).set(correct?'yes':'no').then(function(){
+    if(skIsHost) skCheckTallyReady(skLastState);
+  });
+}
+
 function skCheckTallyReady(state){
   if(!state||!state.currentRound) return;
   var players=Object.values(state.players||{});
@@ -2959,8 +3030,19 @@ function skCheckTallyReady(state){
 
   var nonScottyCount=isNoScotty?n:n-1;
   if(Object.keys(votes).length<nonScottyCount) return;
-  if(!isNoScotty&&Object.keys(catVotes).length<1) return; // Scotty must guess
-
+  if(!isNoScotty){
+    // Scotty must have submitted category guess
+    var scottyGuess=catVotes[round.scottyId];
+    if(!scottyGuess) return;
+    // Non-Scotty must all have judged it (if Scotty submitted)
+    var catJudgements=state.catJudgements||{};
+    var nonScottyIds=Object.keys(players).filter(function(id){return id!==round.scottyId;});
+    if(nonScottyIds.every(function(id){return catJudgements[id];})){
+      // All judged - use majority
+    } else {
+      return; // wait for all judgements
+    }
+  }
   skTallyRound(state);
 }
 
@@ -3018,15 +3100,25 @@ function skTallyRound(state){
       deltas[scottyId]=(deltas[scottyId]||0)+3;
     }
 
-    // Did Scotty guess category correctly?
-    var scottyGuess=Object.values(catVotes)[0]||'';
-    var catCorrect=skCategoryMatch(scottyGuess,round.category);
+    // Did Scotty guess category correctly? (majority vote from non-Scotty players)
+    var scottyGuess=catVotes[scottyId]||'';
+    var catJudgements=state.catJudgements||{};
+    var judgeVotes=Object.values(catJudgements);
+    var yesCount=judgeVotes.filter(function(v){return v==='yes';}).length;
+    var catCorrect=judgeVotes.length>0?(yesCount>judgeVotes.length/2):skCategoryMatch(scottyGuess,round.category);
     if(catCorrect){
       deltas[scottyId]=(deltas[scottyId]||0)+1;
     } else {
       // Non-Scotty players each get +1
       nonScottyIds.forEach(function(id){deltas[id]+=1;});
     }
+
+    // +1 bonus to each non-Scotty who received at least 1 vote (incentivizes blending in weirdly)
+    nonScottyIds.forEach(function(id){
+      if((voteTally[id]||0)>0){
+        deltas[id]=(deltas[id]||0)+1;
+      }
+    });
   }
 
   // Apply deltas to scores
@@ -3046,7 +3138,7 @@ function skTallyRound(state){
     roundDeltas:deltas,
     roundVoteTally:voteTally,
     roundCaughtScotty:!isNoScotty?(Object.keys(votes).filter(function(id){return votes[id]===scottyId;}).length>(Object.values(players).length-1)/2):null,
-    roundCatGuess:Object.values(catVotes)[0]||'',
+    roundCatGuess:scottyGuess,
     roundCatCorrect:!isNoScotty?skCategoryMatch(Object.values(catVotes)[0]||'',round.category):null,
     phase:'results',
     isLastRound:isLast
@@ -3164,7 +3256,7 @@ function skNextRound(){
   var nextIdx=skLastState.nextRoundIdx;
   skDb.ref('rooms/sk/'+skRoomCode).update({
     phase:'play',currentRound:next,roundIdx:nextIdx,
-    answers:{},votes:{},catVotes:{},skReadied:{},
+    answers:{},votes:{},catVotes:{},catJudgements:{},skReadied:{},
     roundDeltas:null,roundVoteTally:null,roundCaughtScotty:null,
     roundCatGuess:null,roundCatCorrect:null,nextRound:null
   });
@@ -3799,7 +3891,7 @@ function abTVLaunch(game,code,players){
     db.ref('rooms/fb/'+code).once('value').then(function(snap){
       var ep=snap.exists()&&snap.val().players?snap.val().players:{};
       players.forEach(function(p){if(!ep[p.id])ep[p.id]={id:p.id,name:p.name,emoji:p.emoji,words:[],ready:false,teamIdx:null,connected:true};});
-      var setOp=snap.exists()?db.ref('rooms/fb/'+code+'/players').set(ep):db.ref('rooms/fb/'+code).set({code:code,phase:'lobby',hostId:fbMyId,players:ep,teams:[],fishbowl:[],scores:[0,0],round:0,teamPlayers:[[],[]],teamTurnPointers:[0,0],activeTurnTeam:0,currentWord:null,wordsLeft:[],passedWords:[],passCount:0,roundWords:[],turnActive:false,nameProposals:{},nameVotes:{},teamNames:['Team 1','Team 2'],createdAt:Date.now()});
+      var setOp=db.ref('rooms/fb/'+code).set({code:code,phase:'lobby',hostId:fbMyId,players:ep,teams:[],fishbowl:[],scores:[0,0],round:0,teamPlayers:[[],[]],teamTurnPointers:[0,0],activeTurnTeam:0,currentWord:null,wordsLeft:[],passedWords:[],passCount:0,roundWords:[],turnActive:false,nameProposals:{},nameVotes:{},teamNames:['Team 1','Team 2'],createdAt:Date.now()});
       setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-fishbowl');
@@ -3848,7 +3940,7 @@ function abTVLaunch(game,code,players){
     skDb=db;skRoomCode=code;skMyId='tv';skIsHost=true;
     var skPs={};players.forEach(function(p){skPs[p.id]={id:p.id,name:p.name,emoji:p.emoji,score:0,connected:true};});
     db.ref('rooms/sk/'+code).once('value').then(function(snap){
-      var base={code:code,phase:'categories',hostId:'tv',players:skPs,catSubmissions:{},categories:[],playerOrder:[],scottyCounts:{},roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},skReadied:{},createdAt:Date.now()};
+      var base={code:code,phase:'categories',hostId:'tv',players:skPs,catSubmissions:{},categories:[],playerOrder:[],scottyCounts:{},roundIdx:0,totalRounds:0,currentRound:null,answers:{},votes:{},catVotes:{},catJudgements:{},skReadied:{},createdAt:Date.now()};
       var setOp=snap.exists()?db.ref('rooms/sk/'+code).update({players:skPs,phase:'categories',catSubmissions:{},skReadied:{}}):db.ref('rooms/sk/'+code).set(base);
       setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
@@ -3862,7 +3954,7 @@ function abTVLaunch(game,code,players){
     tgDb=db;tgRoomCode=code;tgMyId='tv';tgIsHost=true;
     var tgPs={};players.forEach(function(p){tgPs[p.id]={id:p.id,name:p.name,emoji:p.emoji,team:p.team||'',role:'',connected:true};});
     db.ref('rooms/tg/'+code).once('value').then(function(snap){
-      var setOp=snap.exists()?db.ref('rooms/tg/'+code+'/players').set(tgPs):db.ref('rooms/tg/'+code).set({code:code,phase:'lobby',hostId:'tv',players:tgPs,grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,redLeft:9,blueLeft:8,createdAt:Date.now()});
+      var setOp=db.ref('rooms/tg/'+code).set({code:code,phase:'lobby',hostId:'tv',players:tgPs,grid:[],revealed:{},currentTeam:'red',clue:null,bid:0,guessesUsed:0,redLeft:9,blueLeft:8,createdAt:Date.now()});
       setOp.then(function(){
         db.ref('rooms/ab/'+code+'/phase').set('playing');
         showScreen('tv-tangents');
@@ -4018,7 +4110,7 @@ function tvRenderSk(state){
   } else if(phase==='play'||phase==='results'){
     if(phase==='play') skCheckTallyReady(state);
     var ri2=state.roundIdx||0,tot2=state.totalRounds||0,rnd=state.currentRound;
-    h+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:12px;">Round '+(ri2+1)+' of '+tot2+(rnd&&rnd.isNoScotty?' — No Scotty Round!':'')+'</div>';
+    h+='<div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:12px;">Round '+(ri2+1)+' of '+tot2+'</div>';
     if(phase==='results'&&rnd&&!rnd.isNoScotty){
       var sp=rnd.scottyId?(state.players||{})[rnd.scottyId]:null;
       h+='<div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px;text-align:center;margin-bottom:12px;max-width:380px;margin-left:auto;margin-right:auto;">';
